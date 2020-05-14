@@ -4,8 +4,10 @@ CSCI 5709 group project using MERN stack
 How to run:
 
 React:
-1. npm start
+  npm start
 
 Node:
-1. node index.js or
-2. npm start
+  node index.js or
+  npm start
+
+URL for the app: https://csci-5709-web-dev-24.herokuapp.com/
