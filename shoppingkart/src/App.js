@@ -7,15 +7,17 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Group 24: Deployment Successful</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>Group 24: Deployment Successful.</p>
+        <br></br>
+        Team Members:
+        <br></br>
+          Bharat Bhargava (B00838511)<br></br>
+          Deep Muni (B00828375)<br></br>
+          Hardik Dudhrejia (B00835071)<br></br>
+          Pallavi Desai (B00837405)<br></br>
+          Rashmika Ibrahimpatnam (B00832190)<br></br>
+          Vikash Salvi (B00838174)
+        
       </header>
     </div>
   );
