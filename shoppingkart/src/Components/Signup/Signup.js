@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import './Register.css'
 import { Link } from "react-router-dom";
-import { Form, Button, Col } from 'react-bootstrap';
+import { Form, Col } from 'react-bootstrap';
 import { FaUserCircle, FaRegEnvelope, FaLock, FaShoppingCart, FaBirthdayCake } from 'react-icons/fa';
-
-
 
 class Register extends Component {
 
@@ -225,106 +223,87 @@ class Register extends Component {
 
     render() {
         return (
-            <div className="container-fluid bg">
-                <div className="row">
-                    <div className="col-md-3 col-sm-3 col-xs-12"></div>
-                    <div className="col-md-4 col-sm-4 col-xs-12">
-                        <div className={this.state.main.status ? "form_area onerror" : "form_area"}>
-                            <Form className="form-container">
-                                <div className="h1">Create Account</div>
-
-                                <Form.Row>
-                                    <Form.Group as={Col} >
-
-                                        <div className="input-section">
-                                            <Form.Label> <FaUserCircle /> First Name</Form.Label>
-
-                                            <input type="text" id="fname" className="inp" placeholder="Enter First Name"
-                                                onChange={this.validate} />
-                                            {this.state.fname.status ? <div className="error">{this.state.fname.text}</div> : null}
-                                        </div>
-                                    </Form.Group>
-                                    <Form.Group as={Col}>
-
-                                        <div className="input-section">
-                                            <Form.Label> <FaUserCircle /> Last Name</Form.Label>
-                                            <input type="text" id="lname" className="inp" placeholder="Enter Last Name"
-                                                onChange={this.validate} />
-                                            {this.state.lname.status ? <div className="error">{this.state.lname.text}</div> : null}
-                                        </div>
-                                    </Form.Group>
-
-                                </Form.Row>
-
-                                <Form.Row>
-                                    <Form.Group as={Col} >
-
-                                        <div className="input-section">
-                                            <Form.Label> <FaRegEnvelope /> Username </Form.Label>
-                                            <input type="text" id="uname" className="inp" placeholder="Enter User Name"
-                                                onChange={this.validate} />
-                                            {this.state.uname.status ? <div className="error">{this.state.uname.text}</div> : null}
-                                        </div>
-                                    </Form.Group>
-                                    <Form.Group as={Col}>
-
-                                        <div className="input-section">
-                                            <Form.Label> <FaBirthdayCake /> Date of Birth</Form.Label>
-                                            <input type="date" id="dob" className="inp"
-                                                onChange={this.validate} />
-                                            {this.state.dob.status ? <div className="error">{this.state.dob.text}</div> : null}
-                                        </div>
-                                    </Form.Group>
-                                </Form.Row>
-                                <Form.Row>
-                                    <Form.Group as={Col}>
-
-                                        <div className="input-section">
-                                            <Form.Label> <FaLock /> Password</Form.Label>
-                                            <input type="password" id="pass" className="inp" placeholder="Enter A Password"
-                                                onChange={this.validate} onFocus={this.showPolicy} onBlur={this.hidePolicy} />
-                                            {this.state.pass.status ? <div className="error">{this.state.pass.text}</div> : null}
-                                            <div className={this.state.passCheck ? "pass-check" : "pass-check hide"}>
-                                                {
-                                                    this.passCheck.map((item, index) => {
-                                                        return (
-                                                            <p key={index} id={item.id}
-                                                                className={this.state.passPolicy[item.id].status
-                                                                    ? item.success : item.error}>{item.text}</p>
-                                                        );
-                                                    })
-                                                }
-                                            </div>
-                                        </div>
-                                    </Form.Group>
-                                    <Form.Group as={Col}>
-
-                                        <div className="input-section">
-                                            <Form.Label> <FaLock /> Confirm Password</Form.Label>
-                                            <input type="password" id="cpass" className="inp" placeholder="Re-Enter Password"
-                                                onChange={this.validate} />
-                                            {this.state.cpass.status ? <div className="error">{this.state.cpass.text}</div> : null}
-                                        </div>
-                                    </Form.Group>
-                                </Form.Row>
+            <div className="wrapper">
+                <div className={this.state.main.status ? "form_area onerror" : "form_area form-container"}>
+                    <Form>
+                        <h1>Sign Up</h1>
+                        <Form.Row>
+                            <Form.Group as={Col} >
                                 <div className="input-section">
-                                    <button className="submit" onClick={this.register}>
-                                        <lable>Register </lable>
-                                        <FaShoppingCart />
-                                    </button>
-                                    {this.state.main.status ? <div className="submitError">{this.state.main.text}</div> : null}
-
+                                    <Form.Label> <FaUserCircle /> First Name</Form.Label>
+                                    <input type="text" id="fname" className="inp" placeholder="Enter First Name"
+                                           onChange={this.validate} />
+                                    {this.state.fname.status ? <div className="error">{this.state.fname.text}</div> : null}
                                 </div>
-                                <div className="redirect">
-                                    <span className= "ext-text">Already a User? </span>
-                                    <Link className="linkLogin">Login</Link>
+                            </Form.Group>
+                            <Form.Group as={Col}>
+                                <div className="input-section">
+                                    <Form.Label> <FaUserCircle /> Last Name</Form.Label>
+                                    <input type="text" id="lname" className="inp" placeholder="Enter Last Name"
+                                           onChange={this.validate} />
+                                    {this.state.lname.status ? <div className="error">{this.state.lname.text}</div> : null}
                                 </div>
-
-                            </Form>
-
-                        </div>
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} >
+                                <div className="input-section">
+                                    <Form.Label> <FaRegEnvelope /> Username </Form.Label>
+                                    <input type="text" id="uname" className="inp" placeholder="Enter User Name"
+                                           onChange={this.validate} />
+                                    {this.state.uname.status ? <div className="error">{this.state.uname.text}</div> : null}
+                                </div>
+                            </Form.Group>
+                            <Form.Group as={Col}>
+                                <div className="input-section">
+                                    <Form.Label> <FaBirthdayCake /> Date of Birth</Form.Label>
+                                    <input type="date" id="dob" className="inp"
+                                           onChange={this.validate} />
+                                    {this.state.dob.status ? <div className="error">{this.state.dob.text}</div> : null}
+                                </div>
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col}>
+                                <div className="input-section">
+                                    <Form.Label> <FaLock /> Password</Form.Label>
+                                    <input type="password" id="pass" className="inp" placeholder="Enter A Password"
+                                           onChange={this.validate} onFocus={this.showPolicy} onBlur={this.hidePolicy} />
+                                    {this.state.pass.status ? <div className="error">{this.state.pass.text}</div> : null}
+                                    <div className={this.state.passCheck ? "pass-check" : "pass-check hide"}>
+                                        {
+                                            this.passCheck.map((item, index) => {
+                                                return (
+                                                    <p key={index} id={item.id}
+                                                       className={this.state.passPolicy[item.id].status
+                                                           ? item.success : item.error}>{item.text}</p>
+                                                );
+                                            })
+                                        }
+                                    </div>
+                                </div>
+                            </Form.Group>
+                            <Form.Group as={Col}>
+                                <div className="input-section">
+                                    <Form.Label> <FaLock /> Confirm Password</Form.Label>
+                                    <input type="password" id="cpass" className="inp" placeholder="Re-Enter Password"
+                                           onChange={this.validate} />
+                                    {this.state.cpass.status ? <div className="error">{this.state.cpass.text}</div> : null}
+                                </div>
+                            </Form.Group>
+                        </Form.Row>
+                    </Form>
+                    <div className="input-section">
+                        <button className="submit" onClick={this.register}>
+                            <span>Register</span>
+                            <FaShoppingCart />
+                        </button>
+                        {this.state.main.status ? <div className="submitError">{this.state.main.text}</div> : null}
                     </div>
-                    <div className="col-md-3 col-sm-3 col-xs-12"></div>
+                    <div className="redirect">
+                        <span className= "ext-text">Already a User?</span>
+                        <Link className="linkLogin">Login</Link>
+                    </div>
                 </div>
             </div>
         );
