@@ -3,13 +3,14 @@ import Brand from "../Brands/Brands";
 import AboutUs from "../AboutUs/AboutUs";
 import Products from "../Products/Products";
 import Navigation from "../NavBar/NavBar";
+import Slider from "../Carousel/Slider";
 
 class Home extends Component {
     render() {
         return (
             <div>
                 <Navigation/>
-                <div>CAROUSEL</div>
+                <Slider />
                 <Products />
                 <Brand/>
                 <AboutUs/>
