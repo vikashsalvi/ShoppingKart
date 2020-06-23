@@ -38,6 +38,7 @@
     width: 125px;
     height: auto;
     padding: 10px;
+    z-index: 999;
 }
 
 .side-panel li:first-child{
@@ -233,8 +234,4 @@
     .search-icon{
         width: 40px;
     }
-}
-
-.linkDisable{
-    pointer-events: none;
 }
