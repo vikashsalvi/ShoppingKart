@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Toast, Button, Col } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
 import './createprod.css';
+import Footer from '../Footer/Footer';
 
 const INITIALIZE_PRODUCTS = {
     product_name: '',
@@ -57,6 +58,7 @@ function CreateProduct() {
 
 
     return (
+        <div className="wrapper">
         <div class="container-fluid bg">
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-12"></div>
@@ -129,6 +131,9 @@ function CreateProduct() {
                     </div>
                 </div>
             </div>
+            
+        </div>
+        <Footer />
         </div>
     );
 }

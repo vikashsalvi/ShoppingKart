@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import './SearchResults.css'
 import Card from "./ResultCard/Card";
 import {DropdownButton, Dropdown} from "react-bootstrap";
+import Footer from "../Footer/Footer";
 
 class Result extends Component {
 
@@ -155,6 +156,11 @@ class Result extends Component {
                     </div>
                 </div>
                 <div className="products">{this.updateList()}</div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <Footer />
             </div>
         );
     }

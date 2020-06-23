@@ -2,13 +2,15 @@ import React,{Component} from 'react'
 import Container from 'react-bootstrap/Container';
 import productImage from '../static/img/ProductPlaceHolder.jpg'
 import { Table, Card, Col, Image, Button } from 'react-bootstrap';
+import Footer from '../Footer/Footer';
+import Navigation from "../NavBar/NavBar";
 
 class Orders extends Component {
 
     render() {
         return (
             <div className="wrapper">
-                
+                <Navigation/>
                 <Container className="mt-4">
                     <Card>
                         <p></p>
@@ -103,7 +105,7 @@ class Orders extends Component {
                         </Card.Body>
                     </Card>
                 </Container>
-                
+                <Footer />
             </div>
         );
     }

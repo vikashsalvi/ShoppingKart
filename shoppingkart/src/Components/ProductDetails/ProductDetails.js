@@ -4,6 +4,7 @@ import Product from '../Products/Product';
 import ProdutRating from '../ProductRating/ProductRating';
 import ProductSpecifics from '../ProductSpecifics/ProductSpecifics';
 import ProductReviews from '../ProductReviews/ProductReviews';
+import Footer from '../Footer/Footer';
 
 class ProductDetails extends Component {
     constructor(props){
@@ -89,6 +90,7 @@ class ProductDetails extends Component {
                     <ProdutRating />
                     <ProductReviews />
                 </Container>
+            <Footer />
             </div>
         );
     }

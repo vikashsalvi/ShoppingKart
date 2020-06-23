@@ -4,6 +4,7 @@ import AboutUs from "../AboutUs/AboutUs";
 import Products from "../Products/Products";
 import Navigation from "../NavBar/NavBar";
 import Slider from "../Carousel/Slider";
+import Footer from '../Footer/Footer';
 
 class Home extends Component {
     render() {
@@ -14,7 +15,7 @@ class Home extends Component {
                 <Products />
                 <Brand/>
                 <AboutUs/>
-                <div>FOOTER</div>
+                <Footer />
             </div>
         );
     }
