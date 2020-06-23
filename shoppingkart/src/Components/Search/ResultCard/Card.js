@@ -8,8 +8,8 @@ class Card extends Component {
             <div className="product">
                 <img className="productImage" alt="placeholder" src={placeholder}/>
                 <div className="productName">{this.props.name}</div>
-                <div className="price">{this.props.price}</div>
-                <div className="brandName">{this.props.brand}</div>
+                <div className="price">${this.props.price}</div>
+                <div className="brandName">Brand: {this.props.brand}</div>
                 <button className="addtocart">Add to Cart</button>
             </div>
         );
