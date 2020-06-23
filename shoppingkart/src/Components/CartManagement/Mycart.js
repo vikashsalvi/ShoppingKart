@@ -6,6 +6,7 @@ import Bread from "./images/bread.jpg";
 import Chicken from "./images/chicken.jpg";
 import eggs from "./images/eggs.png";
 import "./Mycart.css";
+import Navigation from "../NavBar/NavBar";
 
 class Mycart extends Component {
   state = {
@@ -90,8 +91,8 @@ class Mycart extends Component {
     if (this.state.items.length > 0) {
       return (
         <div className="totalDiv">
-          <label className="totalDiv-title">SubTotal :</label>
-          <label className="totalDiv-value">${this.findTotal()}</label>
+          <span className="totalDiv-title">SubTotal :</span>
+          <span className="totalDiv-value">${this.findTotal()}</span>
         </div>
       );
     }
@@ -100,7 +101,7 @@ class Mycart extends Component {
   render() {
     return (
       <div>
-        <div>HEADER</div>
+        <Navigation/>
         <div>
           <p className="mainTitle"> Your Shopping Cart </p>
         </div>
@@ -118,8 +119,8 @@ class Mycart extends Component {
                     <p className="orderTitle">{result.name}</p>
                     <div className="priceQuantityTotalDiv">
                       <div className="price-Total-div">
-                        <label className="price-total-quantity">Price : </label>
-                        <label className="values">${result.price}</label>
+                        <span className="price-total-quantity">Price : </span>
+                        <span className="values">${result.price}</span>
                       </div>
                       <div className="quantityDiv">
                         <div>
@@ -142,8 +143,8 @@ class Mycart extends Component {
                         </div>
                       </div>
                       <div className="price-Total-div">
-                        <label className="price-total-quantity">Total : </label>
-                        <label className="values">${result.totalPrice}</label>
+                        <span className="price-total-quantity">Total : </span>
+                        <span className="values">${result.totalPrice}</span>
                       </div>
                     </div>
                   </div>
@@ -184,7 +185,6 @@ class Mycart extends Component {
             </p>
           </div>
         </div>
-        <div>FOOTER</div>
       </div>
     );
   }
