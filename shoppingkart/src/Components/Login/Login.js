@@ -48,10 +48,8 @@ class Login extends Component {
     checkEmpty() {
         const email = document.getElementById('email');
         const pwd = document.getElementById('pwd');
-        console.log(email);
-        console.log(pwd);
         
-            if ((email.value === "") && (pwd.value === "")) {
+            if ((email.value === "") || (pwd.value === "")) {
                 return false;
             }
         
@@ -74,7 +72,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="container-fluid">
+            <div className="container-fluid bg">
                 <div className="row">
                     <div className="col-md-4 col-sm-4 col-xs-12"></div>
                     <div className="col-md-4 col-sm-4 col-xs-12">
