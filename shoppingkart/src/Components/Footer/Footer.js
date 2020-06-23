@@ -26,9 +26,9 @@ class Footer extends Component {
                         <div className="col-sm ml-2" style={{ "marginTop": "20px" }}>
                             <p><FontAwesomeIcon icon={faMapMarker} /> &nbsp; Lorem ipsum dolor sit amet</p>
                             <p>
-                            <FontAwesomeIcon icon={faPhone} /> &nbsp; <a href="tel:+1-999-999-9999">(999)-999-9999</a>
+                            <FontAwesomeIcon icon={faPhone} /> &nbsp; <a style={{"color":"#ffffff"}} href="tel:+1-999-999-9999">(999)-999-9999</a>
                             </p>
-                            <FontAwesomeIcon icon={faEnvelope} /> &nbsp; <a href = "mailto: contatncshoppingkart@shoppingkar.com">contatnc@shoppingkar.com</a>
+                            <FontAwesomeIcon icon={faEnvelope} /> &nbsp; <a style={{"color":"#ffffff"}} href = "mailto: contatncshoppingkart@shoppingkar.com">contatnc@shoppingkar.com</a>
                         </div>
 
                     </div>

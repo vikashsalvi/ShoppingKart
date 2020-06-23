@@ -229,6 +229,9 @@ class Register extends Component {
             <div className="wrapper">
                 <Navigation/>
                 <div className={this.state.main.status ? "form_area onerror" : "form_area"}>
+                    
+                    <h1>Signup!!</h1>
+                    
                     <Form>
                         <Form.Row>
                             <Form.Group as={Col} >

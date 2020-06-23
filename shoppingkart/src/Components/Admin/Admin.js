@@ -62,6 +62,8 @@ function CreateProduct() {
         <div className="wrapper">
         <Navigation/>
             <div className="form_area">
+
+                <h1>Insert new product</h1>
                 <Form >
                     <Toast show={success} onClose={showtoast} className="toast-box">
                         <Toast.Header>
