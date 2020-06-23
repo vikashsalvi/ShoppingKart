@@ -65,6 +65,7 @@ class Login extends Component {
            <div className="wrapper">
                <Navigation/>
                <div className="form_area">
+               <h1>Login!!</h1>
                    <Form onSubmit={this.handleSubmit}>
                        <Form.Group>
                            <div className="input-section">
