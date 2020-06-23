@@ -4,6 +4,8 @@ import Product from '../Products/Product';
 import ProdutRating from '../ProductRating/ProductRating';
 import ProductSpecifics from '../ProductSpecifics/ProductSpecifics';
 import ProductReviews from '../ProductReviews/ProductReviews';
+import Footer from '../Footer/Footer';
+import Navigation from "../NavBar/NavBar";
 
 class ProductDetails extends Component {
     constructor(props){
@@ -32,6 +34,7 @@ class ProductDetails extends Component {
         return (
 
             <div className="wrapper">
+                <Navigation />
                 <Container >
                     <div className="row container-fluid">
                         <div className="col-lg-4 col-xs-5 mt-5">
@@ -58,7 +61,7 @@ class ProductDetails extends Component {
                                     <div className="form-group">
                                         <div className="row">
                                             <div className="col-md-4">
-                                                <label>Quantity</label>
+                                                Quantity
                                                 <select className="form-control" id="quantitySelectBox">
                                                     <option>1</option>
                                                     <option>2</option>
@@ -89,6 +92,9 @@ class ProductDetails extends Component {
                     <ProdutRating />
                     <ProductReviews />
                 </Container>
+                <br />
+                <br />
+            <Footer />
             </div>
         );
     }

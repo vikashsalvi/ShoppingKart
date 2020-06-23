@@ -9,7 +9,7 @@ class ProductDetails extends Component {
 
     render() {
         return (
-            <div className="wrapper">
+            <div>
                 <Container>
                     <div className="container">
                         <div className="row">

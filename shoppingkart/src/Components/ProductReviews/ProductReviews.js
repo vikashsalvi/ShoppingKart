@@ -5,7 +5,7 @@ import { Container, Table, Card,Col,Image } from 'react-bootstrap';
 class ProductReviews extends Component {
     render() {
         return (
-            <div className="wrapper mt-5">
+            <div className="mt-5">
                 <Container>
                     <Card>
                         <Card.Header>Reviews</Card.Header>

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Form, Toast, Button, Col } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
 import './createprod.css';
+import Footer from '../Footer/Footer';
+import Navigation from "../NavBar/NavBar";
 
 const INITIALIZE_PRODUCTS = {
     product_name: '',
@@ -57,78 +59,75 @@ function CreateProduct() {
 
 
     return (
-        <div class="container-fluid bg">
-            <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-12"></div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <div className="form-container">
-                        <Form >
-                            <div className="h1">Create Product</div>
-                            <br />
-                            <Toast show={success} onClose={showtoast} className="toast-box">
-                                <Toast.Header>
-                                    <strong className="mr-auto">Success!!!</strong>
-                                </Toast.Header>
-                                <Toast.Body>your product has been posted</Toast.Body>
-                            </Toast>
-                            <Form.Row>
+        <div className="wrapper">
+        <Navigation/>
+            <div className="form_area">
+                <Form >
+                    <Toast show={success} onClose={showtoast} className="toast-box">
+                        <Toast.Header>
+                            <strong className="mr-auto">Success!!!</strong>
+                        </Toast.Header>
+                        <Toast.Body>your product has been posted</Toast.Body>
+                    </Toast>
+                    <Form.Row>
 
-                                <Form.Group as={Col}>
-                                    <Form.Control
-                                        name="prodname"
-                                        lable = {product}
-                                        placeholder="Product Name"
-                                        type="text"
-                                        id="prodname"
-                                        onChange={handleChange}
-                                    />
-                                </Form.Group>
-                                <Form.Group as={Col}>
-                                    <Form.Control
-                                        name="price"
-                                        label="Price"
-                                        placeholder="Price"
-                                        min="0.00"
-                                        step="0.01"
-                                        type="Number"
-                                        id="price"
-                                        onChange={handleChange}
+                        <Form.Group as={Col}>
+                            <input
+                                name="prodname"
+                                lable = {product}
+                                placeholder="Product Name"
+                                type="text"
+                                id="prodname"
+                                className="inp"
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <input
+                                name="price"
+                                label="Price"
+                                placeholder="Price"
+                                min="0.00"
+                                step="0.01"
+                                type="Number"
+                                id="price"
+                                className="inp"
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+                    </Form.Row>
 
-                                    />
-                                </Form.Group>
-                            </Form.Row>
+                    <Form.Group>
+                        <Form.Control
+                            name="media"
+                            label="Media"
+                            content="Select Image"
+                            type="file"
+                            id="img"
+                            accept="image/*"
+                            onChange={handleChange}
+                        />
 
-                            <Form.Group>
-                                <Form.Control
-                                    name="media"
-                                    label="Media"
-                                    content="Select Image"
-                                    type="file"
-                                    id="img"
-                                    accept="image/*"
-                                    onChange={handleChange}
-
-                                />
-
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Control
-                                    name="description"
-                                    label="Description"
-                                    placeholder="Description"
-                                    type="textarea"
-                                    id="desp"
-                                    onChange={handleChange}
-                                />
-                            </Form.Group>
-                            <Button variant="primary" type="submit" className="btn-btn-success btn-block" onClick={handleSubmit}>
-                                <label>Submit  </label>
-                                <FaShoppingCart />
-                            </Button>
-                        </Form>
-                    </div>
-                </div>
+                    </Form.Group>
+                    <Form.Group>
+                        <input
+                            name="description"
+                            label="Description"
+                            placeholder="Description"
+                            className="inp"
+                            type="textarea"
+                            id="desp"
+                            onChange={handleChange}
+                        />
+                    </Form.Group>
+                </Form>
+                <button type="submit" className="submit" onClick={handleSubmit}>
+                    <span>Submit</span>
+                    <FaShoppingCart />
+                </button>
             </div>
+            <div style={{margin: "50px"}}/>
+        <Footer />
         </div>
     );
 }

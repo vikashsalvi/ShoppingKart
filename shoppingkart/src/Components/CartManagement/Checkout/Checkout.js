@@ -7,6 +7,8 @@ import Bread from "../images/bread.jpg";
 import Chicken from "../images/chicken.jpg";
 import eggs from "../images/eggs.png";
 import "./Checkout.css";
+import Navigation from "../../NavBar/NavBar";
+import Footer from "../../Footer/Footer";
 
 class Checkout extends Component {
   state = {
@@ -56,8 +58,8 @@ class Checkout extends Component {
     if (this.state.items.length > 0) {
       return (
         <div className="totalDivOrder">
-          <label className="totalDivlabel">SubTotal :</label>
-          <label className="totalDivValue">${this.findTotal()}</label>
+          <span className="totalDivspan">SubTotal :</span>
+          <span className="totalDivValue">${this.findTotal()}</span>
         </div>
       );
     }
@@ -66,7 +68,7 @@ class Checkout extends Component {
   render() {
     return (
       <div>
-        <div>HEADER</div>
+        <Navigation/>
         <div>
           <div>
             <p className="mainTitle">Order Confirmation</p>
@@ -160,22 +162,22 @@ class Checkout extends Component {
               </div>
               <div>{this.getSubTotal()}</div>
               <div className="totalDivOrder">
-                <label className="totalDivlabel">Delivery Charges:</label>
-                <label className="totalDivValue"> $5.66</label>
+                <span className="totalDivspan">Delivery Charges:</span>
+                <span className="totalDivValue"> $5.66</span>
               </div>
               <div className="totalDivOrder">
-                <label className="totalDivlabel grandTotal">
+                <span className="totalDivspan grandTotal">
                   {" "}
                   Grand Total:
-                </label>
-                <label className="totalDivValue grandTotal">
+                </span>
+                <span className="totalDivValue grandTotal">
                   ${this.findTotal() + 5.66}
-                </label>
+                </span>
               </div>
               <div className="discountDiv">
-                <label htmlFor="discount" className="discountDivTitle">
+                <span htmlFor="discount" className="discountDivTitle">
                   Discount code
-                </label>
+                </span>
                 <div>
                   <input
                     type="text"
@@ -191,7 +193,7 @@ class Checkout extends Component {
             </div>
           </div>
         </div>
-        <div>FOOTER</div>
+        <Footer/>
       </div>
     );
   }

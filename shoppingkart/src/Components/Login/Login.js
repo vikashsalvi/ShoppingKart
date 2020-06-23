@@ -2,15 +2,9 @@ import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import './Login.css';
 import { FaUser, FaLock, FaShoppingCart } from 'react-icons/fa';
-import { Redirect,Link } from 'react-router-dom'
-
-const verifyemail = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
-
-const validation = (errors) => {
-    let verify = true;
-    Object.values(errors).forEach((value) => { value.length > 0 && (verify = false) });
-    return verify;
-}
+import {Link, withRouter} from 'react-router-dom'
+import Navigation from "../NavBar/NavBar";
+import Footer from '../Footer/Footer';
 
 class Login extends Component {
 
@@ -19,109 +13,98 @@ class Login extends Component {
         this.state = {
             username: "",
             password: "",
-            errors: {
-                username_error: "",
-                password_error: "",
-            },
+            username_error: "",
+            password_error: "",
         }
+
+        this.validate = this.validate.bind(this);
+        this.login = this.login.bind(this);
+
     };
 
-    handleChange = (e) => {
-        e.preventDefault();
-        //destructuring
+    validate(e){
         const { name, value } = e.target;
-        const errors = this.state.errors;
+        let val = '';
 
         switch (name) {
             case 'username':
-                errors.username_error = verifyemail.test(value) ? "" : "Email is not valid";
+                val = value.length > 0 ? "" : "Username is required";
+                this.setState({
+                    username_error: val
+                });
                 break;
             case 'password':
-                errors.password_error = value.length < 8 ? "Password length must be atleast 8" : "";
+                val = value.length > 0  ? "" : "Password is required";
+                this.setState({
+                    password_error: val
+                });
                 break;
             default:
                 break;
         }
-        this.setState({ errors, [name]: value }, () => console.log(this.state));
     };
 
     checkEmpty() {
-        const email = document.getElementById('email');
+        const username = document.getElementById('username');
         const pwd = document.getElementById('pwd');
-        
-            if ((email.value === "") || (pwd.value === "")) {
-                return false;
-            }
-        
-        return true;
-    } 
-
-    handleSubmit = e => {
-        e.preventDefault();
-        if (validation(this.state.errors) && (this.checkEmpty())) {
-            alert("User can continue shopping")
-
-        }
-        else{
-            alert("Please fill the empty fields")
-        }
-
-
+        return !((username.value === "") || (pwd.value === ""));
     }
 
+    login(){
+        if (this.state.username_error.length === 0 && this.state.password_error.length === 0 && this.checkEmpty()) {
+            alert("User can continue shopping");
+            this.props.history.push('/');
+        }
+        else{
+            alert("Please fill the empty fields");
+        }
+    }
 
     render() {
         return (
-            <div className="container-fluid bg">
-                <div className="row">
-                    <div className="col-md-4 col-sm-4 col-xs-12"></div>
-                    <div className="col-md-4 col-sm-4 col-xs-12">
+           <div className="wrapper">
+               <Navigation/>
+               <div className="form_area">
+                   <Form onSubmit={this.handleSubmit}>
+                       <Form.Group>
+                           <div className="input-section">
+                               <Form.Label> <FaUser /> Username </Form.Label>
+                               <input id="username" type="text" name="username" placeholder="Enter your Email"
+                                      defaultValue={this.state.username} onChange={this.validate}
+                                      className="inp"/>
+                               <div className = "err-text">{this.state.username_error}</div>
+                           </div>
+                       </Form.Group>
 
-                        <Form className="form-container" onSubmit={this.handleSubmit}>
-                            <div className = "h1">Login </div>
+                       <Form.Group >
+                           <div className="input-section">
+                               <Form.Label> <FaLock /> Password</Form.Label>
+                               <input id="pwd" type="password" name="password" placeholder="Enter your Password"
+                                             defaultValue={this.state.password} onChange={this.validate}
+                                             className="inp"/>
+                               <div className="err-text">{this.state.password_error}</div>
+                           </div>
+                       </Form.Group>
+                   </Form>
+                   <button type="submit" className="submit" onClick={this.login} >
+                       <span>Login</span>
+                       <FaShoppingCart />
+                   </button>
 
-                            <Form.Group>
-
-                                <Form.Label> <FaUser /> Username </Form.Label>
-                                
-                                <Form.Control id = "email" type="email" name="username" placeholder="Enter your Email" defaultValue={this.state.username} onChange={this.handleChange} />
-                                <div className = "err-text">{this.state.errors.username_error}</div>
-                            </Form.Group>
-
-                            <Form.Group >
-
-                                <Form.Label> <FaLock /> Password</Form.Label>
-                                <Form.Control id = "pwd" type="password" name="password" placeholder="Enter your Password" defaultValue={this.state.password} onChange={this.handleChange} />
-                                <div className = "err-text">{this.state.errors.password_error}</div>
-                            </Form.Group>
-
-                            <Form.Group >
-                                <Form.Check type="checkbox" label="Remember me" />
-                            </Form.Group>
-
-                            <Button variant="primary" type="submit" className="btn-btn-success btn-block" onSubmit= {this.handleSubmit} >
-                                <label>Login  </label>
-                                <FaShoppingCart />
-                            </Button>
-                            
-                            <div className="redirect">
-                                    <Link className="linkRegister">New User?Register</Link>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <Link className="linkRegister">Forgot Password?</Link>
-                            </div>
-                            
-
-                        </Form>
-                    </div>
-                    <div className="col-md-4 col-sm-4 col-xs-12"></div>
-                </div>
-            </div>
-
+                   <div className="redirect">
+                       <Link to={'/register'} className="linkRegister">New User?Register</Link>
+                       {/*<br/><br/>*/}
+                       {/*<Link className="linkRegister">Forgot Password?</Link>*/}
+                   </div>
+               </div>
+               <br />
+               <br />
+               <br />
+               <br />
+               <Footer />
+           </div>
         );
-
     }
 }
 
-export default Login;
-
-
+export default withRouter(Login);

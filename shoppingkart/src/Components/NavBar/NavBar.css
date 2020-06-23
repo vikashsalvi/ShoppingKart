@@ -1,5 +1,5 @@
 .bar{
-    background-color: #0073b1;
+    background-color: #0073B1;
     padding: 10px 20px;
     height: 30px;
     position: relative;
@@ -17,7 +17,7 @@
 }
 
 .side-panel{
-    background-color: #0073b1;
+    background-color: #0073B1;
     width: 0;
     padding: 0;
     height: 0;
@@ -38,6 +38,7 @@
     width: 125px;
     height: auto;
     padding: 10px;
+    z-index: 999;
 }
 
 .side-panel li:first-child{
@@ -233,8 +234,4 @@
     .search-icon{
         width: 40px;
     }
-}
-
-.linkDisable{
-    pointer-events: none;
 }
