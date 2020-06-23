@@ -7,7 +7,7 @@ import Result from "../Search/SearchResults";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import OrderHistory from "../Orders/Orders";
 import Cart from "../CartManagement/Mycart";
-import OrderConfirmation from "../CartManagement/Checkout/Checkout";
+import OrderConfirmation from "../CartManagement/Checkout/Checkout";\
 
 class Routes extends Component {
     render() {
