@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Container, Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import './ProductRating.css';
+import AddReview from '../ProductReviews/AddReview'
 
 class ProductDetails extends Component {
 
@@ -33,12 +34,7 @@ class ProductDetails extends Component {
                                 <div className="content text-center">
                                     <div className="ratings">
                                         <div className="text-center">
-                                            <h3>Add a comment</h3>
-                                            <div>
-                                                <textarea className="form-control" placeholder="Please review your purchase" rows="3" />
-                                                <br />
-                                                <Button className="btn btn-dark">Submit</Button>
-                                            </div>
+                                            <AddReview />
                                         </div>
                                     </div>
                                 </div>
