@@ -7,6 +7,7 @@ import Chicken from "./images/chicken.jpg";
 import eggs from "./images/eggs.png";
 import "./Mycart.css";
 import Navigation from "../NavBar/NavBar";
+import Footer from "../Footer/Footer";
 
 class Mycart extends Component {
   state = {
@@ -185,6 +186,7 @@ class Mycart extends Component {
             </p>
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }
