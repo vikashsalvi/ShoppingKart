@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import './UserProfile.css';
+import Navigation from "../NavBar/NavBar";
 
 class Profile extends Component {
 
@@ -99,6 +100,7 @@ class Profile extends Component {
     render() {
         return (
             <div>
+                <Navigation/>
                 <div className="profile-area">
                     <div className="profile-image">Profile Image</div>
                     <div className="profile-details">
