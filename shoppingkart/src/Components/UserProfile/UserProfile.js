@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import './UserProfile.css';
 import Navigation from "../NavBar/NavBar";
+import Footer from "../Footer/Footer";
 
 class Profile extends Component {
 
@@ -140,6 +141,7 @@ class Profile extends Component {
                         </div>
                     </div>
                 </div>
+                <Footer />
             </div>
         );
     }

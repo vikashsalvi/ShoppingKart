@@ -4,6 +4,7 @@ import './Login.css';
 import { FaUser, FaLock, FaShoppingCart } from 'react-icons/fa';
 import {Link, withRouter} from 'react-router-dom'
 import Navigation from "../NavBar/NavBar";
+import Footer from '../Footer/Footer';
 
 class Login extends Component {
 
@@ -96,6 +97,11 @@ class Login extends Component {
                        {/*<Link className="linkRegister">Forgot Password?</Link>*/}
                    </div>
                </div>
+               <br />
+               <br />
+               <br />
+               <br />
+               <Footer />
            </div>
         );
     }

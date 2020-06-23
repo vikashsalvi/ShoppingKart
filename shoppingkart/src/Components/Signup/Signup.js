@@ -4,6 +4,7 @@ import {Link, withRouter} from "react-router-dom";
 import { Form, Col } from 'react-bootstrap';
 import { FaUserCircle, FaRegEnvelope, FaLock, FaShoppingCart, FaBirthdayCake } from 'react-icons/fa';
 import Navigation from "../NavBar/NavBar";
+import Footer from "../Footer/Footer";
 
 class Register extends Component {
 
@@ -307,6 +308,12 @@ class Register extends Component {
                         <Link to={'login'} className="linkLogin">Login</Link>
                     </div>
                 </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <Footer />
             </div>
         );
     }
