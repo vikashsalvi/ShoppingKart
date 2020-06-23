@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import './Register.css'
-import { Link } from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import { Form, Col } from 'react-bootstrap';
 import { FaUserCircle, FaRegEnvelope, FaLock, FaShoppingCart, FaBirthdayCake } from 'react-icons/fa';
+import Navigation from "../NavBar/NavBar";
 
 class Register extends Component {
 
@@ -165,6 +166,7 @@ class Register extends Component {
         } else {
             this.makeEmpty();
             alert("User has been registered");
+            this.props.history.push('/login')
         }
     }
 
@@ -224,9 +226,9 @@ class Register extends Component {
     render() {
         return (
             <div className="wrapper">
-                <div className={this.state.main.status ? "form_area onerror" : "form_area form-container"}>
+                <Navigation/>
+                <div className={this.state.main.status ? "form_area onerror" : "form_area"}>
                     <Form>
-                        <h1>Sign Up</h1>
                         <Form.Row>
                             <Form.Group as={Col} >
                                 <div className="input-section">
@@ -302,7 +304,7 @@ class Register extends Component {
                     </div>
                     <div className="redirect">
                         <span className= "ext-text">Already a User?</span>
-                        <Link className="linkLogin">Login</Link>
+                        <Link to={'login'} className="linkLogin">Login</Link>
                     </div>
                 </div>
             </div>
@@ -310,4 +312,4 @@ class Register extends Component {
     }
 }
 
-export default Register;
+export default withRouter(Register);
