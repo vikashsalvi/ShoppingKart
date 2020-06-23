@@ -2,6 +2,12 @@ import React, {Component} from "react";
 import {Route, Switch} from "react-router-dom";
 import Home from "../Home/Home";
 import Register from "../Signup/Signup";
+import Login from "../Login/Login";
+import Result from "../Search/SearchResults";
+import ProductDetails from "../ProductDetails/ProductDetails";
+import OrderHistory from "../Orders/Orders";
+import Cart from "../CartManagement/Mycart";
+import OrderConfirmation from "../CartManagement/Checkout/Checkout";\
 
 class Routes extends Component {
     render() {
@@ -9,6 +15,12 @@ class Routes extends Component {
             <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route exact path='/register' component={Register}/>
+                <Route exact path= '/login' component={Login}/>
+                <Route exact path='/result' component={Result}/>
+                <Route exact path='/product' component={ProductDetails} />
+                <Route exact path='/order-history' component={OrderHistory} />
+                <Route exact path="/mycart" component={Cart}/>
+                <Route exact path='/orderConfirmation' component={OrderConfirmation}/>
             </Switch>
         );
     }
