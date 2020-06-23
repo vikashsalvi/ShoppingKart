@@ -92,6 +92,8 @@ class ProductDetails extends Component {
                     <ProdutRating />
                     <ProductReviews />
                 </Container>
+                <br />
+                <br />
             <Footer />
             </div>
         );

@@ -14,7 +14,7 @@ class Orders extends Component {
                 <Container className="mt-4">
                     <Card>
                         <p></p>
-                        <Card.Header><p className="display-4">You orders</p></Card.Header>
+                        <Card.Header><p className="display-4">Your orders</p></Card.Header>
                         <Card.Body>
                             <div className="row">
                                 <div className="col-sm">
@@ -105,6 +105,7 @@ class Orders extends Component {
                         </Card.Body>
                     </Card>
                 </Container>
+                
                 <Footer />
             </div>
         );
