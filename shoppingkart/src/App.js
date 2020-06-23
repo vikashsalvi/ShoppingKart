@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter as Router} from "react-router-dom";
-import Routes from "./Components/Route/Routes";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Routes from "./Components/Route/Routes";
 
 function App() {
   return (
