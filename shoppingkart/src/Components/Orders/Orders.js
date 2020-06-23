@@ -4,6 +4,7 @@ import productImage from '../static/img/ProductPlaceHolder.jpg'
 import { Table, Card, Col, Image, Button } from 'react-bootstrap';
 import Footer from '../Footer/Footer';
 import Navigation from "../NavBar/NavBar";
+import './order.css'
 
 class Orders extends Component {
 
@@ -36,7 +37,7 @@ class Orders extends Component {
                                                     <p>Product title</p>
                                                     <p>Product description: Lorem Ipsum is simply dummy text</p></td>
                                                 <td>
-                                                    <Button variant="dark">Track package</Button>
+                                                    <Button className="buts" variant="dark">Track package</Button>
 
                                                 </td>
                                             </tr>
@@ -61,11 +62,11 @@ class Orders extends Component {
                                                     <p>Product title</p>
                                                     <p>Product description: Lorem Ipsum is simply dummy text</p></td>
                                                 <td>
-                                                    <Button variant="dark">Return order</Button>
+                                                    <Button className="buts" variant="dark">Return order</Button>
                                                     <br/>
-                                                    <Button variant="dark" className="mt-2">Provide review</Button>
+                                                    <Button variant="dark" className="buts mt-2">Provide review</Button>
                                                     <br />
-                                                    <Button variant="dark" className="mt-2">Buy again</Button>
+                                                    <Button variant="dark" className="buts mt-2">Buy again</Button>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -89,11 +90,11 @@ class Orders extends Component {
                                                     <p>Product title</p>
                                                     <p>Product description: Lorem Ipsum is simply dummy text</p></td>
                                                 <td>
-                                                    <Button variant="dark">Return order</Button>
+                                                    <Button className="buts" variant="dark">Return order</Button>
                                                     <br/>
-                                                    <Button variant="dark" className="mt-2">Provide review</Button>
+                                                    <Button className="buts mt-2">Provide review</Button>
                                                     <br />
-                                                    <Button variant="dark" className="mt-2">Buy again</Button>
+                                                    <Button className="buts mt-2">Buy again</Button>
                                                 </td>
                                             </tr>
                                         </tbody>

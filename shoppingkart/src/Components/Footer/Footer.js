@@ -9,7 +9,7 @@ class Footer extends Component {
         return (
             <div className="main-footer ">
                 <div>
-                    <div className="row ml-2" >
+                    <div className="row ml-2" style={{marginRight: "0px"}}>
                         <div className="col-sm" style={{ "marginTop": "20px" }}>
                             <h4>ShoppingKart</h4>
                             <p>

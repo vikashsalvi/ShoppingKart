@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import './SearchResults.css'
 import Card from "./ResultCard/Card";
-import {DropdownButton, Dropdown} from "react-bootstrap";
 import Navigation from "../NavBar/NavBar";
 
 class Result extends Component {
