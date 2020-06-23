@@ -5,6 +5,7 @@ import ProdutRating from '../ProductRating/ProductRating';
 import ProductSpecifics from '../ProductSpecifics/ProductSpecifics';
 import ProductReviews from '../ProductReviews/ProductReviews';
 import Footer from '../Footer/Footer';
+import Navigation from "../NavBar/NavBar";
 
 class ProductDetails extends Component {
     constructor(props){
@@ -33,6 +34,7 @@ class ProductDetails extends Component {
         return (
 
             <div className="wrapper">
+                <Navigation />
                 <Container >
                     <div className="row container-fluid">
                         <div className="col-lg-4 col-xs-5 mt-5">
