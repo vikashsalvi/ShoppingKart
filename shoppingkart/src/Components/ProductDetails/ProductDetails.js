@@ -58,7 +58,7 @@ class ProductDetails extends Component {
                                     <div className="form-group">
                                         <div className="row">
                                             <div className="col-md-4">
-                                                <label>Quantity</label>
+                                                Quantity
                                                 <select className="form-control" id="quantitySelectBox">
                                                     <option>1</option>
                                                     <option>2</option>

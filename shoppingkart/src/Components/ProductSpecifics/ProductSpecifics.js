@@ -4,7 +4,7 @@ import { Container, Table } from 'react-bootstrap';
 class ProductSpecifics extends Component {
     render() {
         return (
-            <div className="wrapper mt-5">
+            <div className=" mt-5">
                 <Container>
                     <div className="container">
                         <div className="text-center">

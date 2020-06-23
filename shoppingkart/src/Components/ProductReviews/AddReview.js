@@ -70,7 +70,7 @@ function AddReview() {
 
                                 />
                             </Form.Group>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            
 
                             <Form.Group as={Col}>
                                 <Form.Control
@@ -83,8 +83,8 @@ function AddReview() {
                                 />
                             </Form.Group>
                         </Form.Row>
-                        <Button variant="primary" type="submit" className="btn-btn-success btn-block" onClick = {handleSubmit}>
-                            <label>Submit  </label>
+                        <Button variant="primary" type="submit" className="btn-btn-success btn-block" onClick = {handleSubmit} >
+                        Submit
                         </Button>
                     </Form>
                 </div>
