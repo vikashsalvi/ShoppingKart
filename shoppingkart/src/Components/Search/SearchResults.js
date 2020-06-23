@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import './SearchResults.css'
 import Card from "./ResultCard/Card";
 import {DropdownButton, Dropdown} from "react-bootstrap";
+import Navigation from "../NavBar/NavBar";
 
 class Result extends Component {
 
@@ -124,7 +125,8 @@ class Result extends Component {
         return(
             match.map((item, index) =>{
                 return(
-                    <Card key={index} name={item.name} price={item.price} brand={item.brand} />
+                    <Card key={index} name={item.name}
+                          price={item.price} brand={item.brand} />
                 )
             })
         );
@@ -133,20 +135,17 @@ class Result extends Component {
     render() {
         return (
             <div>
-                <div className="result_tag">Showing Results: Yellow Potato{/*this.props.location.state.id*/}</div>
-                <div className={"row"}>
-                    <div className={"col-md-6 mt-4"}>
-                        <div className={"float-right"}>
-                            <select className={"selectpicker"}
-                                    id={"filterType"} onChange={this.applyFilterItems.bind(this)}>
-                                <option value={"default"}>Filter By</option>
-                                <option value={"vegetable"}>Vegetables</option>
-                                <option value={"fruit"}>Fruits</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className={"col-md-6 mt-4"}>
-                        <select className={"selectpicker"}
+                <Navigation/>
+                <div>
+                    <div className="result_tag">Showing Results: Yellow Potato{/*this.props.location.state.id*/}</div>
+                    <div style={{textAlign: 'right'}}>
+                        <select className="selectpicker"
+                                id={"filterType"} onChange={this.applyFilterItems.bind(this)}>
+                            <option value={"default"}>Filter By</option>
+                            <option value={"vegetable"}>Vegetables</option>
+                            <option value={"fruit"}>Fruits</option>
+                        </select>
+                        <select className="selectpicker"
                                 id={"sortType"} onChange={this.applySortItems.bind(this)}>
                             <option value={"default"}>Sort By</option>
                             <option value={"price"}>Price</option>
