@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import './SearchResults.css'
 import Card from "./ResultCard/Card";
 import Navigation from "../NavBar/NavBar";
+import Footer from "../Footer/Footer";
 
 class Result extends Component {
 
@@ -153,6 +154,7 @@ class Result extends Component {
                     </div>
                 </div>
                 <div className="products">{this.updateList()}</div>
+                <Footer />
             </div>
         );
     }
