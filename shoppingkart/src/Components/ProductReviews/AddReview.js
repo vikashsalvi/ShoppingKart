@@ -46,12 +46,10 @@ function AddReview() {
 
 
     return (
-        <div>
-            <div>
                 <div>
                     <Form>
                         <h4>Add Review </h4>
-                        <Toast show={success} onClose={showtoast} className="toast-box">
+                        <Toast show={success} onClose={showtoast}>
                             <Toast.Header>
                                 <strong className="mr-auto">Success!!!</strong>
                             </Toast.Header>
@@ -90,8 +88,7 @@ function AddReview() {
                         </Button>
                     </Form>
                 </div>
-            </div>
-        </div>
+
 
     );
 }
