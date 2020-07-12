@@ -21,7 +21,8 @@ class Navigation extends Component {
             {'name': 'Register', 'url': 'register', cname: 'item hide-nav', linkClass: 'link'},
             {'name': 'Profile', 'url': 'profile', cname: 'item', linkClass: 'link'},
             {'name': 'Admin', 'url': 'createProduct', cname: 'item', linkClass: 'link'},
-            {'name': 'Orders', 'url': 'order-history', cname: 'item', linkClass: 'link'}
+            {'name': 'Orders', 'url': 'order-history', cname: 'item', linkClass: 'link'},
+            {'name': 'Help', 'url': 'help', cname: 'item', linkClass: 'link'}
         ];
 
         this.navigate = [

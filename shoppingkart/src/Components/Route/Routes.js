@@ -10,6 +10,7 @@ import ProductDetails from "../ProductDetails/ProductDetails";
 import OrderHistory from "../Orders/Orders";
 import Cart from "../CartManagement/Mycart";
 import OrderConfirmation from "../CartManagement/Checkout/Checkout";
+import Help from "../Help/Help";
 
 class Routes extends Component {
     render() {
@@ -25,6 +26,7 @@ class Routes extends Component {
                 <Route exact path='/order-history' component={OrderHistory} />
                 <Route exact path="/mycart" component={Cart}/>
                 <Route exact path='/orderConfirmation' component={OrderConfirmation}/>
+                <Route exact path='/help' component={Help}/>
             </Switch>
         );
     }
