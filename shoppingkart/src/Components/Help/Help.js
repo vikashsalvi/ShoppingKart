@@ -1,6 +1,4 @@
 import React,{Component} from "react";
-import Navigation from "../NavBar/NavBar";
-import Footer from "../Footer/Footer";
 import './Help.css';
 import Question from "./Question/Question";
 
@@ -98,7 +96,6 @@ class Help extends Component {
     render() {
         return (
             <div>
-                <Navigation/>
                 <div className="help-area">
                     <div className="chat-box">
                         {this.chat()}
@@ -109,7 +106,6 @@ class Help extends Component {
                         </div>
                     </div>
                 </div>
-                <Footer/>
             </div>
         );
     }

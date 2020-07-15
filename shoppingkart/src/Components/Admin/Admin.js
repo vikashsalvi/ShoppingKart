@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Toast, Button, Col } from 'react-bootstrap';
+import { Form, Toast, Col } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
 import './createprod.css';
-import Footer from '../Footer/Footer';
-import Navigation from "../NavBar/NavBar";
 
 const INITIALIZE_PRODUCTS = {
     product_name: '',
@@ -60,7 +58,6 @@ function CreateProduct() {
 
     return (
         <div className="wrapper">
-        <Navigation/>
             <div className="form_area">
 
                 <h1>Insert new product</h1>
@@ -129,7 +126,6 @@ function CreateProduct() {
                 </button>
             </div>
             <div style={{margin: "50px"}}/>
-        <Footer />
         </div>
     );
 }

@@ -3,8 +3,6 @@ import './Register.css'
 import {Link, withRouter} from "react-router-dom";
 import { Form, Col } from 'react-bootstrap';
 import { FaUserCircle, FaRegEnvelope, FaLock, FaShoppingCart, FaBirthdayCake } from 'react-icons/fa';
-import Navigation from "../NavBar/NavBar";
-import Footer from "../Footer/Footer";
 
 class Register extends Component {
 
@@ -227,11 +225,10 @@ class Register extends Component {
     render() {
         return (
             <div className="wrapper">
-                <Navigation/>
                 <div className={this.state.main.status ? "form_area onerror" : "form_area"}>
-                    
+
                     <h1>Signup!!</h1>
-                    
+
                     <Form>
                         <Form.Row>
                             <Form.Group as={Col} >
@@ -316,7 +313,6 @@ class Register extends Component {
                 <br />
                 <br />
                 <br />
-                <Footer />
             </div>
         );
     }
