@@ -7,8 +7,6 @@ import Bread from "../images/bread.jpg";
 import Chicken from "../images/chicken.jpg";
 import eggs from "../images/eggs.png";
 import "./Checkout.css";
-import Navigation from "../../NavBar/NavBar";
-import Footer from "../../Footer/Footer";
 
 class Checkout extends Component {
   state = {
@@ -68,7 +66,6 @@ class Checkout extends Component {
   render() {
     return (
       <div>
-        <Navigation/>
         <div>
           <div>
             <p className="mainTitle">Order Confirmation</p>
@@ -193,7 +190,6 @@ class Checkout extends Component {
             </div>
           </div>
         </div>
-        <Footer/>
       </div>
     );
   }

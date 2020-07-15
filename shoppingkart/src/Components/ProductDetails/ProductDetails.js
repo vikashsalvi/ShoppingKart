@@ -10,7 +10,7 @@ import Navigation from "../NavBar/NavBar";
 class ProductDetails extends Component {
     constructor(props){
         super(props);
-        
+
         if(this.props.location.search.split("=")[1] === ""){
             this.state = {
                 pName:"Product name",
@@ -34,7 +34,6 @@ class ProductDetails extends Component {
         return (
 
             <div className="wrapper">
-                <Navigation />
                 <Container >
                     <div className="row container-fluid">
                         <div className="col-lg-4 col-xs-5 mt-5">
@@ -70,7 +69,7 @@ class ProductDetails extends Component {
                                                     <option>5</option>
                                                 </select>
                                             </div>
-                                            
+
                                             <div className="col-md-4 mt-3 ml-3">
                                             <button type="button" className="btn btn-outline-primary w-100">Buy now</button>
                                             <button type="button" class="btn btn-outline-primary w-100 mt-4">Add to cart</button>
@@ -94,7 +93,6 @@ class ProductDetails extends Component {
                 </Container>
                 <br />
                 <br />
-            <Footer />
             </div>
         );
     }

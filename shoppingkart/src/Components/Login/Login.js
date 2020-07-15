@@ -3,8 +3,6 @@ import { Form, Button } from 'react-bootstrap';
 import './Login.css';
 import { FaUser, FaLock, FaShoppingCart } from 'react-icons/fa';
 import {Link, withRouter} from 'react-router-dom'
-import Navigation from "../NavBar/NavBar";
-import Footer from '../Footer/Footer';
 
 class Login extends Component {
 
@@ -63,7 +61,6 @@ class Login extends Component {
     render() {
         return (
            <div className="wrapper">
-               <Navigation/>
                <div className="form_area">
                <h1>Login!!</h1>
                    <Form onSubmit={this.handleSubmit}>
@@ -102,7 +99,6 @@ class Login extends Component {
                <br />
                <br />
                <br />
-               <Footer />
            </div>
         );
     }

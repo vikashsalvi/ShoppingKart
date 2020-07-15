@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import './NavBar.css';
 import {Link, withRouter} from "react-router-dom";
 import Suggestion from "./suggestion/suggestion";
+import Axios from "axios";
 
 class Navigation extends Component {
 
@@ -31,16 +32,6 @@ class Navigation extends Component {
             {'name': 'Register', 'url': 'register', cname: 'link'}
         ];
 
-        this.products = [
-            {'id': 1, 'name': 'Spring Onions'}, {'id': 2, 'name': 'Onions'}, {'id': 3, 'name': 'Yellow Potato'},
-            {'id': 4, 'name': 'White Potato'}, {'id': 5, 'name': 'Sweet Potato'}, {'id': 6, 'name': 'Green Pepper'},
-            {'id': 7, 'name': 'Yellow Pepper'}, {'id': 8, 'name': 'Red Onions'}, {'id': 9, 'name': 'Pink Cabbage'},
-            {'id': 10, 'name': 'Green Cabbage'}, {'id': 11, 'name': 'Broccoli'}, {'id': 12, 'name': 'Apple'},
-            {'id': 13, 'name': 'Pineapple'}, {'id': 14, 'name': 'Banana'}, {'id': 15, 'name': 'Kiwi'},
-            {'id': 16, 'name': 'Watermelon'}, {'id': 1, 'name': 'Straw Berry'}, {'id': 18, 'name': 'Black Berry'},
-            {'id': 19, 'name': 'Mushrooms'}, {'id': 20, 'name': 'Tomato'}, {'id': 21, 'name': 'Cherry Tomato'}
-        ]
-
         this.toggle = this.toggle.bind(this);
         this.validate = this.validate.bind(this);
         this.showList = this.showList.bind(this);
@@ -58,24 +49,23 @@ class Navigation extends Component {
     validate(e){
         if((e.type === "keydown" && e.keyCode === 13) || e.type === "click"){
             const val = document.getElementById("search").value;
-            console.log(val);
             if(val === ""){
                 alert("Please enter a search string")
             }else{
                 this.props.history.push(
-                    '/result', {'id': val}
+                    '/result', {'query': val}
                 );
             }
         }
     }
 
-    showList(e){
+    async showList(e){
         const userInp = e.target.value;
         let suggestion = [];
+
         if(userInp.length > 0){
-            suggestion = this.products.filter(item => {
-                return item.name.toLowerCase().includes(userInp.toLowerCase());
-            });
+            const data = await Axios.get("http://localhost:5000/product/getSuggestion/" + userInp);
+            suggestion = data.data.data;
         }
         this.setState({
             suggestion: suggestion
@@ -90,7 +80,7 @@ class Navigation extends Component {
             <div className="suggestion">
                 {
                     this.state.suggestion.map((item, index) => {
-                        return <Suggestion key={index} name={item.name} onClick={this.itemClick}/>
+                        return <Suggestion key={index} name={item.productName} onClick={this.itemClick}/>
                     })
                 }
             </div>
