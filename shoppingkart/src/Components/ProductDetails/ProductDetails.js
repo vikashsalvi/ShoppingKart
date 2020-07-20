@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { Container } from 'react-bootstrap';
 import Product from '../Products/Product';
-import ProdutRating from '../ProductRating/ProductRating';
+import ProductRating from '../ProductRating/ProductRating';
 import ProductSpecifics from '../ProductSpecifics/ProductSpecifics';
 import ProductReviews from '../ProductReviews/ProductReviews';
-import Footer from '../Footer/Footer';
-import Navigation from "../NavBar/NavBar";
+
 
 class ProductDetails extends Component {
     constructor(props){
@@ -28,6 +27,10 @@ class ProductDetails extends Component {
                 img:"./static/ProductPlaceHolder.jpg"
             }
         }
+    }
+
+    componentDidMount() {
+        console.log(this.props.location.state.query);
     }
 
     render() {
@@ -88,7 +91,7 @@ class ProductDetails extends Component {
                         </div>
                     </div>
                     <ProductSpecifics />
-                    <ProdutRating />
+                    <ProductRating />
                     <ProductReviews />
                 </Container>
                 <br />

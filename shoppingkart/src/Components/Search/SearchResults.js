@@ -106,7 +106,13 @@ class Result extends Component {
         return(
             this.state.product.map((item, index) =>{
                 return(
-                    <Card key={index} name={item.productName} price={item.productPrice} />
+                    <Card key={index}
+                          id = {item.productID}
+                          name={item.productName}
+                          price={item.productPrice}
+                          brand={item.productBrand}
+                          image={item.productImage}
+                    />
                 )
             })
         );
