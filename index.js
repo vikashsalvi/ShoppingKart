@@ -3,20 +3,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const productRoute = require('./api/route/productRoute');
-const mongoose = require('mongoose');
+const db = require('./api/db/connection');
 
 app.use(cors());
-
-const url = "mongodb+srv://deepmuni:MPrfJkmBJDOYvXQK@testing-deep-aets3.mongodb.net/CSCI_5709_Project?retryWrites=true&w=majority";
-
-mongoose.connect(url,{
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
-    console.log("MongoDB connection Successful");
-}).catch(err =>{
-    console.log("MongoDB connection unsuccessful " + err);
-})
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
