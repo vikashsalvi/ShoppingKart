@@ -11,26 +11,24 @@ class Result extends Component {
         super(props);
 
         this.state = {
-            product: [],
-            shownProducts: [],
+            updated: false,
+            product: this.props.location.state.data,
+            shownProducts: this.props.location.state.data,
         };
 
         this.filter = this.filter.bind(this);
         this.sort = this.sort.bind(this);
     }
 
-    async componentDidMount() {
-        const data = await Axios.get("http://localhost:5000/product/getSearchedProduct/" + this.props.location.state.query);
-        this.setState({
-            product: data.data.data
-        })
-    }
-
-    async componentDidUpdate() {
-        const data = await Axios.get("http://localhost:5000/product/getSearchedProduct/" + this.props.location.state.query);
-        this.setState({
-            product: data.data.data
-        })
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.updated === false || this.props.location.state.check === false){
+            this.props.location.state.check = true;
+            this.setState({
+                product: this.props.location.state.data,
+                shownProducts: this.props.location.state.data,
+                updated: true
+            })
+        }
     }
 
     filter(e) {
@@ -101,7 +99,7 @@ class Result extends Component {
         return (
             <div>
                 <div>
-                    <div className="result_tag">Showing Results: {this.value}</div>
+                    <div className="result_tag">Showing Results: {this.props.location.state.query}</div>
                     <div className="sort-filter">
                         <div className="filter">
                             <label>Filter</label>
