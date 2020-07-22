@@ -1,3 +1,9 @@
+/**
+
+ @author    Deep Muni => B00828375
+
+ **/
+
 const productModel = require("../model/productModel");
 
 const getAllProducts = (req, res) => {
