@@ -5,94 +5,73 @@ import Axios from "axios";
 
 class Result extends Component {
 
-    currentItems;
     beforeSortItems;
 
     constructor(props) {
         super(props);
 
         this.state = {
-            matchedProducts: [],
-            filterApplied:false,
-            sortApplied:false,
-            product: []
+            product: [],
+            shownProducts: [],
         };
+
+        this.filter = this.filter.bind(this);
+        this.sort = this.sort.bind(this);
     }
 
     async componentDidMount() {
-        const data  = await Axios.get("http://localhost:5000/product/getSearchedProduct/" + this.props.location.state.query);
+        const data = await Axios.get("http://localhost:5000/product/getSearchedProduct/" + this.props.location.state.query);
         this.setState({
             product: data.data.data
         })
     }
 
     async componentDidUpdate() {
-        const data  = await Axios.get("http://localhost:5000/product/getSearchedProduct/" + this.props.location.state.query);
+        const data = await Axios.get("http://localhost:5000/product/getSearchedProduct/" + this.props.location.state.query);
         this.setState({
             product: data.data.data
         })
     }
 
-    applyFilterItems(){
+    filter(e) {
 
-        this.currentItems = this.state.product;
-        var typeFilter = document.getElementById("filterType").value;
+        const current = e.target.value;
 
-        if(typeFilter === "default"){
-            this.setState({filterApplied:!this.state.filterApplied});
-            return true;
+        let currentItems;
+
+        if (current === "default") {
+            currentItems = this.state.product;
+        } else {
+            currentItems = this.state.product.filter((item) => {
+                return item.category === current;
+            });
         }
-        var filterItems = [];
-        this.currentItems.map((item,index)=>(
-            filterItems.push((item.brand===typeFilter)?item:null)
-        ))
 
-        var filtered = filterItems.filter(function (el) {
-            return el != null;
+        this.setState({
+            shownProducts: currentItems
         });
-        this.currentItems = filtered;
-        this.setState({filterApplied:!this.state.filterApplied});
     }
 
-    compareValues(key) {
-        return function innerSort(a, b) {
-            if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-                return 0;
-            }
-            const firstVariable = (typeof a[key] === 'string')
-                ? a[key].toUpperCase() : a[key];
-            const secondVariable = (typeof b[key] === 'string')
-                ? b[key].toUpperCase() : b[key];
+    sort(e) {
 
-            let result = 0;
-            if (firstVariable > secondVariable) {
-                result = 1;
-            } else if (firstVariable < secondVariable) {
-                result = -1;
-            }
-            return (
-                result
-            );
-        };
-    }
+        const current = e.target.value;
 
-    applySortItems() {
-        var typeSort = document.getElementById("sortType").value;
-        if(typeSort === "default"){
-            this.currentItems = this.beforeSortItems;
-            this.setState({sortApplied : !this.state.sortApplied})
-            return true;
+        if(current === "price"){
+            this.state.shownProducts.sort((a, b) => {
+                return (a.productPrice > b.productPrice ? 1 : -1)
+            });
+        }else if(current === "popularity"){
+            this.state.shownProducts.sort((a, b) => {
+                return (a.productPopularity > b.productPopularity ? 1 : -1)
+            });
         }
-        else {
-            this.beforeSortItems = this.currentItems;
-            this.currentItems.sort(this.compareValues(typeSort));
-            this.setState({sortApplied : !this.state.sortApplied})
-        }
+
+        this.updateList();
     }
 
-    updateList(){
-        if(this.state.product.length === 0){
-            if(this.props.location.state.query === ""){
+    updateList() {
+        if (this.state.shownProducts.length === 0) {
+            if (this.props.location.state.query === "") {
                 return (
                     <div className="nomatch">No search text entered</div>
                 );
@@ -103,39 +82,43 @@ class Result extends Component {
             );
         }
 
-        return(
-            this.state.product.map((item, index) =>{
-                return(
+        return (
+            this.state.shownProducts.map((item, index) => {
+                return (
                     <Card key={index}
-                          id = {item.productID}
+                          id={item.productID}
                           name={item.productName}
                           price={item.productPrice}
                           brand={item.productBrand}
-                          image={item.productImage}
+                          image={item.imageUrl}
                     />
                 )
             })
         );
     }
 
-    render() {
+    render(props) {
         return (
             <div>
                 <div>
-                    <div className="result_tag">Showing Results: {this.props.location.state.query}</div>
-                    <div style={{textAlign: 'right'}}>
-                        <select className="selectpicker"
-                                id={"filterType"} onChange={this.applyFilterItems.bind(this)}>
-                            <option value={"default"}>Filter By</option>
-                            <option value={"vegetable"}>Vegetables</option>
-                            <option value={"fruit"}>Fruits</option>
-                        </select>
-                        <select className="selectpicker"
-                                id={"sortType"} onChange={this.applySortItems.bind(this)}>
-                            <option value={"default"}>Sort By</option>
-                            <option value={"price"}>Price</option>
-                            <option value={"popularity"}>Popularity</option>
-                        </select>
+                    <div className="result_tag">Showing Results: {this.value}</div>
+                    <div className="sort-filter">
+                        <div className="filter">
+                            <label>Filter</label>
+                            <select className="drop-down" id={"filterType"} onChange={this.filter}>
+                                <option value={"default"}> -</option>
+                                <option value={"vegetable"}>Vegetables</option>
+                                <option value={"fruit"}>Fruits</option>
+                            </select>
+                        </div>
+                        <div className="sort">
+                            <label>Sort</label>
+                            <select className="drop-down" id={"sortType"} onChange={this.sort}>
+                                <option value={"default"}> -</option>
+                                <option value={"price"}>Price</option>
+                                <option value={"popularity"}>Popularity</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div className="products">{this.updateList()}</div>
