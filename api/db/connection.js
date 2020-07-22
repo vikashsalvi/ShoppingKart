@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const url = "mongodb+srv://deepmuni:MPrfJkmBJDOYvXQK@testing-deep-aets3.mongodb.net/CSCI_5709_Project?retryWrites=true&w=majority";
+const url = "mongodb+srv://webUser:admin123@cluster0.jb5qq.mongodb.net/test";
 
 mongoose.connect(url,{
     useNewUrlParser: true,
