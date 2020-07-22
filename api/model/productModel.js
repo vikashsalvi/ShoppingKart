@@ -1,3 +1,9 @@
+/**
+
+ @author    Deep Muni => B00828375
+
+ **/
+
 const mongoose = require('mongoose');
 
 const products = mongoose.Schema({
