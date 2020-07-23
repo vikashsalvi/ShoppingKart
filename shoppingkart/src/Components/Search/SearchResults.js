@@ -92,7 +92,7 @@ class Result extends Component {
                           id={item.productID}
                           name={item.productName}
                           price={item.productPrice}
-                          brand={item.productBrand}
+                          category={item.category}
                           image={item.imageUrl}
                     />
                 )
