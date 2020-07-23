@@ -90,7 +90,7 @@ class Navigation extends Component {
             <div className="suggestion">
                 {
                     this.state.suggestion.map((item, index) => {
-                        return <Suggestion key={index} name={item.productName} onClick={this.itemClick}/>
+                        return <Suggestion key={index} name={item} onClick={this.itemClick}/>
                     })
                 }
             </div>
