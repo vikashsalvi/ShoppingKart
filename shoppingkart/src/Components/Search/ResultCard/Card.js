@@ -7,8 +7,8 @@ class Card extends Component {
     render() {
         return (
             <div className="product">
-                <div className="hoverClass" onClick={() => this.props.history.push('/product')}>
-                    <img className="productImage" alt="placeholder" src={placeholder}/>
+                <div className="hoverClass" onClick={() => this.props.history.push('/product', {'query': this.props.id})}>
+                    <img className="productImage" alt="placeholder" src={this.props.image}/>
                     <div className="productName">{this.props.name}</div>
                     <div className="price">${this.props.price}</div>
                     <div className="brandName">Brand: {this.props.brand}</div>
