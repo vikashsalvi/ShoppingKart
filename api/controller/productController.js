@@ -36,6 +36,28 @@ const getSearchedProducts = (req, res) => {
         })
 }
 
+const getProductDetails = (req,res) => {
+    productModel.find({"productID" : req.params.query}).exec()
+        .then(data => {
+            res.json({ Status :"Success", data : data});
+        })
+        .catch(err => {
+            console.log("Failure:" + err);
+        })
+}
+
+const getTopProducts = (req,res) => {
+    productModel.find().limit(4).exec()
+        .then(data => {
+            res.json({ Status :"Success", data : data});
+        })
+        .catch(err => {
+            console.log("Failure:" + err);
+        })
+}
+
 module.exports.getAllProducts = getAllProducts;
 module.exports.getSuggestions = getSuggestions;
 module.exports.getSearchedProducts = getSearchedProducts;
+module.exports.getProductDetails = getProductDetails;
+module.exports.getTopProducts = getTopProducts;
