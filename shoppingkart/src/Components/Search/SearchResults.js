@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import './SearchResults.css'
 import Card from "./ResultCard/Card";
-import Axios from "axios";
 
 class Result extends Component {
 
@@ -45,6 +44,8 @@ class Result extends Component {
             });
         }
 
+        console.log(currentItems);
+
         this.setState({
             shownProducts: currentItems
         });
@@ -54,20 +55,24 @@ class Result extends Component {
 
         const current = e.target.value;
 
+        let currentItems = this.state.shownProducts;
+
         if(current === "price"){
-            this.state.shownProducts.sort((a, b) => {
-                return (a.productPrice > b.productPrice ? 1 : -1)
-            });
+            currentItems = this.state.shownProducts.sort((a, b) => a.productPrice - b.productPrice);
         }else if(current === "popularity"){
-            this.state.shownProducts.sort((a, b) => {
+            currentItems = this.state.shownProducts.sort((a, b) => {
                 return (a.productPopularity > b.productPopularity ? 1 : -1)
             });
         }
 
-        this.updateList();
+        this.setState({
+            shownProducts: currentItems
+        });
+
     }
 
     updateList() {
+
         if (this.state.shownProducts.length === 0) {
             if (this.props.location.state.query === "") {
                 return (
@@ -95,7 +100,7 @@ class Result extends Component {
         );
     }
 
-    render(props) {
+    render() {
         return (
             <div>
                 <div>
