@@ -46,18 +46,23 @@ class Navigation extends Component {
         })
     }
 
-    validate(e){
-        if((e.type === "keydown" && e.keyCode === 13) || e.type === "click"){
-            const val = document.getElementById("search").value;
-            if(val === ""){
-                alert("Please enter a search string")
-            }else{
-                this.props.history.push(
-                    '/result', {'query': val}
-                );
-            }
-        }
-    }
+     async validate(e) {
+         if ((e.type === "keydown" && e.keyCode === 13) || e.type === "click") {
+             const val = document.getElementById("search").value;
+             if (val === "") {
+                 alert("Please enter a search string")
+             } else {
+                 const data = await Axios.get("http://localhost:5000/product/getSearchedProduct/" + val);
+                 this.props.history.push(
+                     '/result', {
+                         'query': val,
+                         'data': data.data.data,
+                         'check': false
+                     }
+                 );
+             }
+         }
+     }
 
     async showList(e){
         const userInp = e.target.value;
