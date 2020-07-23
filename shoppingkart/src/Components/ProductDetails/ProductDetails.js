@@ -6,6 +6,9 @@ import ProductSpecifics from '../ProductSpecifics/ProductSpecifics';
 import ProductReviews from '../ProductReviews/ProductReviews';
 import Axios from "axios";
 
+/**
+ @author    Vikash Salvi => B00838074
+ **/
 class ProductDetails extends Component {
     constructor(props){
         super(props);

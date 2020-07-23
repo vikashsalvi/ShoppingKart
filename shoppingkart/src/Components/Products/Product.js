@@ -1,7 +1,9 @@
 import React from "react";
 import { Container, Card } from "react-bootstrap";
 import {withRouter} from "react-router-dom";
-
+/**
+ @author    Vikash Salvi => B00838074
+ **/
 class Product extends React.Component {
     constructor(props){
         super(props);
