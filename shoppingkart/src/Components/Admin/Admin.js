@@ -109,15 +109,17 @@ function CreateProduct() {
 
                     </Form.Group>
                     <Form.Group>
-                        <input
+                        <textarea
                             name="description"
                             label="Description"
-                            placeholder="Description"
-                            className="inp"
+                            placeholder="  Product Description"
+                            // className="inp"
                             type="textarea"
                             id="desp"
+                            rows="4"
+                            cols="60"
                             onChange={handleChange}
-                        />
+                        ></textarea>
                     </Form.Group>
                 </Form>
                 <button type="submit" className="submit" onClick={handleSubmit}>

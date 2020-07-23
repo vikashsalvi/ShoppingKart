@@ -4,6 +4,7 @@ const cors = require('cors');
 const app = express();
 const productRoute = require('./api/route/productRoute');
 const db = require('./api/db/connection');
+const adminProductRoute = require('./api/controller/adminProductController')
 
 app.use(cors());
 
@@ -17,6 +18,8 @@ app.get('/',function(req,res, next){
     res.sendFile(path.join(__dirname + '/shoppingkart/build/index.html'));
     next();
 });
+
+app.use("/getAllProducts",adminProductRoute.adminRouter)
 
 app.use('/product', productRoute);
 
