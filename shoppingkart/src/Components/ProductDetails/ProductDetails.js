@@ -6,6 +6,9 @@ import ProductSpecifics from '../ProductSpecifics/ProductSpecifics';
 import ProductReviews from '../ProductReviews/ProductReviews';
 import Axios from "axios";
 
+/**
+ @author    Vikash Salvi => B00838074
+ **/
 class ProductDetails extends Component {
     constructor(props){
         super(props);
@@ -13,7 +16,8 @@ class ProductDetails extends Component {
             productName: "",
             productDescription: "",
             productUrl: "",
-            productQuantity: 0
+            productQuantity: 0,
+            productPrice: 0
         };
         console.log(props)
     }
@@ -25,7 +29,8 @@ class ProductDetails extends Component {
             productName: productData.data.data[0].productName,
             productDescription: productData.data.data[0].productDescription,
             productUrl: productData.data.data[0].imageUrl,
-            productQuantity: productData.data.data[0].productQuantity
+            productQuantity: productData.data.data[0].productQuantity,
+            productPrice: productData.data.data[0].productPrice
         })
     }
 
@@ -114,7 +119,11 @@ class ProductDetails extends Component {
                                     </div>
                                 </div>
                                 <div class="h-50 col mt-4" >
-                                    Product description
+                                    <h4>Product price: &nbsp;$
+                                    {this.state.productPrice}
+                                    </h4>
+                                    <br />
+                                    Product description:
                                     <hr />
                                     <p className="h6">
                                         {

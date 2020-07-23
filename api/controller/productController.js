@@ -36,6 +36,9 @@ const getSearchedProducts = (req, res) => {
         })
 }
 
+/**
+ @function author    Vikash Salvi => B00838074
+ **/
 const getProductDetails = (req,res) => {
     productModel.find({"productID" : req.params.query}).exec()
         .then(data => {
@@ -45,7 +48,9 @@ const getProductDetails = (req,res) => {
             console.log("Failure:" + err);
         })
 }
-
+/**
+ @function author    Vikash Salvi => B00838074
+ **/
 const getTopProducts = (req,res) => {
     productModel.find().limit(4).exec()
         .then(data => {
