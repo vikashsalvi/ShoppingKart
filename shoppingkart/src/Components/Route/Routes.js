@@ -1,11 +1,12 @@
 import React, {Component} from "react";
 import {Route, Switch} from "react-router-dom";
 import Home from "../Home/Home";
-import CreateProduct from '../Admin/Admin';
+import CreateProduct from '../Admin/InsertProduct';
 import Profile from "../UserProfile/UserProfile";
 import Register from "../Signup/Signup";
 import Login from "../Login/Login";
 import Result from "../Search/SearchResults";
+import AdminHome from "../Admin/AdminHome";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import OrderHistory from "../Orders/Orders";
 import Cart from "../CartManagement/Mycart";
@@ -17,6 +18,7 @@ class Routes extends Component {
         return (
             <Switch>
                 <Route exact path='/' component={Home}/>
+                <Route exact path='/admin' component={AdminHome}/>
                 <Route exact path='/createProduct' component={CreateProduct}/>
                 <Route exact path='/profile' component={Profile}/>
                 <Route exact path='/register' component={Register}/>

@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import { Form, Toast, Col } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
 import './createprod.css';
+import axios from 'axios';
 
 const INITIALIZE_PRODUCTS = {
+    product_id:'',
     product_name: '',
     product_price: '',
     product_description: '',
-    product_img: ''
+    product_img: '',
+    product_qty : '',
+    product_brand: ''
 
 }
 
@@ -30,12 +34,17 @@ function CreateProduct() {
 
 
     function checkEmpty() {
+        const productid = document.getElementById('id');
         const prodname = document.getElementById('prodname');
         const price = document.getElementById('price');
         const desp = document.getElementById('desp');
         const img = document.getElementById('img');
+        const qty = document.getElementById('prodqty');
+        const brand = document.getElementById('brand');
+        
 
-        if ((prodname.value === "") || (price.value === "") || (desp.value === "") || (img.value === "")) {
+        if ((prodname.value === "") || (price.value === "") || (desp.value === "") || (img.value === "")
+        || (qty.value == "") || (brand.value == "")) {
             alert("Please fill all the fields");
             return false;
         }
@@ -48,26 +57,58 @@ function CreateProduct() {
         event.preventDefault()
         if (checkEmpty()) {
             setProduct(INITIALIZE_PRODUCTS)
+            INITIALIZE_PRODUCTS.product_id = document.getElementById('id').value;
+            INITIALIZE_PRODUCTS.product_name = document.getElementById('prodname').value;
+            INITIALIZE_PRODUCTS.product_price= document.getElementById('price').value;
+            INITIALIZE_PRODUCTS.product_description = document.getElementById('desp').value;
+            INITIALIZE_PRODUCTS.product_img = document.getElementById('img').value;
+            INITIALIZE_PRODUCTS.product_qty = document.getElementById('prodqty').value;
+            INITIALIZE_PRODUCTS.product_brand = document.getElementById('brand').value;
+            axios({
+                method: "POST", 
+                url:"http://localhost:5000/admin/saveProduct", 
+                data:  INITIALIZE_PRODUCTS
+              }).then((response)=>{
+                if (response.data.status === 'success'){
+                  alert("Message Sent."); 
+                  this.resetForm()
+                }else if(response.data.status === 'fail'){
+                  alert("Message failed to send.")
+                }
+              })
+            console.log(INITIALIZE_PRODUCTS)
             SetSuccess(true)
         }
         else {
             SetSuccess(false);
+
         }
     }
-
 
     return (
         <div className="wrapper">
             <div className="form_area">
 
                 <h1>Insert new product</h1>
-                <Form >
+                <Form method="post">
                     <Toast show={success} onClose={showtoast} className="toast-box">
                         <Toast.Header>
                             <strong className="mr-auto">Success!!!</strong>
                         </Toast.Header>
                         <Toast.Body>your product has been posted</Toast.Body>
                     </Toast>
+                    <Form.Group>
+                        <input
+                            name="id"
+                            label="id"
+                            placeholder="Product ID"
+                            type="number"
+                            id="id"
+                            className="inp"
+                            onChange={handleChange}
+                        />
+
+                    </Form.Group>
                     <Form.Row>
 
                         <Form.Group as={Col}>
@@ -96,14 +137,39 @@ function CreateProduct() {
                         </Form.Group>
                     </Form.Row>
 
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <input
+                                name="prodqty"
+                                placeholder="Product Quantity"
+                                type="number"
+                                id="prodqty"
+                                className="inp"
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <input
+                                name="brand"
+                                label="Brand"
+                                placeholder="Brand"
+                                type="text"
+                                id="brand"
+                                className="inp"
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+                    </Form.Row>
+
                     <Form.Group>
-                        <Form.Control
+                        <input
                             name="media"
                             label="Media"
                             content="Select Image"
-                            type="file"
+                            placeholder="Image URL"
+                            type="text"
                             id="img"
-                            accept="image/*"
+                            className="inp"
                             onChange={handleChange}
                         />
 
@@ -113,14 +179,14 @@ function CreateProduct() {
                             name="description"
                             label="Description"
                             placeholder="  Product Description"
-                            // className="inp"
                             type="textarea"
                             id="desp"
-                            rows="4"
+                            rows="3"
                             cols="60"
                             onChange={handleChange}
                         ></textarea>
                     </Form.Group>
+                    
                 </Form>
                 <button type="submit" className="submit" onClick={handleSubmit}>
                     <span>Submit</span>

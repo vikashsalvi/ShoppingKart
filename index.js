@@ -4,7 +4,7 @@ const cors = require('cors');
 const app = express();
 const productRoute = require('./api/route/productRoute');
 const db = require('./api/db/connection');
-const adminProductRoute = require('./api/controller/adminProductController')
+const adminProductRoute = require('./api/route/adminProductRoute')
 
 app.use(cors());
 
@@ -19,7 +19,7 @@ app.get('/',function(req,res, next){
     next();
 });
 
-app.use("/getAllProducts",adminProductRoute.adminRouter)
+app.use("/admin",adminProductRoute)
 
 app.use('/product', productRoute);
 
