@@ -115,13 +115,13 @@ class Checkout extends Component {
                 <div className="left-div-address-div">
                   <div style={{ display: "flex", padding: "5px 5px 15px 5px" }}>
                     <input type="radio" value="Card" name="payment" />
-                    <img src={card} className="radio-button-img" />
+                    <img src={card} className="radio-button-img" alt="test"/>
                     Credit/Debit Card
                   </div>
 
                   <div style={{ display: "flex", padding: "5px 5px 15px 5px" }}>
                     <input type="radio" value="Paypal" name="payment" />
-                    <img src={PayPal} className="radio-button-img" />
+                    <img src={PayPal} className="radio-button-img" alt="test"/>
                     PayPal
                   </div>
                 </div>

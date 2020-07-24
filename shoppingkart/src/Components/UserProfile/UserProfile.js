@@ -112,7 +112,6 @@ class Profile extends Component {
             this.setState({
                 isDisabled: true
             });
-            let res = "";
             const url = "http://localhost:5000/users/editprofile/" + document.getElementById("uname").value;
             axios.put(url, {
                 firstname: document.getElementById("fname").value,
@@ -120,7 +119,7 @@ class Profile extends Component {
                 address: document.getElementById("address").value
             })
                 .then(res => {
-                    
+
                     if (res.data.Status === "Success") {
                         alert("Updated");
                         this.props.history.push('/');

@@ -7,7 +7,7 @@ export class EmptyCart extends Component{
         return (
           <div className="emptyCart">
             <div>
-                <img src={emptyCart} className="emptyCart-img"/>
+                <img src={emptyCart} className="emptyCart-img" alt="test"/>
             </div>
             <div className="emptyCart-label-div">
                 <p className="emptyCart-label">Your cart is empty</p>
@@ -16,6 +16,6 @@ export class EmptyCart extends Component{
           </div>
         );
       }
-} 
+}
 
 export default EmptyCart;
