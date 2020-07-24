@@ -1,6 +1,6 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import './NavBar.css';
-import {Link, withRouter} from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Suggestion from "./suggestion/suggestion";
 import Axios from "axios";
 
@@ -16,20 +16,22 @@ class Navigation extends Component {
         }
 
         this.side_panel = [
-            {'name': 'Home', 'url': '', cname: 'item', linkClass: 'link'},
-            {'name': 'Cart', 'url': 'mycart', cname: 'item hide-nav', linkClass: 'link'},
-            {'name': 'Login', 'url': 'login', cname: 'item hide-nav', linkClass: 'link'},
-            {'name': 'Register', 'url': 'register', cname: 'item hide-nav', linkClass: 'link'},
-            {'name': 'Profile', 'url': 'profile', cname: 'item', linkClass: 'link'},
-            {'name': 'Admin', 'url': 'createProduct', cname: 'item', linkClass: 'link'},
-            {'name': 'Orders', 'url': 'order-history', cname: 'item', linkClass: 'link'},
-            {'name': 'Help', 'url': 'help', cname: 'item', linkClass: 'link'}
+            { 'name': 'Home', 'url': '', cname: 'item', linkClass: 'link' },
+            { 'name': 'Cart', 'url': 'mycart', cname: 'item hide-nav', linkClass: 'link' },
+            { 'name': 'Login', 'url': 'login', cname: 'item hide-nav', linkClass: 'link' },
+            { 'name': 'Register', 'url': 'register', cname: 'item hide-nav', linkClass: 'link' },
+            { 'name': 'Logout', 'url': 'logout', cname: 'item hide-nav', linkClass: 'link'},
+            { 'name': 'Profile', 'url': 'profile', cname: 'item', linkClass: 'link' },
+            { 'name': 'Admin', 'url': 'createProduct', cname: 'item', linkClass: 'link' },
+            { 'name': 'Orders', 'url': 'order-history', cname: 'item', linkClass: 'link' },
+            { 'name': 'Help', 'url': 'help', cname: 'item', linkClass: 'link' }
         ];
 
         this.navigate = [
-            {'name': 'Cart', 'url': 'mycart', cname: 'link'},
-            {'name': 'Login', 'url': 'login', cname: 'link'},
-            {'name': 'Register', 'url': 'register', cname: 'link'}
+            { 'name': 'Cart', 'url': 'mycart', cname: 'link' },
+            { 'name': 'Login', 'url': 'login', cname: 'link' },
+            { 'name': 'Register', 'url': 'register', cname: 'link' },
+            { 'name': 'Logout', 'url': 'logout', cname: 'link' }
         ];
 
         this.toggle = this.toggle.bind(this);
@@ -39,7 +41,7 @@ class Navigation extends Component {
 
     }
 
-    toggle(){
+    toggle() {
         const isShowing = this.state.showing;
         this.setState({
             showing: !isShowing
@@ -53,6 +55,11 @@ class Navigation extends Component {
                  alert("Please enter a search string")
              } else {
                  const data = await Axios.get("http://localhost:5000/product/getSearchedProduct/" + val);
+
+                 this.setState({
+                     suggestion: []
+                 });
+
                  this.props.history.push(
                      '/result', {
                          'query': val,
@@ -64,11 +71,11 @@ class Navigation extends Component {
          }
      }
 
-    async showList(e){
+    async showList(e) {
         const userInp = e.target.value;
         let suggestion = [];
 
-        if(userInp.length > 0){
+        if (userInp.length > 0) {
             const data = await Axios.get("http://localhost:5000/product/getSuggestion/" + userInp);
             suggestion = data.data.data;
         }
@@ -77,15 +84,15 @@ class Navigation extends Component {
         })
     }
 
-    suggestionList(){
-        if(this.state.suggestion.length === 0){
+    suggestionList() {
+        if (this.state.suggestion.length === 0) {
             return null;
         }
-        return(
+        return (
             <div className="suggestion">
                 {
                     this.state.suggestion.map((item, index) => {
-                        return <Suggestion key={index} name={item.productName} onClick={this.itemClick}/>
+                        return <Suggestion key={index} name={item} onClick={this.itemClick}/>
                     })
                 }
             </div>
@@ -100,7 +107,7 @@ class Navigation extends Component {
         });
 
         this.setState({
-            suggestion : [],
+            suggestion: [],
             selectedTup: tup
         });
     }
@@ -108,37 +115,41 @@ class Navigation extends Component {
     render() {
         return (
             <nav className="bar">
-                <div className="menu" onClick={this.toggle}/>
+                <div className="menu" onClick={this.toggle} />
                 <div className={this.state.showing ? "search-bar search-move" : "search-bar"}>
                     <div className="search">
                         <input type="text" id="search" placeholder="Search"
-                               onKeyDown={this.validate} onChange={this.showList}/>
+                            onKeyDown={this.validate} onChange={this.showList} />
                     </div>
-                    <div className="search-icon" onClick={this.validate}/>
+                    <div className="search-icon" onClick={this.validate} />
                     {this.suggestionList()}
                 </div>
                 <ul className="right">
                     {
                         this.navigate.map((item, index) => {
-                            return(
+                            return (
                                 <li key={index}>
                                     <div className="label">{item.name}</div>
-                                    <Link to={item.url} className={item.cname}/>
+                                    <Link to={item.url} className={item.cname} />
                                 </li>
                             );
                         })
                     }
                 </ul>
-                <Link to={'/'}><div className="logo"/></Link>
+                <Link to={'/'}><div className="logo" /></Link>
                 <div className={this.state.showing ? "side-panel show-panel" : "side-panel"}>
                     <ul>
                         {
-                            this.side_panel.map((item,index) => {
-                                return(
+                            this.side_panel.map((item, index) => {
+                                return (
+                                    
                                     <li className={item.cname} key={index}>
-                                        <div className="label">{item.name}</div>
-                                        <div className="arrow"/>
-                                        <Link to={item.url} className={item.linkClass}/>
+                                            
+                                            <div className="label">{item.name}</div>
+                                            <div className="arrow" />
+                                            <Link to={item.url} className={item.linkClass} />
+                                        
+                                       
                                     </li>
                                 );
                             })

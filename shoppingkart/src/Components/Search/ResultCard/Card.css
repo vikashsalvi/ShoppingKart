@@ -13,10 +13,11 @@
 .productImage{
     width: 210px;
     border-radius: 10px;
-    height: 100px;
+    min-height: 100px;
+    max-height: 100px;
 }
 
-.productName, .price, .brandName{
+.productName, .price, .category{
     word-wrap: break-word;
     margin-top: 10px;
     text-overflow: ellipsis;
@@ -25,6 +26,7 @@
     overflow: hidden;
     color: #ffffff;
     font-family: Arial, serif;
+    height: 25px;
 }
 
 .addtocart{
