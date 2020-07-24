@@ -8,7 +8,6 @@
 const express = require('express')
 const product = require("../model/productModel");
 
-const adminRouter = express.Router()
 
 const saveProduct = async (req, res)=>{
     const newProduct = new product({
@@ -54,7 +53,7 @@ const updateProduct = async (req, res) => {
         
         console.log(req.body)
         console.log(updatedItem)
-        
+
         if(updatedItem.n === 1)
         {
             res.json({"Success":true})
@@ -68,6 +67,20 @@ const updateProduct = async (req, res) => {
     }
 }
 
+const checkProduct = async (req, res) => {
+    const existingProduct = await product.find({productID:req.body.product_id})
+    console.log(existingProduct)
+    if(existingProduct.length > 0){
+        res.json({"Success":false})
+    }
+    else{
+    res.json({"Success":true})
+    }
+
+}
+
+
 module.exports.saveProduct = saveProduct
+module.exports.checkProduct = checkProduct
 module.exports.deleteProduct = deleteProduct
 module.exports.updateProduct = updateProduct

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const productRoute = require('./api/route/productRoute');
+const userRoute = require('./api/route/userRoute')
 const db = require('./api/db/connection');
 const adminProductRoute = require('./api/route/adminProductRoute')
 
@@ -22,6 +23,7 @@ app.get('/',function(req,res, next){
 app.use("/admin",adminProductRoute)
 
 app.use('/product', productRoute);
+app.use('/users', userRoute);
 
 app.listen(process.env.PORT || 5000, function () {
     console.log('Express serve running on port 5000');

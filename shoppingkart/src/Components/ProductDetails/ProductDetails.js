@@ -4,33 +4,74 @@ import Product from '../Products/Product';
 import ProductRating from '../ProductRating/ProductRating';
 import ProductSpecifics from '../ProductSpecifics/ProductSpecifics';
 import ProductReviews from '../ProductReviews/ProductReviews';
+import Axios from "axios";
 
-
+/**
+ @author    Vikash Salvi => B00838074
+ **/
 class ProductDetails extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            productName: "",
+            productDescription: "",
+            productUrl: "",
+            productQuantity: 0,
+            productPrice: 0
+        };
+        console.log(props)
+    }
 
-        if(this.props.location.search.split("=")[1] === ""){
-            this.state = {
-                pName:"Product name",
-                img:"./static/ProductPlaceHolder.jpg"
-            }
-        }else{
-            this.state = {
-                pName:this.props.location.search.split("=")[1],
-                img:"./static/"+this.props.location.search.split("=")[1]+".jpg"
-            }
+    async componentDidMount() {
+        console.log("Id " + this.props.location.state.query);
+        const productData  = await Axios.get("http://localhost:5000/product/getProductDetails/" + this.props.location.state.query);
+        this.setState( {
+            productName: productData.data.data[0].productName,
+            productDescription: productData.data.data[0].productDescription,
+            productUrl: productData.data.data[0].imageUrl,
+            productQuantity: productData.data.data[0].productQuantity,
+            productPrice: productData.data.data[0].productPrice
+        })
+    }
+
+    onDropdownSelected(e) {
+        console.log("Quantity ", e.target.value);
+    }
+
+    createSelectuantity() {
+        let items = [];
+        let counter = 5;
+        let start = 1;
+        if(this.state.productQuantity < 5 ){
+            counter = this.state.productQuantity
         }
-        if(this.props.location.search === ""){
-            this.state = {
-                pName:"Product name",
-                img:"./static/ProductPlaceHolder.jpg"
-            }
+        if(this.state.productQuantity === 0){
+            start = 0
+        }
+        for (let i = start; i <= counter; i++) {
+             items.push(<option key={i} value={i}>{i}</option>);
+        }
+        return items;
+    }
+
+    getStockText(){
+        if(this.state.productQuantity === 0 ){
+            return <h6 className="text-danger">No stock left</h6>
+        }else{
+        return <h6 className="text-success">In sotck, Quantity left: {this.state.productQuantity}</h6>
         }
     }
 
-    componentDidMount() {
-        console.log(this.props.location.state.query);
+    getPurchaseButtons(){
+        let list = []
+        if(this.state.productQuantity === 0 ){
+            list.push(<button type="button" className="btn btn-outline-primary w-100" disabled>Buy now</button>);
+            list.push(<button type="button" class="btn btn-outline-primary w-100 mt-4" disabled>Add to cart</button>);
+        }else{
+            list.push(<button type="button" className="btn btn-outline-primary w-100">Buy now</button>);
+            list.push(<button type="button" class="btn btn-outline-primary w-100 mt-4">Add to cart</button>)
+        }
+        return list;
     }
 
     render() {
@@ -42,7 +83,7 @@ class ProductDetails extends Component {
                         <div className="col-lg-4 col-xs-5 mt-5">
                             <div className="row h-100">
                                 <div className="col">
-                                    <Product img={this.state.img}/>
+                                    <Product img={this.state.productUrl}/>
                                 </div>
                             </div>
                         </div>
@@ -52,11 +93,11 @@ class ProductDetails extends Component {
                                     <div className="mt-5">
                                         <h1 className="display-4">
                                             {
-                                                this.state.pName
+                                                this.state.productName
                                             }
                                         </h1>
-                                        <h6 >Product seller</h6>
-                                        <h6 className="text-success">In sotck</h6>
+                                        {this.getStockText()}
+
                                     </div>
                                 </div>
                                 <div className="w-100 ml-3 container-fluid" >
@@ -64,33 +105,36 @@ class ProductDetails extends Component {
                                         <div className="row">
                                             <div className="col-md-4">
                                                 Quantity
-                                                <select className="form-control" id="quantitySelectBox">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                <select className="form-control"
+                                                onChange={this.onDropdownSelected}
+                                                id="quantitySelectBox">
+                                                    {this.createSelectuantity()}
                                                 </select>
                                             </div>
 
                                             <div className="col-md-4 mt-3 ml-3">
-                                            <button type="button" className="btn btn-outline-primary w-100">Buy now</button>
-                                            <button type="button" class="btn btn-outline-primary w-100 mt-4">Add to cart</button>
+                                                {this.getPurchaseButtons()}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="h-50 col mt-4" >
-                                    Product description
+                                    <h4>Product price: &nbsp;$
+                                    {this.state.productPrice}
+                                    </h4>
+                                    <br />
+                                    Product description:
                                     <hr />
                                     <p className="h6">
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                                        {
+                                            this.state.productDescription
+                                        }
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <ProductSpecifics />
+                    <ProductSpecifics productId={this.props.location.state.query}/>
                     <ProductRating />
                     <ProductReviews />
                 </Container>

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import './Register.css'
-import {Link, withRouter} from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Form, Col } from 'react-bootstrap';
 import { FaUserCircle, FaRegEnvelope, FaLock, FaShoppingCart, FaBirthdayCake } from 'react-icons/fa';
+import axios from 'axios';
 
 class Register extends Component {
 
@@ -44,6 +45,7 @@ class Register extends Component {
         this.policyNotSatisfied = this.policyNotSatisfied.bind(this);
     }
 
+
     validate(e) {
 
         const field = e.target;
@@ -57,8 +59,9 @@ class Register extends Component {
                 } else if (field.value.length < 4 || field.value.length > 21) {
                     update = { status: true, text: 'Length between 4 & 21' }
                 } else {
-                    update = { status: false, text: '' }
+                    update = { status: false, text: field.value }
                 }
+                
                 this.setState({
                     uname: update
                 });
@@ -69,7 +72,7 @@ class Register extends Component {
                 } else if (field.value.length < 4 || field.value.length > 21) {
                     update = { status: true, text: 'Length between 4 & 21' }
                 } else {
-                    update = { status: false, text: '' }
+                    update = { status: false, text: field.value }
                 }
                 this.setState({
                     fname: update
@@ -81,7 +84,7 @@ class Register extends Component {
                 } else if (field.value.length < 4 || field.value.length > 21) {
                     update = { status: true, text: 'Length between 4 & 21' }
                 } else {
-                    update = { status: false, text: '' }
+                    update = { status: false, text: field.value }
                 }
                 this.setState({
                     lname: update
@@ -91,7 +94,7 @@ class Register extends Component {
                 if (field.value === "") {
                     update = { status: true, text: 'Date of Birth is required' }
                 } else {
-                    update = { status: false, text: '' }
+                    update = { status: false, text: field.value }
                 }
                 this.setState({
                     dob: update
@@ -104,7 +107,7 @@ class Register extends Component {
                 if (field.value === "") {
                     update = { status: true, text: 'Password is required' }
                 } else {
-                    update = { status: false, text: '' }
+                    update = { status: false, text: field.value }
                 }
 
                 if (field.value !== document.getElementById('cpass').value) {
@@ -122,7 +125,7 @@ class Register extends Component {
                 } else if (field.value !== document.getElementById('pass').value) {
                     update = { status: true, text: 'Password does not match' }
                 } else {
-                    update = { status: false, text: '' }
+                    update = { status: false, text: field.value }
                 }
                 this.setState({
                     cpass: update
@@ -163,10 +166,31 @@ class Register extends Component {
                 });
             }, 2500);
         } else {
+            
+            
+            const newUser = {
+                uname: this.state.uname.text,
+                fname: this.state.fname.text,
+                lname: this.state.lname.text,
+                dob: this.state.dob.text,
+                pass: this.state.pass.text,
+                cpass: this.state.cpass.text
+            };
+            
+            axios.post("http://localhost:5000/users/register", newUser)
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                alert("User has been registered");
+                this.props.history.push('/login')
+            })
+            .catch(error => {
+                console.log(error);
+            })
             this.makeEmpty();
-            alert("User has been registered");
-            this.props.history.push('/login')
+
         }
+        
     }
 
     checkBlank() {
@@ -235,7 +259,7 @@ class Register extends Component {
                                 <div className="input-section">
                                     <Form.Label> <FaUserCircle /> First Name</Form.Label>
                                     <input type="text" id="fname" className="inp" placeholder="Enter First Name"
-                                           onChange={this.validate} />
+                                        onChange={this.validate} />
                                     {this.state.fname.status ? <div className="error">{this.state.fname.text}</div> : null}
                                 </div>
                             </Form.Group>
@@ -243,7 +267,7 @@ class Register extends Component {
                                 <div className="input-section">
                                     <Form.Label> <FaUserCircle /> Last Name</Form.Label>
                                     <input type="text" id="lname" className="inp" placeholder="Enter Last Name"
-                                           onChange={this.validate} />
+                                        onChange={this.validate} />
                                     {this.state.lname.status ? <div className="error">{this.state.lname.text}</div> : null}
                                 </div>
                             </Form.Group>
@@ -253,7 +277,7 @@ class Register extends Component {
                                 <div className="input-section">
                                     <Form.Label> <FaRegEnvelope /> Username </Form.Label>
                                     <input type="text" id="uname" className="inp" placeholder="Enter User Name"
-                                           onChange={this.validate} />
+                                        onChange={this.validate} />
                                     {this.state.uname.status ? <div className="error">{this.state.uname.text}</div> : null}
                                 </div>
                             </Form.Group>
@@ -261,7 +285,7 @@ class Register extends Component {
                                 <div className="input-section">
                                     <Form.Label> <FaBirthdayCake /> Date of Birth</Form.Label>
                                     <input type="date" id="dob" className="inp"
-                                           onChange={this.validate} />
+                                        onChange={this.validate} />
                                     {this.state.dob.status ? <div className="error">{this.state.dob.text}</div> : null}
                                 </div>
                             </Form.Group>
@@ -271,15 +295,15 @@ class Register extends Component {
                                 <div className="input-section">
                                     <Form.Label> <FaLock /> Password</Form.Label>
                                     <input type="password" id="pass" className="inp" placeholder="Enter A Password"
-                                           onChange={this.validate} onFocus={this.showPolicy} onBlur={this.hidePolicy} />
+                                        onChange={this.validate} onFocus={this.showPolicy} onBlur={this.hidePolicy} />
                                     {this.state.pass.status ? <div className="error">{this.state.pass.text}</div> : null}
                                     <div className={this.state.passCheck ? "pass-check" : "pass-check hide"}>
                                         {
                                             this.passCheck.map((item, index) => {
                                                 return (
                                                     <p key={index} id={item.id}
-                                                       className={this.state.passPolicy[item.id].status
-                                                           ? item.success : item.error}>{item.text}</p>
+                                                        className={this.state.passPolicy[item.id].status
+                                                            ? item.success : item.error}>{item.text}</p>
                                                 );
                                             })
                                         }
@@ -290,7 +314,7 @@ class Register extends Component {
                                 <div className="input-section">
                                     <Form.Label> <FaLock /> Confirm Password</Form.Label>
                                     <input type="password" id="cpass" className="inp" placeholder="Re-Enter Password"
-                                           onChange={this.validate} />
+                                        onChange={this.validate} />
                                     {this.state.cpass.status ? <div className="error">{this.state.cpass.text}</div> : null}
                                 </div>
                             </Form.Group>
@@ -304,7 +328,7 @@ class Register extends Component {
                         {this.state.main.status ? <div className="submitError">{this.state.main.text}</div> : null}
                     </div>
                     <div className="redirect">
-                        <span className= "ext-text">Already a User?</span>
+                        <span className="ext-text">Already a User?</span>
                         <Link to={'login'} className="linkLogin">Login</Link>
                     </div>
                 </div>

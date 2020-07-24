@@ -1,36 +1,38 @@
 import React, {Component} from "react";
 import './SearchResults.css'
 import Card from "./ResultCard/Card";
-import Axios from "axios";
 
 class Result extends Component {
-
-    beforeSortItems;
 
     constructor(props) {
         super(props);
 
         this.state = {
-            product: [],
-            shownProducts: [],
+            updated: false,
+            product: this.props.location.state.data,
+            shownProducts: this.props.location.state.data,
+            pass: true
         };
 
         this.filter = this.filter.bind(this);
         this.sort = this.sort.bind(this);
     }
 
-    async componentDidMount() {
-        const data = await Axios.get("http://localhost:5000/product/getSearchedProduct/" + this.props.location.state.query);
+    componentDidMount() {
         this.setState({
-            product: data.data.data
-        })
+            pass: true
+        });
     }
 
-    async componentDidUpdate() {
-        const data = await Axios.get("http://localhost:5000/product/getSearchedProduct/" + this.props.location.state.query);
-        this.setState({
-            product: data.data.data
-        })
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.updated === false || this.props.location.state.check === false){
+            this.props.location.state.check = true;
+            this.setState({
+                product: this.props.location.state.data,
+                shownProducts: this.props.location.state.data,
+                updated: true
+            })
+        }
     }
 
     filter(e) {
@@ -47,6 +49,8 @@ class Result extends Component {
             });
         }
 
+        document.getElementById("sortType").value = "default";
+
         this.setState({
             shownProducts: currentItems
         });
@@ -56,20 +60,34 @@ class Result extends Component {
 
         const current = e.target.value;
 
-        if(current === "price"){
-            this.state.shownProducts.sort((a, b) => {
-                return (a.productPrice > b.productPrice ? 1 : -1)
-            });
-        }else if(current === "popularity"){
-            this.state.shownProducts.sort((a, b) => {
-                return (a.productPopularity > b.productPopularity ? 1 : -1)
-            });
+        let currentItems = this.state.shownProducts;
+
+        if(current === "price_lh"){
+            currentItems = this.state.shownProducts.sort((a, b) => a.productPrice - b.productPrice);
+        }else if(current === "price_hl"){
+            currentItems = this.state.shownProducts.sort((a, b) => b.productPrice - a.productPrice);
+        }else if(current === "alpha_az"){
+            currentItems = this.state.shownProducts.sort(function(a, b){
+                if(a.productName < b.productName) { return -1; }
+                if(a.productName > b.productName) { return 1; }
+                return 0;
+            })
+        }else if(current === "alpha_za"){
+            currentItems = this.state.shownProducts.sort(function(a, b){
+                if(a.productName < b.productName) { return 1; }
+                if(a.productName > b.productName) { return -1; }
+                return 0;
+            })
         }
 
-        this.updateList();
+        this.setState({
+            shownProducts: currentItems
+        });
+
     }
 
     updateList() {
+
         if (this.state.shownProducts.length === 0) {
             if (this.props.location.state.query === "") {
                 return (
@@ -89,7 +107,7 @@ class Result extends Component {
                           id={item.productID}
                           name={item.productName}
                           price={item.productPrice}
-                          brand={item.productBrand}
+                          category={item.category}
                           image={item.imageUrl}
                     />
                 )
@@ -97,16 +115,16 @@ class Result extends Component {
         );
     }
 
-    render(props) {
+    render() {
         return (
             <div>
                 <div>
-                    <div className="result_tag">Showing Results: {this.value}</div>
+                    <div className="result_tag">Showing Results: {this.props.location.state.query}</div>
                     <div className="sort-filter">
                         <div className="filter">
                             <label>Filter</label>
                             <select className="drop-down" id={"filterType"} onChange={this.filter}>
-                                <option value={"default"}> -</option>
+                                <option value={"default"}>-</option>
                                 <option value={"vegetable"}>Vegetables</option>
                                 <option value={"fruit"}>Fruits</option>
                             </select>
@@ -114,9 +132,11 @@ class Result extends Component {
                         <div className="sort">
                             <label>Sort</label>
                             <select className="drop-down" id={"sortType"} onChange={this.sort}>
-                                <option value={"default"}> -</option>
-                                <option value={"price"}>Price</option>
-                                <option value={"popularity"}>Popularity</option>
+                                <option value={"default"}>-</option>
+                                <option value={"price_lh"}>Price: Low to High</option>
+                                <option value={"price_hl"}>Price: High to Low</option>
+                                <option value={"alpha_az"}>A to Z</option>
+                                <option value={"alpha_za"}>Z to A</option>
                             </select>
                         </div>
                     </div>

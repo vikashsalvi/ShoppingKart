@@ -40,8 +40,14 @@
   "entrypoints": [
     "static/js/runtime-main.211326c3.js",
     "static/css/2.af3c1da9.chunk.css",
+<<<<<<< HEAD
     "static/js/2.55b2196e.chunk.js",
     "static/css/main.b13178e5.chunk.css",
     "static/js/main.e9447851.chunk.js"
+=======
+    "static/js/2.776e6290.chunk.js",
+    "static/css/main.63343c22.chunk.css",
+    "static/js/main.79b8bb61.chunk.js"
+>>>>>>> ffaaa7fe382058cc72b4ed6d7597c744c31c5410
   ]
 }

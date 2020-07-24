@@ -8,6 +8,7 @@ const adminRoute = express.Router()
 const adminProductController = require('../controller/adminProductController')
 
 adminRoute.post("/saveProduct",adminProductController.saveProduct)
+adminRoute.get("/check",adminProductController.checkProduct)
 adminRoute.post("/deleteProduct",adminProductController.deleteProduct)
 adminRoute.post("/editProduct",adminProductController.updateProduct)
 

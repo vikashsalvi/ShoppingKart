@@ -1,5 +1,5 @@
 import React,{Component} from "react";
-import FooterCSS from './Footer.css'
+import './Footer.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarker,faPhone, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
