@@ -46,5 +46,28 @@ const deleteProduct = async (req, res)=>{
     }
 }
 
+const updateProduct = async (req, res) => {
+    try{
+        const updatedItem = await product.updateOne({productID:req.body.product_id},
+            {$set:{productPrice:req.body.product_price,productQuantity:req.body.product_qty,
+            productDescription:req.body.product_description}})
+        
+        console.log(req.body)
+        console.log(updatedItem)
+        
+        if(updatedItem.n === 1)
+        {
+            res.json({"Success":true})
+        }
+        else{
+            res.json({"Success":false})
+        }
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
 module.exports.saveProduct = saveProduct
 module.exports.deleteProduct = deleteProduct
+module.exports.updateProduct = updateProduct

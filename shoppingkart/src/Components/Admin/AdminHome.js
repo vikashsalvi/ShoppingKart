@@ -12,10 +12,10 @@ class AdminHome extends React.Component{
                         <Link to="/createProduct"><button className="btn btn-primary">Insert Product</button></Link>
                     </div>
                     <div className="col-sm-2">
-                        <button className="btn btn-primary">Update Product</button>
+                       <button className="btn btn-primary">Update Product</button>
                     </div>
                     <div className="col-sm-2">
-                        <button className="btn btn-primary">Delete Product</button>
+                    <Link to="removeProduct"> <button className="btn btn-primary">Delete Product</button></Link>
                     </div>
                 </div>
                 
