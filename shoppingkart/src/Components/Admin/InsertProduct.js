@@ -3,6 +3,7 @@ import { Form, Toast, Col } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
 import './createprod.css';
 import axios from 'axios';
+import { response } from 'express';
 
 const INITIALIZE_PRODUCTS = {
     product_id:'',
@@ -64,6 +65,16 @@ function CreateProduct() {
             INITIALIZE_PRODUCTS.product_img = document.getElementById('img').value;
             INITIALIZE_PRODUCTS.product_qty = document.getElementById('prodqty').value;
             INITIALIZE_PRODUCTS.product_brand = document.getElementById('brand').value;
+
+            axios({
+                method: "GET", 
+                url:"http://localhost:5000/admin/check", 
+                data:  {"product_id":INITIALIZE_PRODUCTS.product_id}
+              }).then((response)=>{
+                  console.log("Inside check product")
+                  console.log(response)
+              })
+
             axios({
                 method: "POST", 
                 url:"http://localhost:5000/admin/saveProduct", 
