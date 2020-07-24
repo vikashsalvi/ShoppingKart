@@ -1,10 +1,15 @@
+/**
+
+ @author    Rashmika Ibrahimpatnam => B00832190
+
+**/
 import axios from "axios";
 const setAuthToken = token => {
   if (token) {
-    // set authorization token to every request if the user is logged in
+    // seting authorization token if the user has logged in
     axios.defaults.headers.common["Authorization"] = token;
   } else {
-    // Delete authorization header
+    // Deleting authorization header
     delete axios.defaults.headers.common["Authorization"];
   }
 };

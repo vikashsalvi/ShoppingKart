@@ -10,6 +10,7 @@ const jwtdata = {};
 jwtdata.jwtFromRequest = extractJwt.fromAuthHeaderAsBearerToken();
 jwtdata.secretOrKey = "secret";
 
+//using passport-jwt strategy for authentication
 module.exports = authenticate => {
     authenticate.use(
         new jwtStrategy(jwtdata, (jwt_payload, done) => {

@@ -90,6 +90,7 @@ const login = (req, res) => {
 });
 }
 
+//get request for fetching a specific user
 const getuser = (req, res) => {
     User.find({ username: req.params.username }).exec()
     .then(data => {
@@ -100,6 +101,7 @@ const getuser = (req, res) => {
     })
 }
 
+//put request for editing the profile of a user
 const editprofile = (req, res) => {
 
     User.find({ username: req.params.username }).exec()
