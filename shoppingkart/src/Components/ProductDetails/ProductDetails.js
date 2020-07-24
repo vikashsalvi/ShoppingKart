@@ -42,7 +42,7 @@ class ProductDetails extends Component {
     onDropdownSelected(e) {
         console.log("Quantity ", e.target.value);
     }
-    
+
     createSelectuantity() {
         let items = [];
         let counter = 5;
@@ -50,14 +50,14 @@ class ProductDetails extends Component {
         if(this.state.productQuantity < 5 ){
             counter = this.state.productQuantity
         }
-        if(this.state.productQuantity == 0){
+        if(this.state.productQuantity === 0){
             start = 0
-        }         
-        for (let i = start; i <= counter; i++) {             
+        }
+        for (let i = start; i <= counter; i++) {
              items.push(<option key={i} value={i}>{i}</option>);
         }
         return items;
-    } 
+    }
 
     getStockText(){
         if(this.state.productQuantity === 0 ){
@@ -70,11 +70,11 @@ class ProductDetails extends Component {
     getPurchaseButtons(){
         let list = []
         if(this.state.productQuantity === 0 ){
-            list.push(<button type="button" className="btn btn-outline-primary w-100" disabled>Buy now</button>);        
+            list.push(<button type="button" className="btn btn-outline-primary w-100" disabled>Buy now</button>);
             list.push(<button type="button" class="btn btn-outline-primary w-100 mt-4" disabled>Add to cart</button>);
         }else{
             list.push(<button type="button" className="btn btn-outline-primary w-100">Buy now</button>);          
-            list.push(<button type="button" class="btn btn-outline-primary w-100 mt-4" onClick ={() => this.addItemsToCart()}>Add to cart</button>)
+            list.push(<button type="button" class="btn btn-outline-primary w-100 mt-4" onClick ={() => this.addItemsToCart()}>Add to cart</button>);
         }
         return list;
     }
@@ -118,7 +118,7 @@ class ProductDetails extends Component {
                                             }
                                         </h1>
                                         {this.getStockText()}
-                                        
+
                                     </div>
                                 </div>
                                 <div className="w-100 ml-3 container-fluid" >
@@ -127,7 +127,7 @@ class ProductDetails extends Component {
                                             <div className="col-md-4">
                                                 Quantity
                                                 <select className="form-control"
-                                                onChange={this.onDropdownSelected} 
+                                                onChange={this.onDropdownSelected}
                                                 id="quantitySelectBox">
                                                     {this.createSelectuantity()}
                                                 </select>
