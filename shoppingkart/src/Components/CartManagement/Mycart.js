@@ -7,43 +7,30 @@ import Chicken from "./images/chicken.jpg";
 import eggs from "./images/eggs.png";
 import "./Mycart.css";
 
+let myStorage = window.localStorage;
+
 class Mycart extends Component {
-  state = {
-    items: [
-      {
-        id: 1,
-        img: Cheese,
-        name: "Diamond bar cheese",
-        quantity: 1,
-        price: 5,
-        totalPrice: 5,
-      },
-      {
-        id: 2,
-        img: Bread,
-        name: "Old mill bread",
-        quantity: 1,
-        price: 3,
-        totalPrice: 3,
-      },
-      {
-        id: 3,
-        img: Chicken,
-        name: "Farmer's chicken",
-        quantity: 1,
-        price: 10,
-        totalPrice: 10,
-      },
-      {
-        id: 4,
-        img: eggs,
-        name: "Farmer's eggs",
-        quantity: 1,
-        price: 5,
-        totalPrice: 5,
-      },
-    ],
-  };
+  constructor(){
+    super();
+    this.state = { 
+      items: JSON.parse(myStorage.getItem('tempCart'))
+    };
+  }
+  
+  // {
+  //   items: [
+  //     {
+  //       id: 1,
+  //       img: Cheese,
+  //       name: "Diamond bar cheese",
+  //       quantity: 1,
+  //       price: 5,
+  //       totalPrice: 5,
+  //     }]
+  
+  handleLocalStorage(){
+    myStorage.setItem('tempCart', JSON.stringify(this.state.items));
+  }
 
   handleIncrement(index) {
     let items = this.state.items;
@@ -52,6 +39,7 @@ class Mycart extends Component {
     this.setState({
       items,
     });
+    this.handleLocalStorage();
   }
 
   handleDecrement(index) {
@@ -63,11 +51,12 @@ class Mycart extends Component {
         items,
       });
     }
+    this.handleLocalStorage();
   }
 
   deleteCard(index) {
     let items = this.state.items.filter((c) => c.id !== index);
-    this.setState({ items });
+    this.setState({ items },this.handleLocalStorage);
   }
 
   findTotal() {
@@ -78,6 +67,8 @@ class Mycart extends Component {
 
   getEmptyCart() {
     if (this.state.items.length === 0) {
+      myStorage.removeItem('tempCart');
+      myStorage.removeItem('id');
       return (
         <div>
           <EmptyCart />
@@ -97,6 +88,19 @@ class Mycart extends Component {
     }
   }
 
+  orderCheckout(){
+    if(myStorage.getItem("token")){
+      this.props.history.push({
+        pathname: "/orderConfirmation",
+        data: this.state.items,
+      })
+    } else {
+      this.props.history.push({
+        pathname: "/login"
+      })
+    }
+  }
+  
   render() {
     return (
       <div>
@@ -168,12 +172,7 @@ class Mycart extends Component {
             <div className="checkout-div">
               <button
                 className="checkoutButton"
-                onClick={() =>
-                  this.props.history.push({
-                    pathname: "/orderConfirmation",
-                    data: this.state.items,
-                  })
-                }
+                onClick={() => this.orderCheckout()}
               >
                 Checkout Securely Now{" "}
               </button>

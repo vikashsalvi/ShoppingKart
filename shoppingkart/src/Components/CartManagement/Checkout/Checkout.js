@@ -7,43 +7,16 @@ import Bread from "../images/bread.jpg";
 import Chicken from "../images/chicken.jpg";
 import eggs from "../images/eggs.png";
 import "./Checkout.css";
+import Axios from "axios";
+
+let storage = window.localStorage;
 
 class Checkout extends Component {
   state = {
-    items: this.props.location.data || [
-      {
-        id: 1,
-        img: Cheese,
-        name: "Diamond bar cheese",
-        quantity: 1,
-        price: 5,
-        totalPrice: 5,
-      },
-      {
-        id: 2,
-        img: Bread,
-        name: "Old mill bread",
-        quantity: 1,
-        price: 3,
-        totalPrice: 3,
-      },
-      {
-        id: 3,
-        img: Chicken,
-        name: "Farmer's chicken",
-        quantity: 1,
-        price: 10,
-        totalPrice: 10,
-      },
-      {
-        id: 4,
-        img: eggs,
-        name: "Farmer's eggs",
-        quantity: 1,
-        price: 5,
-        totalPrice: 5,
-      },
-    ],
+    items: this.props.location.data,
+    firstname: "",
+    lastname: "",
+    address: ""
   };
 
   findTotal() {
@@ -61,6 +34,43 @@ class Checkout extends Component {
         </div>
       );
     }
+  }
+
+  async componentDidMount(){
+    const url = "http://localhost:5000/orders/getUserDetails/chanchan";            /// CHANGE URL 
+    const response = await Axios.get(url);
+        if(response.data.Status === "Success"){
+            this.setState({
+                firstname: response.data.data[0].firstname,
+                lastname: response.data.data[0].lastname,
+                address: response.data.data[0].address
+            })
+        }       
+  }
+
+  async saveAddress() {
+    document.getElementById("address").contentEditable = false;
+    let res = "";
+
+    const url = "http://localhost:5000/orders/changeAddress/chanchan"; ///////////////// CHANGE URL USERNAME
+    await Axios.put(url, {
+      username: "chanchan",          ////////////////////////////////////////////// CHANGE USERNAME
+      address: document.getElementById("address").textContent,
+    }).then(function (response) {
+      res = response;
+    });
+  }
+
+  async placeOrder() {
+    let res = "";
+    const url = "http://localhost:5000/orders/addToCart/";
+    await Axios.post(url, {
+      username: storage.getItem("username"),
+      orderItems: this.state.items,
+      grandTotal: this.findTotal(),
+    }).then(function (response) {
+      res = response;
+    });
   }
 
   render() {
@@ -81,16 +91,16 @@ class Checkout extends Component {
                 </div>
                 <div className="left-div-address-div">
                   <div id="contactDetails" className="contactDiv">
-                    <b>Chanandler Bong</b>
-                    {
-                      "\n3017  Pine Street, Altario\nAlberta T0C 0E0 Canada\n403-552-0734"
-                    }
+                    <b id="userName">{this.state.firstname} {this.state.lastname}</b>
+                    <div id="address" className="addressDiv">
+                      {this.state.address}
+                    </div>
                   </div>
                   <div className="left-div-edit-save-div">
                     <button
                       onClick={() =>
                         (document.getElementById(
-                          "contactDetails"
+                          "address"
                         ).contentEditable = true)
                       }
                       className="edit-save-button"
@@ -98,11 +108,7 @@ class Checkout extends Component {
                       Edit
                     </button>
                     <button
-                      onClick={() =>
-                        (document.getElementById(
-                          "contactDetails"
-                        ).contentEditable = false)
-                      }
+                      onClick={() => this.saveAddress()}
                       className="edit-save-button"
                     >
                       Save
@@ -163,10 +169,7 @@ class Checkout extends Component {
                 <span className="totalDivValue"> $5.66</span>
               </div>
               <div className="totalDivOrder">
-                <span className="totalDivspan grandTotal">
-                  {" "}
-                  Grand Total:
-                </span>
+                <span className="totalDivspan grandTotal"> Grand Total:</span>
                 <span className="totalDivValue grandTotal">
                   ${this.findTotal() + 5.66}
                 </span>
@@ -185,7 +188,12 @@ class Checkout extends Component {
                 </div>
               </div>
               <div className="checkout-div">
-                <button className="checkoutButton">Place Order</button>
+                <button
+                  className="checkoutButton"
+                  onClick={() => this.placeOrder()}
+                >
+                  Place Order
+                </button>
               </div>
             </div>
           </div>
