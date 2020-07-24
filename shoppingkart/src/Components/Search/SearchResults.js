@@ -4,8 +4,6 @@ import Card from "./ResultCard/Card";
 
 class Result extends Component {
 
-    beforeSortItems;
-
     constructor(props) {
         super(props);
 
@@ -13,10 +11,17 @@ class Result extends Component {
             updated: false,
             product: this.props.location.state.data,
             shownProducts: this.props.location.state.data,
+            pass: true
         };
 
         this.filter = this.filter.bind(this);
         this.sort = this.sort.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({
+            pass: true
+        });
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -44,7 +49,7 @@ class Result extends Component {
             });
         }
 
-        console.log(currentItems);
+        document.getElementById("sortType").value = "default";
 
         this.setState({
             shownProducts: currentItems
@@ -57,12 +62,22 @@ class Result extends Component {
 
         let currentItems = this.state.shownProducts;
 
-        if(current === "price"){
+        if(current === "price_lh"){
             currentItems = this.state.shownProducts.sort((a, b) => a.productPrice - b.productPrice);
-        }else if(current === "popularity"){
-            currentItems = this.state.shownProducts.sort((a, b) => {
-                return (a.productPopularity > b.productPopularity ? 1 : -1)
-            });
+        }else if(current === "price_hl"){
+            currentItems = this.state.shownProducts.sort((a, b) => b.productPrice - a.productPrice);
+        }else if(current === "alpha_az"){
+            currentItems = this.state.shownProducts.sort(function(a, b){
+                if(a.productName < b.productName) { return -1; }
+                if(a.productName > b.productName) { return 1; }
+                return 0;
+            })
+        }else if(current === "alpha_za"){
+            currentItems = this.state.shownProducts.sort(function(a, b){
+                if(a.productName < b.productName) { return 1; }
+                if(a.productName > b.productName) { return -1; }
+                return 0;
+            })
         }
 
         this.setState({
@@ -92,7 +107,7 @@ class Result extends Component {
                           id={item.productID}
                           name={item.productName}
                           price={item.productPrice}
-                          brand={item.productBrand}
+                          category={item.category}
                           image={item.imageUrl}
                     />
                 )
@@ -109,7 +124,7 @@ class Result extends Component {
                         <div className="filter">
                             <label>Filter</label>
                             <select className="drop-down" id={"filterType"} onChange={this.filter}>
-                                <option value={"default"}> -</option>
+                                <option value={"default"}>-</option>
                                 <option value={"vegetable"}>Vegetables</option>
                                 <option value={"fruit"}>Fruits</option>
                             </select>
@@ -117,9 +132,11 @@ class Result extends Component {
                         <div className="sort">
                             <label>Sort</label>
                             <select className="drop-down" id={"sortType"} onChange={this.sort}>
-                                <option value={"default"}> -</option>
-                                <option value={"price"}>Price</option>
-                                <option value={"popularity"}>Popularity</option>
+                                <option value={"default"}>-</option>
+                                <option value={"price_lh"}>Price: Low to High</option>
+                                <option value={"price_hl"}>Price: High to Low</option>
+                                <option value={"alpha_az"}>A to Z</option>
+                                <option value={"alpha_za"}>Z to A</option>
                             </select>
                         </div>
                     </div>

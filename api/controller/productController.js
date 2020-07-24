@@ -19,7 +19,11 @@ const getAllProducts = (req, res) => {
 const getSuggestions = (req, res) => {
     productModel.find({"productName" : {$regex : ".*"+ req.params.query +".*", $options: "i"}}).exec()
         .then(data => {
-            res.json({ Status :"Success", data : data});
+            let finalData = new Set();
+            data.map(d => {
+                finalData.add(d.productName);
+            });
+            res.json({ Status :"Success", data : Array.from(finalData)});
         })
         .catch(err => {
             console.log("Failure:" + err);

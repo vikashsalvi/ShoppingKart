@@ -53,6 +53,11 @@ class Navigation extends Component {
                  alert("Please enter a search string")
              } else {
                  const data = await Axios.get("http://localhost:5000/product/getSearchedProduct/" + val);
+
+                 this.setState({
+                     suggestion: []
+                 });
+
                  this.props.history.push(
                      '/result', {
                          'query': val,
@@ -85,7 +90,7 @@ class Navigation extends Component {
             <div className="suggestion">
                 {
                     this.state.suggestion.map((item, index) => {
-                        return <Suggestion key={index} name={item.productName} onClick={this.itemClick}/>
+                        return <Suggestion key={index} name={item} onClick={this.itemClick}/>
                     })
                 }
             </div>
