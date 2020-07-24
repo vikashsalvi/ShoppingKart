@@ -112,6 +112,7 @@ class Login extends Component {
             axios.post("http://localhost:5000/users/login", loginUser)
                 .then(res => {
                     mystorage.setItem("username",this.state.uname.text)
+                    
                     const response = res.data;
                     if (response) {
 
@@ -120,7 +121,7 @@ class Login extends Component {
                             this.makeEmpty();
                             this.props.history.push('/login');
                         }
-                        else if (mystorage.getItem("username").toLowerCase === "admin") {
+                        else if (this.state.uname.text.toLowerCase === "admin") {
                             mystorage.setItem("token", res.data.token)
                             mystorage.setItem("userid", res.data.userid)
                             Auth.authenticate();
