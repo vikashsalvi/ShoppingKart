@@ -11,6 +11,7 @@ import OrderHistory from "../Orders/Orders";
 import Cart from "../CartManagement/Mycart";
 import OrderConfirmation from "../CartManagement/Checkout/Checkout";
 import Help from "../Help/Help";
+import AddReview from "../ProductReviews/AddReview";
 
 class Routes extends Component {
     render() {
@@ -27,6 +28,7 @@ class Routes extends Component {
                 <Route exact path="/mycart" component={Cart}/>
                 <Route exact path='/orderConfirmation' component={OrderConfirmation}/>
                 <Route exact path='/help' component={Help}/>
+                <Route exact path='/AddReview' component={AddReview}/>
             </Switch>
         );
     }
