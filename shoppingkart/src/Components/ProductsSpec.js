@@ -10,7 +10,8 @@ class ProductsSpec extends React.Component {
     render() {
         return (
             <Container>
-                <div className='container-fluid'>
+                <div className='container-fluid' onClick={() =>
+                                this.props.history.push('/product', {'query': this.props.productID})}>
                     <Card>
                         <Card.Img variant="top" src={this.props.img} />
                         <Card.Title className="text-center mt-2">
