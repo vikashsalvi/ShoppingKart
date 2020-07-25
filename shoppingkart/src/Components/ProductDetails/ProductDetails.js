@@ -4,7 +4,6 @@ import Product from '../Products/Product';
 import ProductRating from '../ProductRating/ProductRating';
 import ProductSpecifics from '../ProductSpecifics/ProductSpecifics';
 import ProductReviews from '../ProductReviews/ProductReviews';
-import AddReview from '../ProductReviews/AddReview';
 import Axios from "axios";
 
 /**
