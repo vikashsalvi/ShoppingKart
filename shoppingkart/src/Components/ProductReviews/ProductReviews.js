@@ -28,7 +28,7 @@ class ProductReviews extends Component {
                 })
             }
         );
-        
+       
     }
 
     // To show reviews provided by users with their usernames
@@ -42,7 +42,6 @@ class ProductReviews extends Component {
                             <Image style={{"width":"40px","height":"40px"}} 
                             src={userImage} roundedCircle 
                             fluid/>
-                            
                             <p>{reviews[i].userName}</p>
                         </Col>
                         <td>{reviews[i].productDescription}</td>
