@@ -110,7 +110,7 @@ class ProductDetails extends Component {
         productArray[productArray.length - 1].totalPrice = productArray[productArray.length - 1].price * productArray[productArray.length - 1].quantity;
         myStorage.setItem('tempCart', JSON.stringify(productArray));
         myStorage.setItem('id', productID);
-        alert("Product added to cart")
+        alert("Added product to cart")
     }
 
     render() {
