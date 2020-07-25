@@ -1,11 +1,14 @@
+/**
+
+ @author    Pallavi Desai => B00837405
+
+ **/
+
 import React, { Component } from "react";
 
 import EmptyCart from "./EmptyCart";
-import Cheese from "./images/cheese.jpg";
-import Bread from "./images/bread.jpg";
-import Chicken from "./images/chicken.jpg";
-import eggs from "./images/eggs.png";
 import "./Mycart.css";
+import Axios from "axios";
 
 let myStorage = window.localStorage;
 
@@ -13,21 +16,36 @@ class Mycart extends Component {
   constructor(){
     super();
     this.state = { 
-      items: JSON.parse(myStorage.getItem('tempCart'))
+      items: JSON.parse(myStorage.getItem('tempCart')) || []
     };
   }
   
-  // {
-  //   items: [
-  //     {
-  //       id: 1,
-  //       img: Cheese,
-  //       name: "Diamond bar cheese",
-  //       quantity: 1,
-  //       price: 5,
-  //       totalPrice: 5,
-  //     }]
-  
+  // fetch the saved unconfirmed order and add into cart
+  async componentDidMount(){
+    if(myStorage.getItem('token')){
+      let res = "";
+      let items;
+      const url = "http://localhost:5000/orders/getOrderDetails/"+myStorage.getItem("username")+"/unconfirmed";
+      const response = await Axios.get(url);
+        if(response.data.Status === "Success" && response.data.data.length>0 ){
+            items = myStorage.getItem('tempCart')? JSON.parse(myStorage.getItem('tempCart')) : []; 
+            let orderArray = response.data.data[0].orderItems;
+            for(var i = 0; i < orderArray.length; i++){
+              items.push(orderArray[i]);
+            }
+            this.setState({
+              items
+            });
+            myStorage.setItem('tempCart', JSON.stringify(items));
+            // deleting the unconfirmed order from dB since each user can have only one unconfirmed order
+            await Axios.delete("http://localhost:5000/orders/removeOrderData/"+myStorage.getItem("username")+"/unconfirmed"); 
+        }
+    }     
+  }
+
+  /* localStorage will have user's unconfirmed order throughout the session,
+  if user not logged in then save unconfirmed items to browser's localStorage for next session
+  */
   handleLocalStorage(){
     myStorage.setItem('tempCart', JSON.stringify(this.state.items));
   }
@@ -55,13 +73,13 @@ class Mycart extends Component {
   }
 
   deleteCard(index) {
-    let items = this.state.items.filter((c) => c.id !== index);
+    let items = this.state.items.filter((c) => c.name !== index);
     this.setState({ items },this.handleLocalStorage);
   }
 
   findTotal() {
     let total = 0;
-    this.state.items.map((result) => (total = total + result.totalPrice));
+    this.state.items.map((result) => (total = parseInt(total) + parseInt(result.totalPrice)));
     return total;
   }
 
@@ -88,7 +106,7 @@ class Mycart extends Component {
     }
   }
 
-  orderCheckout(){
+  async orderCheckout(){ 
     if(myStorage.getItem("token")){
       this.props.history.push({
         pathname: "/orderConfirmation",
@@ -153,7 +171,7 @@ class Mycart extends Component {
                   <div>
                     <button
                       className="removeButton"
-                      onClick={() => this.deleteCard(result.id)}
+                      onClick={() => this.deleteCard(result.name)}
                     >
                       Remove this item
                     </button>

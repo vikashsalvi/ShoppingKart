@@ -79,6 +79,7 @@ class ProductDetails extends Component {
         return list;
     }
 
+    // adding the product to localStorage 
     addItemsToCart(){
         productArray = myStorage.getItem('tempCart')? JSON.parse(myStorage.getItem('tempCart')) : []; 
         productID = myStorage.getItem('id') ? JSON.parse(myStorage.getItem('id'))+1 : 0;
@@ -87,7 +88,7 @@ class ProductDetails extends Component {
             name: this.state.productName,
             img:this.state.productUrl,
             quantity: parseInt(document.getElementById("quantitySelectBox").value),
-            price: this.state.productPrice,
+            price: parseInt(this.state.productPrice),
             totalPrice: 0
         });
         productArray[productArray.length - 1].totalPrice = productArray[productArray.length - 1].price * productArray[productArray.length - 1].quantity;

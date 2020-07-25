@@ -1,11 +1,13 @@
+/**
+
+ @author    Pallavi Desai => B00837405
+
+ **/
+
 import React, { Component } from "react";
 import { Card, CardDeck } from "react-bootstrap";
 import card from "../images/card.png";
 import PayPal from "../images/paypal.png";
-import Cheese from "../images/cheese.jpg";
-import Bread from "../images/bread.jpg";
-import Chicken from "../images/chicken.jpg";
-import eggs from "../images/eggs.png";
 import "./Checkout.css";
 import Axios from "axios";
 
@@ -21,7 +23,7 @@ class Checkout extends Component {
 
   findTotal() {
     let total = 0;
-    this.state.items.map((result) => (total = total + result.totalPrice));
+    this.state.items.map((result) => (total = parseInt(total) + parseInt(result.totalPrice)));
     return total;
   }
 
@@ -36,8 +38,9 @@ class Checkout extends Component {
     }
   }
 
+  // get the user details for order confirmation
   async componentDidMount(){
-    const url = "http://localhost:5000/orders/getUserDetails/chanchan";            /// CHANGE URL 
+    const url = "http://localhost:5000/orders/getUserDetails/"+storage.getItem('username');             
     const response = await Axios.get(url);
         if(response.data.Status === "Success"){
             this.setState({
@@ -52,9 +55,9 @@ class Checkout extends Component {
     document.getElementById("address").contentEditable = false;
     let res = "";
 
-    const url = "http://localhost:5000/orders/changeAddress/chanchan"; ///////////////// CHANGE URL USERNAME
+    const url = "http://localhost:5000/orders/changeAddress/"+storage.getItem('username'); 
     await Axios.put(url, {
-      username: "chanchan",          ////////////////////////////////////////////// CHANGE USERNAME
+      username: storage.getItem('username'),          
       address: document.getElementById("address").textContent,
     }).then(function (response) {
       res = response;
@@ -68,9 +71,24 @@ class Checkout extends Component {
       username: storage.getItem("username"),
       orderItems: this.state.items,
       grandTotal: this.findTotal(),
+      orderStatus: "Confirmed"
     }).then(function (response) {
       res = response;
     });
+    this.removeOrder();
+    // clearing the localStorage when order is confirmed
+    storage.removeItem('tempCart');
+    storage.removeItem('id');
+  }
+
+  // this function will remove unconfirmed order from dB once order is confirmed
+  async removeOrder() {
+    const url = "http://localhost:5000/orders/removeOrderData/"+storage.getItem("username")+"/unconfirmed";
+    const response = await Axios.delete(url);
+  }
+
+  getUseraddress(){
+      return this.state.address === "" || this.state.address == null ? "No address found. Update your address" : this.state.address;
   }
 
   render() {
@@ -93,7 +111,7 @@ class Checkout extends Component {
                   <div id="contactDetails" className="contactDiv">
                     <b id="userName">{this.state.firstname} {this.state.lastname}</b>
                     <div id="address" className="addressDiv">
-                      {this.state.address}
+                      {this.getUseraddress()}
                     </div>
                   </div>
                   <div className="left-div-edit-save-div">
