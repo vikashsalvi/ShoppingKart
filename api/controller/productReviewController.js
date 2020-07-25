@@ -15,7 +15,7 @@ const postProductreview = (req, res) => {
         userId: userid,
         productId: productid,
         productRating: productrating,
-        productDescription:productdesc
+        productDescription: productdesc
     }).then(data => {
         res.json({ Status: "Success", data: data });
     })
