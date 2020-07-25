@@ -4,6 +4,7 @@ import Product from '../Products/Product';
 import ProductRating from '../ProductRating/ProductRating';
 import ProductSpecifics from '../ProductSpecifics/ProductSpecifics';
 import ProductReviews from '../ProductReviews/ProductReviews';
+
 import Axios from "axios";
 
 /**
@@ -12,9 +13,12 @@ import Axios from "axios";
 
 let myStorage = window.localStorage;
 let productArray;
-let productID;
+
 
 class ProductDetails extends Component {
+
+    productID = this.props.location.state.query;
+
     constructor(props){
         super(props);
         this.state = {
@@ -33,7 +37,7 @@ class ProductDetails extends Component {
         this.setState( {
             productName: productData.data.data[0].productName,
             productDescription: productData.data.data[0].productDescription,
-            productUrl: productData.data.data[0].imageUrl,
+            productUrl: productData.data.data[0].imageURL,
             productQuantity: productData.data.data[0].productQuantity,
             productPrice: productData.data.data[0].productPrice
         })
@@ -63,7 +67,7 @@ class ProductDetails extends Component {
         if(this.state.productQuantity === 0 ){
             return <h6 className="text-danger">No stock left</h6>
         }else{
-        return <h6 className="text-success">In sotck, Quantity left: {this.state.productQuantity}</h6>
+        return <h6 className="text-success">In stock, Quantity left: {this.state.productQuantity}</h6>
         }
     }
 
@@ -73,44 +77,68 @@ class ProductDetails extends Component {
             list.push(<button type="button" className="btn btn-outline-primary w-100" disabled>Buy now</button>);
             list.push(<button type="button" class="btn btn-outline-primary w-100 mt-4" disabled>Add to cart</button>);
         }else{
-            list.push(<button type="button" className="btn btn-outline-primary w-100"   onClick={() => this.addItemAndRedirectToCart()}>Buy now</button>);          
+            list.push(<button type="button" className="btn btn-outline-primary w-100"   onClick={() => this.addItemAndRedirectToCart()}>Buy now</button>);
             list.push(<button type="button" class="btn btn-outline-primary w-100 mt-4" onClick ={() => this.addItemsToCart()}>Add to cart</button>);
         }
         return list;
     }
     addItemAndRedirectToCart(){
-        productArray = myStorage.getItem('tempCart')? JSON.parse(myStorage.getItem('tempCart')) : []; 
-        productID = myStorage.getItem('id') ? JSON.parse(myStorage.getItem('id'))+1 : 0;
-        productArray.push({
-            id: productID,
-            name: this.state.productName,
-            img:this.state.productUrl,
-            quantity: parseInt(document.getElementById("quantitySelectBox").value),
-            price: parseInt(this.state.productPrice),
-            totalPrice: 0
+        let productArray = window.localStorage.getItem('tempCart') ? JSON.parse(window.localStorage.getItem('tempCart')) : [];
+
+        let count = -1;
+
+        let found = productArray.some(product => {
+            count += 1;
+            return product.id === this.productID;
         });
-        productArray[productArray.length - 1].totalPrice = productArray[productArray.length - 1].price * productArray[productArray.length - 1].quantity;
-        myStorage.setItem('tempCart', JSON.stringify(productArray));
-        myStorage.setItem('id', productID);
+
+        if(found){
+            productArray[count].quantity += 1;
+            productArray[count].totalPrice = parseInt(productArray[count].totalPrice) + parseInt(this.state.productPrice);
+        }else{
+            productArray.push({
+                id: this.productID,
+                name: this.state.productName,
+                img: this.state.productUrl,
+                quantity: 1,
+                price: parseInt(this.state.productPrice),
+                totalPrice: parseInt(this.state.productPrice)
+            });
+        }
+        window.localStorage.setItem('tempCart', JSON.stringify(productArray));
+
+        alert("Item is added to Cart");
 
         this.props.history.push('/mycart', {'query': this.props.id})
     }
-    // adding the product to localStorage 
+    // adding the product to localStorage
     addItemsToCart(){
-        productArray = myStorage.getItem('tempCart')? JSON.parse(myStorage.getItem('tempCart')) : []; 
-        productID = myStorage.getItem('id') ? JSON.parse(myStorage.getItem('id'))+1 : 0;
-        productArray.push({
-            id: productID,
-            name: this.state.productName,
-            img:this.state.productUrl,
-            quantity: parseInt(document.getElementById("quantitySelectBox").value),
-            price: parseInt(this.state.productPrice),
-            totalPrice: 0
+
+        let productArray = window.localStorage.getItem('tempCart') ? JSON.parse(window.localStorage.getItem('tempCart')) : [];
+        let count = -1;
+
+        let found = productArray.some(product => {
+            count += 1;
+            return product.id === this.productID;
         });
-        productArray[productArray.length - 1].totalPrice = productArray[productArray.length - 1].price * productArray[productArray.length - 1].quantity;
-        myStorage.setItem('tempCart', JSON.stringify(productArray));
-        myStorage.setItem('id', productID);
-        alert("Added product to cart")
+
+        if(found){
+            productArray[count].quantity += parseInt(document.getElementById("quantitySelectBox").value);
+            productArray[count].totalPrice = parseInt(productArray[count].totalPrice) + (parseInt(this.state.productPrice) * parseInt(document.getElementById("quantitySelectBox").value));
+        }else{
+            productArray.push({
+                id: this.productID,
+                name: this.state.productName,
+                img:this.state.productUrl,
+                quantity: parseInt(document.getElementById("quantitySelectBox").value),
+                price: parseInt(this.state.productPrice),
+                totalPrice: (parseInt(document.getElementById("quantitySelectBox").value) * parseInt(this.state.productPrice))
+            });
+        }
+        window.localStorage.setItem('tempCart', JSON.stringify(productArray));
+
+        alert("Item is added to Cart");
+
     }
 
     render() {
