@@ -176,7 +176,7 @@ class ProductDetails extends Component {
                     </div>
                     <ProductSpecifics productId={this.props.location.state.query}/>
                     <ProductRating parentProps={this.props} productId={this.props.location.state.query}/>
-                    <ProductReviews  />
+                    <ProductReviews  productId={this.props.location.state.query}/>
                 </Container>
                 <br />
                 <br />
