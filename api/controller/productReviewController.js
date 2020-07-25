@@ -31,10 +31,10 @@ const postProductreview = (req, res) => {
 /**
  @function author    Vikash Salvi => B00838074
  **/
-const getProductReview = (req,res) => {
-    productReviewModel.find({"productId" : req.params.query}).exec()
+const getProductReview = (req, res) => {
+    productReviewModel.find({ "productId": req.params.query }).exec()
         .then(data => {
-            res.json({ Status :"Success", data : data});
+            res.json({ Status: "Success", data: data });
         })
         .catch(err => {
             console.log("Failure:" + err);
