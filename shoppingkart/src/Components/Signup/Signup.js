@@ -169,7 +169,7 @@ class Register extends Component {
             
             
             const newUser = {
-                uname: this.state.uname.text,
+                uname: this.state.uname.text.toLowerCase(),
                 fname: this.state.fname.text,
                 lname: this.state.lname.text,
                 dob: this.state.dob.text,
@@ -179,8 +179,7 @@ class Register extends Component {
             
             axios.post("http://localhost:5000/users/register", newUser)
             .then(res => {
-                console.log(res);
-                console.log(res.data);
+                
                 alert("User has been registered");
                 this.props.history.push('/login')
             })

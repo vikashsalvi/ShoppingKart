@@ -105,14 +105,13 @@ class Login extends Component {
 
 
             const loginUser = {
-                uname: this.state.uname.text,
+                uname: this.state.uname.text.toLowerCase(),
                 pass: this.state.pass.text
             };
 
             axios.post("http://localhost:5000/users/login", loginUser)
                 .then(res => {
                     mystorage.setItem("username",this.state.uname.text)
-                    
                     const response = res.data;
                     if (response) {
 
@@ -121,13 +120,14 @@ class Login extends Component {
                             this.makeEmpty();
                             this.props.history.push('/login');
                         }
-                        else if (this.state.uname.text.toLowerCase === "admin") {
+                        else if (this.state.uname.text.toLowerCase() === "admin") {
                             mystorage.setItem("token", res.data.token)
                             mystorage.setItem("userid", res.data.userid)
                             Auth.authenticate();
-                            this.props.history.push('/createproduct');
+                            alert("admin can manage inventory")
+                            this.props.history.push('/admin');
                         }
-                        else if (mystorage.getItem("username") === loginUser.uname) {
+                        else if (mystorage.getItem("username").toLowerCase() === loginUser.uname.toLowerCase()) {
                             mystorage.setItem("token", res.data.token)
                             mystorage.setItem("userid", res.data.userid)
                             setAuthToken(res.data.token);
