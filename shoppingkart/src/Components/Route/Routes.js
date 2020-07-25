@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Route, Switch, Redirect} from "react-router-dom";
 import Home from "../Home/Home";
-import CreateProduct from '../Admin/Admin';
 import Profile from "../UserProfile/UserProfile";
 import Register from "../Signup/Signup";
 import Login from "../Login/Login";
@@ -14,7 +13,10 @@ import Help from "../Help/Help";
 import AddReview from "../ProductReviews/AddReview";
 import Logout from "../Logout/Logout";
 import Auth from "../Login/Auth";
-
+import AdminHome from "../Admin/AdminHome"
+import CreateProduct from "../Admin/InsertProduct"
+import DeleteProduct from "../Admin/DeleteProduct"
+import UpdateProduct from "../Admin/UpdateProduct"
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -31,7 +33,10 @@ class Routes extends Component {
         return (
             <Switch>
                 <Route exact path='/' component={Home}/>
+                <Route exact path='/admin' component={AdminHome}/>
                 <Route exact path='/createProduct' component={CreateProduct}/>
+                <Route exact path='/removeProduct' component={DeleteProduct}/>
+                <Route exact path='/updateProduct' component={UpdateProduct}/>
                 <Route exact path='/profile' component={Profile}/>
                 <Route exact path='/register' component={Register}/>
                 <Route exact path= '/login' component={Login}/>

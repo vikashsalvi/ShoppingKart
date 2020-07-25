@@ -7,6 +7,7 @@ const productReviewRoute = require('./api/route/productReviewRoute')
 const cartRoute = require('./api/route/cartRoute');
 const userRoute = require('./api/route/userRoute')
 const db = require('./api/db/connection');
+const adminProductRoute = require('./api/route/adminProductRoute')
 
 app.use(cors());
 
@@ -21,6 +22,7 @@ app.get('/', function (req, res, next) {
     next();
 });
 
+app.use("/admin",adminProductRoute)
 
 app.use('/product', productRoute);
 app.use('/review', productReviewRoute);

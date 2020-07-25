@@ -16,15 +16,14 @@ class Navigation extends Component {
         }
 
         this.side_panel = [
-            { 'name': 'Home', 'url': '', cname: 'item', linkClass: 'link' },
-            { 'name': 'Cart', 'url': 'mycart', cname: 'item hide-nav', linkClass: 'link' },
-            { 'name': 'Login', 'url': 'login', cname: 'item hide-nav', linkClass: 'link' },
-            { 'name': 'Register', 'url': 'register', cname: 'item hide-nav', linkClass: 'link' },
-            { 'name': 'Logout', 'url': 'logout', cname: 'item hide-nav', linkClass: 'link'},
-            { 'name': 'Profile', 'url': 'profile', cname: 'item', linkClass: 'link' },
-            { 'name': 'Admin', 'url': 'createProduct', cname: 'item', linkClass: 'link' },
-            { 'name': 'Orders', 'url': 'order-history', cname: 'item', linkClass: 'link' },
-            { 'name': 'Help', 'url': 'help', cname: 'item', linkClass: 'link' }
+            {'name': 'Home', 'url': '', cname: 'item', linkClass: 'link'},
+            {'name': 'Cart', 'url': 'mycart', cname: 'item hide-nav', linkClass: 'link'},
+            {'name': 'Login', 'url': 'login', cname: 'item hide-nav', linkClass: 'link'},
+            {'name': 'Register', 'url': 'register', cname: 'item hide-nav', linkClass: 'link'},
+            {'name': 'Profile', 'url': 'profile', cname: 'item', linkClass: 'link'},
+            {'name': 'Admin', 'url': 'admin', cname: 'item', linkClass: 'link'},
+            {'name': 'Orders', 'url': 'order-history', cname: 'item', linkClass: 'link'},
+            {'name': 'Help', 'url': 'help', cname: 'item', linkClass: 'link'}
         ];
 
         this.navigate = [
