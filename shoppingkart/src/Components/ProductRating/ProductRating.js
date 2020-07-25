@@ -1,17 +1,50 @@
+/**
+ @author    Bharat Bhargava => B00838511
+ **/
+
 import React, { Component } from "react";
 import { Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import './ProductRating.css';
 import AddReview from '../ProductReviews/AddReview'
+import Axios from "axios";
 
+let count = 0;
 class ProductRating extends Component {
 
     constructor(props){
         super(props);
         this.state = {
+            rating: 0
         };
+        this.totalRating=this.totalRating.bind(this)
         console.log(props)
+    }
+
+    async componentDidMount() {
+        let id = this.props.productId + ""
+        // To get reviews data from all users
+        const productData = await Axios.get("http://localhost:5000/review/getProductReview/" + id).then(
+            res => {
+                this.totalRating(res.data.data)
+            }
+        );
+        
+    }
+
+    // To get total rating from the provided ratings by users
+    totalRating(data) {
+        let rate = 0;
+        count = 0;
+        for (let i = 0; i < data.length; i++) {
+            rate = rate + data[i].productRating;
+            count = count + 1;
+        }
+        let rating = parseFloat(rate/count).toFixed(1);
+        this.setState({
+            rating : rating
+        });
     }
     render() {
         return (
@@ -22,7 +55,7 @@ class ProductRating extends Component {
                             <div className="col-sm">
                                 <div className="content text-center">
                                     <div className="ratings">
-                                        <span className="product-rating">4.6</span><span>/5</span>
+                                        <span className="product-rating">{this.state.rating}</span><span>/5</span>
                                         <div class="stars">
                                             <FontAwesomeIcon icon={faStar} style={{ "color": "orange" }} />
                                             <FontAwesomeIcon icon={faStar} style={{ "color": "orange" }} />
@@ -31,7 +64,7 @@ class ProductRating extends Component {
                                             <FontAwesomeIcon icon={faStar} />
                                         </div>
                                         <div className="rating-text">
-                                            <span>46 ratings & 15 reviews</span>
+                                            <span>{count} ratings & {count} reviews</span>
                                         </div>
                                     </div>
                                 </div>

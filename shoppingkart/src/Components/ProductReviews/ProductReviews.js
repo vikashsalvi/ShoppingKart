@@ -1,3 +1,7 @@
+/**
+ @author    Bharat Bhargava => B00838511
+ **/
+
 import React,{Component} from 'react';
 import userImage from './static/img/user.png'
 import { Container, Table, Card,Col,Image } from 'react-bootstrap';
@@ -15,12 +19,19 @@ class ProductReviews extends Component {
 
     async componentDidMount() {
         let id = this.props.productId + ""
-        const productData = await Axios.get("http://localhost:5000/review/getProductReview/" + id);
-        this.setState({
-            productReviews: productData.data.data
-        })
+        // To get reviews data from all users
+        const productData = await Axios.get("http://localhost:5000/review/getProductReview/" + id).then(
+            res => {
+                debugger;
+                this.setState({
+                    productReviews: res.data.data
+                })
+            }
+        );
+        
     }
 
+    // To show reviews provided by users with their usernames
     addReviews() {
         let rows = [];
         let reviews = this.state.productReviews;
@@ -32,7 +43,7 @@ class ProductReviews extends Component {
                             src={userImage} roundedCircle 
                             fluid/>
                             
-                            <p>User A</p>
+                            <p>{reviews[i].userName}</p>
                         </Col>
                         <td>{reviews[i].productDescription}</td>
                     </tr>  
