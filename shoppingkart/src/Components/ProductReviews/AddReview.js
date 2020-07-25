@@ -29,17 +29,23 @@ class AddReview extends Component {
         }
     }
 
+    // To check if rating and description are filled by the user
     checkEmpty() {
         const rating = document.getElementById('rating');
         const desp = document.getElementById('desp');
 
-        if ((rating.value === "") || (desp.value === "")) {
-            alert("Please fill all the fields");
+        if (rating.value === "") {
+            alert("Please fill rating");
+            return false;
+        }
+        else if (desp.value === ""){
+            alert("Please fill description");
             return false;
         }
         return true;
     }
 
+    // To set values in the database for reviews
     async handleSubmit(event) {
         if (myStorage.getItem("token")) {
             event.preventDefault()
@@ -48,6 +54,7 @@ class AddReview extends Component {
                     product_rating: this.state.product_rating,
                     product_description: this.state.product_description,
                     user_id: myStorage.getItem("userid"),
+                    user_name: myStorage.getItem("username"),
                     product_id: this.props.productId
                 };
                 Axios.post("http://localhost:5000/review/putReview", payload)
