@@ -31,6 +31,7 @@ const postProductreview = (req, res) => {
 /**
  @function author    Vikash Salvi => B00838074
  **/
+//Get all the reviews of a particular product
 const getProductReview = (req, res) => {
     productReviewModel.find({ "productId": req.params.query }).exec()
         .then(data => {

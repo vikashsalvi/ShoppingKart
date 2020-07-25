@@ -1,3 +1,7 @@
+/**
+ @author    Vikash Salvi => B00838074
+ **/
+
 import React, { Component } from 'react';
 import { Container, Table } from 'react-bootstrap';
 import Axios from "axios";
@@ -18,7 +22,7 @@ class ProductSpecifics extends Component {
             productDetails: productData.data.data[0].productDetails
         })
     }
-
+    //Add details of products in grid fashion
     addProductDetails() {
         let rows = [];
         let detail = this.state.productDetails;

@@ -1,9 +1,11 @@
-import React from "react";
-import { Container, Card } from "react-bootstrap";
-import {withRouter} from "react-router-dom";
 /**
  @author    Vikash Salvi => B00838074
  **/
+
+import React from "react";
+import { Container, Card } from "react-bootstrap";
+import {withRouter} from "react-router-dom";
+//Component for handling single product
 class ProductsSpec extends React.Component {
     render() {
         return (

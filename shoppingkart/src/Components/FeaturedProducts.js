@@ -1,8 +1,11 @@
+/**
+ @author    Vikash Salvi => B00838074
+ **/
 import React, { Component } from "react";
 import Container from 'react-bootstrap/Container';
 import Product from "./ProductsSpec";
 import Axios from "axios";
-
+//Component for displaying all the featured products on home page
 class FeaturedProducts extends Component {
 
     constructor(props) {
@@ -14,22 +17,15 @@ class FeaturedProducts extends Component {
             list3:[]
         }
     }
-
-    shuffle(array) {
-        let counter = array.length;
-
-        // While there are elements in the array
-        while (counter > 0) {
-            // Pick a random index
-            let index = Math.floor(Math.random() * counter);
-
-            // Decrease counter by 1
-            counter--;
-
-            // And swap the last element with it
-            let temp = array[counter];
-            array[counter] = array[index];
-            array[index] = temp;
+    //Shuffles the array in random order
+    arrayShuffle(array) {
+        let arrayLength = array.length;
+        while (arrayLength > 0) {
+            let randomIndex = Math.floor(Math.random() * arrayLength);
+            arrayLength = arrayLength - 1;
+            let tempArray = array[arrayLength];
+            array[arrayLength] = array[randomIndex];
+            array[randomIndex] = tempArray;
         }
 
         return array;
@@ -41,7 +37,7 @@ class FeaturedProducts extends Component {
             list: products.data.data
         })
         this.setState({
-            list: this.shuffle(this.state.list)
+            list: this.arrayShuffle(this.state.list)
         })
         for(let i=0;i<this.state.list.length;i++){
             if(i<=3){

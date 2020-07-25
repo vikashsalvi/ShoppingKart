@@ -1,15 +1,14 @@
+/**
+ @author    Vikash Salvi => B00838074
+ **/
+
 import React, { Component } from "react";
 import { Container } from 'react-bootstrap';
 import Product from './ProductsSpec';
 import ProductRating from './ProductRating';
 import ProductSpecifics from './ProductSpecifics';
 import ProductReviews from './ProductReviews';
-
 import Axios from "axios";
-
-/**
- @author    Vikash Salvi => B00838074
- **/
 
 class ProductDetails extends Component {
 
@@ -38,11 +37,12 @@ class ProductDetails extends Component {
             productPrice: productData.data.data[0].productPrice
         })
     }
-
+    //Dropdown for quantity
     onDropdownSelected(e) {
         console.log("Quantity ", e.target.value);
     }
 
+    // Add dynamic quantity in dropdown
     createSelectuantity() {
         let items = [];
         let counter = 5;
@@ -58,7 +58,8 @@ class ProductDetails extends Component {
         }
         return items;
     }
-
+    
+    //Dynamically change stock label
     getStockText() {
         if (this.state.productQuantity === 0) {
             return <h6 className="text-danger">No stock left</h6>
@@ -66,7 +67,7 @@ class ProductDetails extends Component {
             return <h6 className="text-success">In stock, Quantity left: {this.state.productQuantity}</h6>
         }
     }
-
+    //Dynamically disable or enable buy now and add to cart button
     getPurchaseButtons() {
         let list = []
         if (this.state.productQuantity === 0) {
@@ -78,6 +79,7 @@ class ProductDetails extends Component {
         }
         return list;
     }
+    //Handling actions on buy now button click
     addItemAndRedirectToCart() {
         let productArray = window.localStorage.getItem('tempCart') ? JSON.parse(window.localStorage.getItem('tempCart')) : [];
 

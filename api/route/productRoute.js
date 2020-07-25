@@ -25,7 +25,9 @@ productRoute.get('/getSearchedProduct/:query', productController.getSearchedProd
 /**
  @Route author Vikash Salvi => B00838074
  **/
+//Route to get product detail based on product id
 productRoute.get('/getProductDetails/:query', productController.getProductDetails);
+//Route to get all products featured on main page
 productRoute.get('/getTopProducts', productController.getTopProducts);
 
 
