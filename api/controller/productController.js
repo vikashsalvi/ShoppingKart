@@ -55,8 +55,9 @@ const getProductDetails = (req,res) => {
 /**
  @function author    Vikash Salvi => B00838074
  **/
+
 const getTopProducts = (req,res) => {
-    productModel.find().limit(4).exec()
+    productModel.find().limit(20).exec()
         .then(data => {
             res.json({ Status :"Success", data : data});
         })
