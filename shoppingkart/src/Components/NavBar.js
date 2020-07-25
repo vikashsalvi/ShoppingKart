@@ -65,6 +65,8 @@ class Navigation extends Component {
                      suggestion: []
                  });
 
+                 document.getElementById("search").value = "";
+
                  this.props.history.push(
                      '/result', {
                          'query': val,
