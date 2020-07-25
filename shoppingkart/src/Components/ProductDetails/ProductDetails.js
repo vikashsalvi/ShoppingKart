@@ -9,6 +9,11 @@ import Axios from "axios";
 /**
  @author    Vikash Salvi => B00838074
  **/
+
+let myStorage = window.localStorage;
+let productArray;
+let productID;
+
 class ProductDetails extends Component {
     constructor(props){
         super(props);
@@ -68,10 +73,27 @@ class ProductDetails extends Component {
             list.push(<button type="button" className="btn btn-outline-primary w-100" disabled>Buy now</button>);
             list.push(<button type="button" class="btn btn-outline-primary w-100 mt-4" disabled>Add to cart</button>);
         }else{
-            list.push(<button type="button" className="btn btn-outline-primary w-100">Buy now</button>);
-            list.push(<button type="button" class="btn btn-outline-primary w-100 mt-4">Add to cart</button>)
+            list.push(<button type="button" className="btn btn-outline-primary w-100">Buy now</button>);          
+            list.push(<button type="button" class="btn btn-outline-primary w-100 mt-4" onClick ={() => this.addItemsToCart()}>Add to cart</button>);
         }
         return list;
+    }
+
+    // adding the product to localStorage 
+    addItemsToCart(){
+        productArray = myStorage.getItem('tempCart')? JSON.parse(myStorage.getItem('tempCart')) : []; 
+        productID = myStorage.getItem('id') ? JSON.parse(myStorage.getItem('id'))+1 : 0;
+        productArray.push({
+            id: productID,
+            name: this.state.productName,
+            img:this.state.productUrl,
+            quantity: parseInt(document.getElementById("quantitySelectBox").value),
+            price: parseInt(this.state.productPrice),
+            totalPrice: 0
+        });
+        productArray[productArray.length - 1].totalPrice = productArray[productArray.length - 1].price * productArray[productArray.length - 1].quantity;
+        myStorage.setItem('tempCart', JSON.stringify(productArray));
+        myStorage.setItem('id', productID);
     }
 
     render() {

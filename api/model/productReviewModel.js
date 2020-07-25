@@ -2,12 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const productReviewSchema = new Schema({
-    userName : {
-        type: String,
-        required: true,
-        unique: true
+    productRating : {
+        type: Number,
+        required: true
     },
-    userReview : {
+    productDescription : {
         type: String,
         required: true
     }

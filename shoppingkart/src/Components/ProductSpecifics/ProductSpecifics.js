@@ -21,19 +21,21 @@ class ProductSpecifics extends Component {
 
     addProductDetails() {
         let rows = [];
-        let detail = this.state.productDetails
+        let detail = this.state.productDetails;
+        
+        
+        if(detail){
+            Object.keys(detail).map(function(key, index) {
 
-        Object.keys(detail).map(function (key, index) {
-            rows.push(
-                <tr>
-                    <td className="font-weight-bold">{key.trim().replace(/([A-Z])/g, ' $1').replace(/^./, function (word) {
-                        return word.toUpperCase();
-                    })
-                    }</td>
-                    <td>{detail[key].trim()}</td>
-                </tr>
-            )
-        })
+                rows.push(
+                    <tr>
+                        <td className="font-weight-bold">{key.trim().replace(/([A-Z])/g, ' $1').replace(/^./, function(word){ return word.toUpperCase(); })
+                        }</td>
+                        <td>{detail[key].trim()}</td>
+                    </tr>
+                )
+            })
+        }
         return rows
     }
 
