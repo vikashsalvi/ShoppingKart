@@ -11,6 +11,7 @@ import OrderHistory from "../Orders/Orders";
 import Cart from "../CartManagement/Mycart";
 import OrderConfirmation from "../CartManagement/Checkout/Checkout";
 import Help from "../Help/Help";
+import AddReview from "../ProductReviews/AddReview";
 import Logout from "../Logout/Logout";
 import Auth from "../Login/Auth";
 
