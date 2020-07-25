@@ -22,7 +22,6 @@ class ProductReviews extends Component {
         // To get reviews data from all users
         await Axios.get("https://csci-5709-web-24.herokuapp.com/review/getProductReview/" + id).then(
             res => {
-                debugger;
                 this.setState({
                     productReviews: res.data.data
                 })
