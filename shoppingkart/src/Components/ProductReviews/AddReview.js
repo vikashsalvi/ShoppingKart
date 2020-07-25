@@ -38,7 +38,7 @@ class AddReview extends Component {
             alert("Please fill rating");
             return false;
         }
-        else if (desp.value === ""){
+        else if (desp.value === "") {
             alert("Please fill description");
             return false;
         }

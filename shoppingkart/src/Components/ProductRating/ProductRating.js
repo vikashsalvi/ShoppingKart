@@ -13,12 +13,12 @@ import Axios from "axios";
 let count = 0;
 class ProductRating extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             rating: 0
         };
-        this.totalRating=this.totalRating.bind(this)
+        this.totalRating = this.totalRating.bind(this)
         console.log(props)
     }
 
@@ -30,20 +30,23 @@ class ProductRating extends Component {
                 this.totalRating(res.data.data)
             }
         );
-        
+
     }
 
     // To get total rating from the provided ratings by users
     totalRating(data) {
         let rate = 0;
         count = 0;
+        debugger;
         for (let i = 0; i < data.length; i++) {
             rate = rate + data[i].productRating;
             count = count + 1;
         }
-        let rating = parseFloat(rate/count).toFixed(1);
+        let rating = parseFloat(rate / count).toFixed(1);
+        // If no rating is available then set rating to zero
+        rating = rating == "NaN" ? 0 : rating;
         this.setState({
-            rating : rating
+            rating: rating
         });
     }
     render() {
@@ -73,7 +76,7 @@ class ProductRating extends Component {
                                 <div className="content text-center">
                                     <div className="ratings">
                                         <div className="text-center">
-                                            <AddReview parentProps={this.props.parentProps} productId = {this.props.productId} />
+                                            <AddReview parentProps={this.props.parentProps} productId={this.props.productId} />
                                         </div>
                                     </div>
                                 </div>

@@ -2,9 +2,9 @@
  @author    Bharat Bhargava => B00838511
  **/
 
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import userImage from './static/img/user.png'
-import { Container, Table, Card,Col,Image } from 'react-bootstrap';
+import { Container, Table, Card, Col, Image } from 'react-bootstrap';
 import Axios from "axios";
 
 class ProductReviews extends Component {
@@ -14,7 +14,7 @@ class ProductReviews extends Component {
         this.state = {
             productReviews: []
         }
-        this.addReviews=this.addReviews.bind(this)
+        this.addReviews = this.addReviews.bind(this)
     }
 
     async componentDidMount() {
@@ -28,7 +28,7 @@ class ProductReviews extends Component {
                 })
             }
         );
-       
+
     }
 
     // To show reviews provided by users with their usernames
@@ -37,20 +37,24 @@ class ProductReviews extends Component {
         let reviews = this.state.productReviews;
         for (let i = 0; i < this.state.productReviews.length; i++) {
             rows.push(
-                    <tr>
-                        <Col className="text-center mt-1">
-                            <Image style={{"width":"40px","height":"40px"}} 
-                            src={userImage} roundedCircle 
-                            fluid/>
-                            <p>{reviews[i].userName}</p>
-                        </Col>
-                        <td>{reviews[i].productDescription}</td>
-                    </tr>  
+                <tr>
+                    <Col className="text-center mt-1">
+                        <Image style={{ "width": "40px", "height": "40px" }}
+                            src={userImage} roundedCircle
+                            fluid />
+                        <p>{reviews[i].userName}</p>
+                    </Col>
+                    <td>{reviews[i].productDescription}</td>
+                </tr>
             );
         }
-        
-        return rows
-        
+        if (rows.length > 0) {
+            return rows
+        }
+        else {
+            return "No reviews available"
+        }
+
     }
 
     render() {
