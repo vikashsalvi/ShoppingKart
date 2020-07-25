@@ -15,7 +15,6 @@ class AddReview extends Component {
             product_rating: '',
             product_description: '',
         };
-        debugger;
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this)
     }
