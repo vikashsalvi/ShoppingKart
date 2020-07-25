@@ -27,8 +27,8 @@ class Products extends Component {
                 {
                     data.map((l) => (
                         <div className="col-md-2 mt-4 ml-4">
-                            <Product text={l.productName} 
-                            img={l.imageUrl}
+                            <Product text={l.productName}
+                            img={l.imageURL}
                             productID={l.productID} />
                         </div>
                     ))
@@ -41,7 +41,7 @@ class Products extends Component {
         return (
             <Container>
             <div className="container-fluid">
-                
+
                 {this.generateProductRow(this.state.list1)}
             </div>
             </Container>
