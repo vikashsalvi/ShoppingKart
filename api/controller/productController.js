@@ -6,6 +6,11 @@
 
 const productModel = require("../model/productModel");
 
+/**
+ @function author    Deep Muni => B00828375
+ **/
+
+// This controller will help to fetch all the products
 const getAllProducts = (req, res) => {
     productModel.find().exec()
         .then(data => {
@@ -16,6 +21,11 @@ const getAllProducts = (req, res) => {
         })
 }
 
+/**
+ @function author    Deep Muni => B00828375
+ **/
+
+// This controller will help to fetch the suggestion
 const getSuggestions = (req, res) => {
     productModel.find({"productName" : {$regex : ".*"+ req.params.query +".*", $options: "i"}}).exec()
         .then(data => {
@@ -30,6 +40,11 @@ const getSuggestions = (req, res) => {
         })
 }
 
+/**
+ @function author    Deep Muni => B00828375
+ **/
+
+// This controller will help to fetch the result of search
 const getSearchedProducts = (req, res) => {
     productModel.find({"productName" : {$regex : ".*"+ req.params.query +".*", $options: "i"}}).exec()
         .then(data => {
@@ -65,6 +80,8 @@ const getTopProducts = (req,res) => {
             console.log("Failure:" + err);
         })
 }
+
+// Exporting the controller
 
 module.exports.getAllProducts = getAllProducts;
 module.exports.getSuggestions = getSuggestions;

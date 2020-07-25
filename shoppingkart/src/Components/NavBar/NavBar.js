@@ -1,3 +1,9 @@
+/**
+
+ @author    Deep Muni => B00828375
+
+ **/
+
 import React, { Component } from "react";
 import './NavBar.css';
 import { Link, withRouter } from "react-router-dom";
@@ -141,14 +147,14 @@ class Navigation extends Component {
                         {
                             this.side_panel.map((item, index) => {
                                 return (
-                                    
+
                                     <li className={item.cname} key={index}>
-                                            
+
                                             <div className="label">{item.name}</div>
                                             <div className="arrow" />
                                             <Link to={item.url} className={item.linkClass} />
-                                        
-                                       
+
+
                                     </li>
                                 );
                             })

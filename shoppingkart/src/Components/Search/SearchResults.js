@@ -1,3 +1,9 @@
+/**
+
+ @author    Deep Muni => B00828375
+
+ **/
+
 import React, {Component} from "react";
 import './SearchResults.css'
 import Card from "./ResultCard/Card";

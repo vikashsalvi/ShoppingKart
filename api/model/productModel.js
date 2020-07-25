@@ -6,6 +6,8 @@
 
 const mongoose = require('mongoose');
 
+// Schema for products
+
 const products = mongoose.Schema({
     productID: { type: Number, required: true },
     productName: { type: String, required: true },
@@ -15,5 +17,7 @@ const products = mongoose.Schema({
     productURL: {type: String, required: true},
     productDescription: {type: String, required: true},
 });
+
+// Exporting the schema
 
 module.exports = mongoose.model("products", products,"products");
