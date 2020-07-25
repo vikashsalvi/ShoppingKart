@@ -54,9 +54,10 @@ const deleteProduct = async (req, res)=>{
 
 const updateProduct = async (req, res) => {
     try{
+        console.log(req.body)
         const updatedItem = await product.updateOne({productID:req.body.product_id},
             {$set:{productPrice:req.body.product_price,productQuantity:req.body.product_qty,
-            productDescription:req.body.product_description}})
+            productDescription:req.body.product_description,productURL:req.body.product_img}})
         
         console.log(req.body)
         console.log(updatedItem)

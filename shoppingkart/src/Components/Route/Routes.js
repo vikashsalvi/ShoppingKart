@@ -13,6 +13,7 @@ import Cart from "../CartManagement/Mycart";
 import OrderConfirmation from "../CartManagement/Checkout/Checkout";
 import Help from "../Help/Help";
 import DeleteProduct from "../Admin/DeleteProduct";
+import UpdateProduct from "../Admin/UpdateProduct";
 
 class Routes extends Component {
     render() {
@@ -22,6 +23,7 @@ class Routes extends Component {
                 <Route exact path='/admin' component={AdminHome}/>
                 <Route exact path='/createProduct' component={CreateProduct}/>
                 <Route exact path='/removeProduct' component={DeleteProduct}/>
+                <Route exact path='/updateProduct' component={UpdateProduct}/>
                 <Route exact path='/profile' component={Profile}/>
                 <Route exact path='/register' component={Register}/>
                 <Route exact path= '/login' component={Login}/>

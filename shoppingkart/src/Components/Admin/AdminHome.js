@@ -5,16 +5,16 @@ import './home.css'
 class AdminHome extends React.Component{
     render(){
         return(
-            <div align="center" className="container" id="main-tag">
+            <div align="right" className="container" id="main-tag">
             <br/>
                 <div className="row">
-                    <div className="col-sm-2">
+                    <div className="col-sm-3">
                         <Link to="/createProduct"><button className="btn btn-primary">Insert Product</button></Link>
                     </div>
-                    <div className="col-sm-2">
-                       <button className="btn btn-primary">Update Product</button>
+                    <div className="col-sm-3">
+                       <Link to="/updateProduct"><button className="btn btn-primary">Update Product</button></Link>
                     </div>
-                    <div className="col-sm-2">
+                    <div className="col-sm-3">
                     <Link to="removeProduct"> <button className="btn btn-primary">Delete Product</button></Link>
                     </div>
                 </div>

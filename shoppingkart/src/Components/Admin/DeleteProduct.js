@@ -3,6 +3,7 @@ import { Form, Toast, Col } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
 import './deleteprod.css';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 const PRODUCT_INFO = {
     product_id:'',
@@ -67,8 +68,22 @@ function DeleteProduct() {
 
     return (
         <div className="wrapper">
-            <div className="form_area">
+            <div align="right" className="container">
+            <br/>
+                <div className="row">
+                    <div className="col-sm-3">
+                        <Link to="/createProduct"><button className="btn btn-primary">Insert Product</button></Link>
+                    </div>
+                    <div className="col-sm-3">
+                       <Link to="/updateProduct"><button className="btn btn-primary">Update Product</button></Link>
+                    </div>
+                    <div className="col-sm-3">
+                    <Link to="removeProduct"> <button className="btn btn-primary">Delete Product</button></Link>
+                    </div>
+                </div>
+            </div>
 
+            <div className="form_area">
                 <h1>Delete an existing product</h1>
                 <Form method="post">
                     <Form.Group>
@@ -90,7 +105,6 @@ function DeleteProduct() {
                 </button>
             </div>
             <div style={{margin: "50px"}}/>
-            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         </div>
     );
 }

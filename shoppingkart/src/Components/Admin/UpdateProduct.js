@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
 import { Form, Toast, Col } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
-import './createprod.css';
+import './updateprod.css';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
 
 
 const INITIALIZE_PRODUCTS = {
     product_id:'',
-    product_name: '',
     product_price: '',
     product_description: '',
     product_img: '',
     product_qty : '',
-    product_brand: ''
 
 }
 
-function CreateProduct() {
+function UpdateProduct() {
 
     const [product, setProduct] = useState(INITIALIZE_PRODUCTS);
 
@@ -36,16 +34,14 @@ function CreateProduct() {
 
     function checkEmpty() {
         const productid = document.getElementById('id');
-        const prodname = document.getElementById('prodname');
         const price = document.getElementById('price');
         const desp = document.getElementById('desp');
         const img = document.getElementById('img');
         const qty = document.getElementById('prodqty');
-        const brand = document.getElementById('brand');
         
 
-        if ((prodname.value === "") || (price.value === "") || (desp.value === "") || (img.value === "")
-        || (qty.value == "") || (brand.value == "")) {
+        if ((productid.value === "") || (price.value === "") || (desp.value === "") || (img.value === "")
+        || (qty.value == "")) {
             alert("Please fill all the fields");
             return false;
         }
@@ -59,22 +55,20 @@ function CreateProduct() {
         if (checkEmpty()) {
             setProduct(INITIALIZE_PRODUCTS)
             INITIALIZE_PRODUCTS.product_id = document.getElementById('id').value;
-            INITIALIZE_PRODUCTS.product_name = document.getElementById('prodname').value;
             INITIALIZE_PRODUCTS.product_price= document.getElementById('price').value;
             INITIALIZE_PRODUCTS.product_description = document.getElementById('desp').value;
             INITIALIZE_PRODUCTS.product_img = document.getElementById('img').value;
             INITIALIZE_PRODUCTS.product_qty = document.getElementById('prodqty').value;
-            INITIALIZE_PRODUCTS.product_brand = document.getElementById('brand').value;
 
 
             await axios({
                 method: "POST", 
-                url:"http://localhost:5000/admin/saveProduct", 
+                url:"http://localhost:5000/admin/editProduct", 
                 data:  INITIALIZE_PRODUCTS
               }).then((response)=>{
                 if(response.data.Success===false)
                 {
-                    alert("A product with same ID already exists")
+                    alert("Product with entered ID does not exist")
                 }
                 else{
                     SetSuccess(true)
@@ -103,19 +97,18 @@ function CreateProduct() {
                     <div className="col-sm-3">
                     <Link to="removeProduct"> <button className="btn btn-primary">Delete Product</button></Link>
                     </div>
-                </div>    
+                </div>
             </div>
-
 
             <div className="form_area">
 
-                <h1>Insert new product</h1>
+                <h1>Update an exisitng product</h1>
                 <Form method="post">
                     <Toast show={success} onClose={showtoast} className="toast-box">
                         <Toast.Header>
                             <strong className="mr-auto">Success!!!</strong>
                         </Toast.Header>
-                        <Toast.Body>your product has been posted</Toast.Body>
+                        <Toast.Body>Product has been updated</Toast.Body>
                     </Toast>
                     <Form.Group>
                         <input
@@ -130,18 +123,7 @@ function CreateProduct() {
 
                     </Form.Group>
                     <Form.Row>
-
-                        <Form.Group as={Col}>
-                            <input
-                                name="prodname"
-                                lable = {product}
-                                placeholder="Product Name"
-                                type="text"
-                                id="prodname"
-                                className="inp"
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
+                    
                         <Form.Group as={Col}>
                             <input
                                 name="price"
@@ -155,26 +137,12 @@ function CreateProduct() {
                                 onChange={handleChange}
                             />
                         </Form.Group>
-                    </Form.Row>
-
-                    <Form.Row>
                         <Form.Group as={Col}>
-                            <input
+                        <input
                                 name="prodqty"
                                 placeholder="Product Quantity"
                                 type="number"
                                 id="prodqty"
-                                className="inp"
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                        <Form.Group as={Col}>
-                            <input
-                                name="brand"
-                                label="Brand"
-                                placeholder="Brand"
-                                type="text"
-                                id="brand"
                                 className="inp"
                                 onChange={handleChange}
                             />
@@ -218,4 +186,4 @@ function CreateProduct() {
     );
 }
 
-export default CreateProduct;
+export default UpdateProduct;
