@@ -5,8 +5,16 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import './ProductRating.css';
 import AddReview from '../ProductReviews/AddReview'
 
-class ProductDetails extends Component {
+class ProductRating extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+        };
+        // this.props = this.props.parentProps;
+        debugger;
+        console.log(props)
+    }
     render() {
         return (
             <div>
@@ -34,7 +42,7 @@ class ProductDetails extends Component {
                                 <div className="content text-center">
                                     <div className="ratings">
                                         <div className="text-center">
-                                            <AddReview />
+                                            <AddReview parentProps={this.props.parentProps} productId = {this.props.productId} />
                                         </div>
                                     </div>
                                 </div>
@@ -47,4 +55,4 @@ class ProductDetails extends Component {
         );
     }
 }
-export default ProductDetails
+export default ProductRating

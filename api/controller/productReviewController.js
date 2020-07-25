@@ -1,16 +1,19 @@
+/**
+ @author    Bharat Bhargava => B00838511
+ **/
+
 const productReviewModel = require("../model/productReviewModel");
 
 const postProductreview = (req, res) => {
-    // var username = req.body.userName;
-    // var productname = req.body.productName;
+    var userid = req.body.user_id;
+    var productid = req.body.product_id;
     var productrating = req.body.product_rating;
     var productdesc = req.body.product_description;
     console.log(productrating);
 
     productReviewModel.create({
-        // userName: username,
-        // userReview: userreview,
-        // productName: productname
+        userId: userid,
+        productId: productid,
         productRating: productrating,
         productDescription:productdesc
     }).then(data => {

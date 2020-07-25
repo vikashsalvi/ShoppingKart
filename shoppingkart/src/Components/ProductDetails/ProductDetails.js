@@ -4,6 +4,7 @@ import Product from '../Products/Product';
 import ProductRating from '../ProductRating/ProductRating';
 import ProductSpecifics from '../ProductSpecifics/ProductSpecifics';
 import ProductReviews from '../ProductReviews/ProductReviews';
+import AddReview from '../ProductReviews/AddReview';
 import Axios from "axios";
 
 /**
@@ -157,8 +158,8 @@ class ProductDetails extends Component {
                         </div>
                     </div>
                     <ProductSpecifics productId={this.props.location.state.query}/>
-                    <ProductRating />
-                    <ProductReviews />
+                    <ProductRating parentProps={this.props} productId={this.props.location.state.query}/>
+                    <ProductReviews  />
                 </Container>
                 <br />
                 <br />

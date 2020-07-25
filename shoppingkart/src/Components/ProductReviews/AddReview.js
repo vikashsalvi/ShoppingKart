@@ -1,7 +1,12 @@
-import React, { useState, Component } from 'react';
-import { Form, Toast, Button, Col } from 'react-bootstrap';
+/**
+ @author    Bharat Bhargava => B00838511
+ **/
+
+import React, { Component } from 'react';
+import { Form, Button, Col, } from 'react-bootstrap';
 import Axios from 'axios';
 
+let myStorage = window.localStorage;
 
 class AddReview extends Component {
     constructor(props) {
@@ -10,29 +15,19 @@ class AddReview extends Component {
             product_rating: '',
             product_description: '',
         };
+        debugger;
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this)
-
     }
-
-    // const [rate, SetRating] = useState(INITIALIZE_RATING);
-    // const [success, SetSuccess] = useState(false);
-    // const showtoast = () => SetSuccess(!success);
-
 
 
     handleChange(event) {
-        // const { name, value } = event.target;
-        // SetRating(prevState => ({ ...prevState, [name]: value }))
-        // debugger;
-        // console.log(event.target.value);
         if (event.target.name === "rating") {
             this.setState({ 'product_rating': event.target.value });
         }
         else if (event.target.name === "description") {
             this.setState({ 'product_description': event.target.value });
         }
-
     }
 
     checkEmpty() {
@@ -43,28 +38,30 @@ class AddReview extends Component {
             alert("Please fill all the fields");
             return false;
         }
-
         return true;
     }
 
     async handleSubmit(event) {
-        //to prevent refreshing the page
-        event.preventDefault()
-        if (this.checkEmpty()) {
-            let payload = {
-                product_rating : this.state.product_rating,
-                product_description : this.state.product_description
-            };
-            // SetRating(INITIALIZE_RATING)
-            Axios.post("http://localhost:5000/review/putReview", payload)
-                .then(res => {
-                    this.props.history.push('/ProductDetails');
-                })
+        if (myStorage.getItem("token")) {
+            event.preventDefault()
+            if (this.checkEmpty()) {
+                let payload = {
+                    product_rating: this.state.product_rating,
+                    product_description: this.state.product_description,
+                    user_id: myStorage.getItem("userid"),
+                    product_id: this.props.productId
+                };
+                Axios.post("http://localhost:5000/review/putReview", payload)
+                    .then(res => {
+                        alert("Review added");
+                    })
 
+            }
+        } else {
+            this.props.parentProps.history.push({
+                pathname: "/login"
+            });
         }
-        // else {
-        //     SetSuccess(false);
-        // }
     }
 
     render() {
@@ -72,18 +69,11 @@ class AddReview extends Component {
             <div>
                 <Form>
                     <h4>Add Review </h4>
-                    {/* <Toast show={success} onClose={showtoast}>
-                        <Toast.Header>
-                            <strong className="mr-auto">Success!!!</strong>
-                        </Toast.Header>
-                        <Toast.Body>your review has been posted</Toast.Body>
-                    </Toast> */}
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Control
                                 name="rating"
                                 id="rating"
-                                // label={rate}
                                 placeholder="Rating"
                                 min="0"
                                 step="1"

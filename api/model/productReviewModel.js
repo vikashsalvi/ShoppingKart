@@ -1,7 +1,19 @@
+/**
+ @author    Bharat Bhargava => B00838511
+ **/
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const productReviewSchema = new Schema({
+    userId : {
+        type: String,
+        required: true
+    },
+    productId : {
+        type: String,
+        required: true
+    },
     productRating : {
         type: Number,
         required: true
