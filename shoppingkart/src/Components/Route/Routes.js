@@ -1,12 +1,10 @@
 import React, {Component} from "react";
-import {Route, Switch} from "react-router-dom";
+import {Route, Switch, Redirect} from "react-router-dom";
 import Home from "../Home/Home";
-import CreateProduct from '../Admin/InsertProduct';
 import Profile from "../UserProfile/UserProfile";
 import Register from "../Signup/Signup";
 import Login from "../Login/Login";
 import Result from "../Search/SearchResults";
-import AdminHome from "../Admin/AdminHome";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import OrderHistory from "../Orders/Orders";
 import Cart from "../CartManagement/Mycart";
@@ -15,8 +13,10 @@ import Help from "../Help/Help";
 import AddReview from "../ProductReviews/AddReview";
 import Logout from "../Logout/Logout";
 import Auth from "../Login/Auth";
-import DeleteProduct from "../Admin/DeleteProduct";
-import UpdateProduct from "../Admin/UpdateProduct";
+import AdminHome from "../Admin/AdminHome"
+import CreateProduct from "../Admin/InsertProduct"
+import DeleteProduct from "../Admin/DeleteProduct"
+import UpdateProduct from "../Admin/UpdateProduct"
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -28,6 +28,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     )
 
 class Routes extends Component {
+    
     render() {
         return (
             <Switch>
@@ -43,8 +44,9 @@ class Routes extends Component {
                 <Route exact path='/product' component={ProductDetails} />
                 <Route exact path='/order-history' component={OrderHistory} />
                 <Route exact path="/mycart" component={Cart}/>
-                <Route exact path='/orderConfirmation' component={OrderConfirmation}/>
-                <Route exact path='/help' component={Help}/>
+                <Route exact path="/logout" component={Logout}/>
+                <PrivateRoute exact path='/orderConfirmation' component={OrderConfirmation}/>
+                <Route exact path='/help' component={Help}/>                
             </Switch>
         );
     }
