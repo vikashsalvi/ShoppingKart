@@ -20,8 +20,15 @@ const saveProduct = async (req, res)=>{
         productDescription : req.body.product_description
     })
     try{
-        const savedItem = await newProduct.save().then(console.log("Product has been saved to the database"))
-        res.json({"Success":true})
+        const existingProduct = await product.find({productID:req.body.product_id})
+        if(existingProduct.length > 0){
+            res.json({"Success":false})
+        }
+        else{
+            const savedItem = await newProduct.save().then(console.log("Product has been saved to the database"))
+            res.json({"Success":true})
+        }
+        
     }catch(err){
         res.json({message:err})
     }
@@ -67,20 +74,7 @@ const updateProduct = async (req, res) => {
     }
 }
 
-const checkProduct = async (req, res) => {
-    const existingProduct = await product.find({productID:req.body.product_id})
-    console.log(existingProduct)
-    if(existingProduct.length > 0){
-        res.json({"Success":false})
-    }
-    else{
-    res.json({"Success":true})
-    }
-
-}
-
 
 module.exports.saveProduct = saveProduct
-module.exports.checkProduct = checkProduct
 module.exports.deleteProduct = deleteProduct
 module.exports.updateProduct = updateProduct

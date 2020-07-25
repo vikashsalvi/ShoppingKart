@@ -49,11 +49,11 @@ function DeleteProduct() {
                 url:"http://localhost:5000/admin/deleteProduct", 
                 data:  PRODUCT_INFO
               }).then((response)=>{
-                if (response){
-                  console.log(response) 
-                  this.resetForm()
-                }else if(response.data.status === 'fail'){
-                  alert("Message failed to send.")
+                if(response.data.Success==true){
+                    alert("Product deleted successfully")
+                }
+                else{
+                    alert("The product ID does not exists")
                 }
               })
             console.log(PRODUCT_INFO)

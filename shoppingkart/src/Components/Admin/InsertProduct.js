@@ -3,7 +3,6 @@ import { Form, Toast, Col } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
 import './createprod.css';
 import axios from 'axios';
-import { response } from 'express';
 
 const INITIALIZE_PRODUCTS = {
     product_id:'',
@@ -31,8 +30,7 @@ function CreateProduct() {
 
         setProduct(prevState => ({ ...prevState, [name]: value }))
 
-    }
-
+    }           
 
     function checkEmpty() {
         const productid = document.getElementById('id');
@@ -66,29 +64,21 @@ function CreateProduct() {
             INITIALIZE_PRODUCTS.product_qty = document.getElementById('prodqty').value;
             INITIALIZE_PRODUCTS.product_brand = document.getElementById('brand').value;
 
-            axios({
-                method: "GET", 
-                url:"http://localhost:5000/admin/check", 
-                data:  {"product_id":INITIALIZE_PRODUCTS.product_id}
-              }).then((response)=>{
-                  console.log("Inside check product")
-                  console.log(response)
-              })
 
-            axios({
+            await axios({
                 method: "POST", 
                 url:"http://localhost:5000/admin/saveProduct", 
                 data:  INITIALIZE_PRODUCTS
               }).then((response)=>{
-                if (response.data.status === 'success'){
-                  alert("Message Sent."); 
-                  this.resetForm()
-                }else if(response.data.status === 'fail'){
-                  alert("Message failed to send.")
+                if(response.data.Success===false)
+                {
+                    alert("A product with same ID already exists")
+                }
+                else{
+                    SetSuccess(true)
+                    // alert("Product added successfully")
                 }
               })
-            console.log(INITIALIZE_PRODUCTS)
-            SetSuccess(true)
         }
         else {
             SetSuccess(false);
