@@ -10,4 +10,4 @@ Node:
 1. node index.js or
 2. npm start
 
-URL for the app: https://csci-5709-web-dev-24.herokuapp.com/
+URL for the app: https://csci-5709-web-24.herokuapp.com/

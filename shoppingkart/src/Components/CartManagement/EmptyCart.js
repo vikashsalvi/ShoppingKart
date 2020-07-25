@@ -1,3 +1,8 @@
+/**
+
+ @author    Pallavi Desai => B00837405
+
+ **/
 import React, { Component } from "react";
 import emptyCart from "./images/emptyCart.png";
 import "./Mycart.css";

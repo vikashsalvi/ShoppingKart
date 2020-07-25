@@ -1,24 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.c120f43a.chunk.css",
-    "main.js": "/static/js/main.e4b76167.chunk.js",
-    "main.js.map": "/static/js/main.e4b76167.chunk.js.map",
+    "main.css": "/static/css/main.81a662d8.chunk.css",
+    "main.js": "/static/js/main.17a23a22.chunk.js",
+    "main.js.map": "/static/js/main.17a23a22.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.211326c3.js",
     "runtime-main.js.map": "/static/js/runtime-main.211326c3.js.map",
     "static/css/2.af3c1da9.chunk.css": "/static/css/2.af3c1da9.chunk.css",
-    "static/js/2.998c1c72.chunk.js": "/static/js/2.998c1c72.chunk.js",
-    "static/js/2.998c1c72.chunk.js.map": "/static/js/2.998c1c72.chunk.js.map",
+    "static/js/2.5b361eba.chunk.js": "/static/js/2.5b361eba.chunk.js",
+    "static/js/2.5b361eba.chunk.js.map": "/static/js/2.5b361eba.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.f9a0a09bdf4696b4f4f05b873081bbab.js": "/precache-manifest.f9a0a09bdf4696b4f4f05b873081bbab.js",
+    "precache-manifest.c949ec277122e2bf57daf44fbb4cfa8d.js": "/precache-manifest.c949ec277122e2bf57daf44fbb4cfa8d.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.af3c1da9.chunk.css.map": "/static/css/2.af3c1da9.chunk.css.map",
-    "static/css/main.c120f43a.chunk.css.map": "/static/css/main.c120f43a.chunk.css.map",
-    "static/js/2.998c1c72.chunk.js.LICENSE.txt": "/static/js/2.998c1c72.chunk.js.LICENSE.txt",
-    "static/media/bread.jpg": "/static/media/bread.fca9a15b.jpg",
-    "static/media/cheese.jpg": "/static/media/cheese.ca50fab9.jpg",
-    "static/media/chicken.jpg": "/static/media/chicken.ea047a84.jpg",
+    "static/css/main.81a662d8.chunk.css.map": "/static/css/main.81a662d8.chunk.css.map",
+    "static/js/2.5b361eba.chunk.js.LICENSE.txt": "/static/js/2.5b361eba.chunk.js.LICENSE.txt",
     "static/media/AboutUs.css": "/static/media/customer.4ccaa1ea.png",
-    "static/media/eggs.png": "/static/media/eggs.f4a1764a.png",
     "static/media/emptyCart.png": "/static/media/emptyCart.4e086c9a.png",
     "static/media/paypal.png": "/static/media/paypal.83e34342.png",
     "static/media/slider1.jpg": "/static/media/slider1.b2d5f187.jpg",
@@ -28,8 +24,8 @@
   "entrypoints": [
     "static/js/runtime-main.211326c3.js",
     "static/css/2.af3c1da9.chunk.css",
-    "static/js/2.998c1c72.chunk.js",
-    "static/css/main.c120f43a.chunk.css",
-    "static/js/main.e4b76167.chunk.js"
+    "static/js/2.5b361eba.chunk.js",
+    "static/css/main.81a662d8.chunk.css",
+    "static/js/main.17a23a22.chunk.js"
   ]
 }

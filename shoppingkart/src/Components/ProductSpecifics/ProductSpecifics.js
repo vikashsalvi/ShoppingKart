@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Container, Table} from 'react-bootstrap';
+import React, { Component } from 'react';
+import { Container, Table } from 'react-bootstrap';
 import Axios from "axios";
 
 class ProductSpecifics extends Component {
@@ -21,19 +21,21 @@ class ProductSpecifics extends Component {
 
     addProductDetails() {
         let rows = [];
-        let detail = this.state.productDetails
+        let detail = this.state.productDetails;
 
-        Object.keys(detail).map(function (key, index) {
-            rows.push(
-                <tr>
-                    <td className="font-weight-bold">{key.trim().replace(/([A-Z])/g, ' $1').replace(/^./, function (word) {
-                        return word.toUpperCase();
-                    })
-                    }</td>
-                    <td>{detail[key].trim()}</td>
-                </tr>
-            )
-        })
+
+        if (detail) {
+            Object.keys(detail).map(function (key, index) {
+
+                rows.push(
+                    <tr>
+                        <td className="font-weight-bold">{key.trim().replace(/([A-Z])/g, ' $1').replace(/^./, function (word) { return word.toUpperCase(); })
+                        }</td>
+                        <td>{detail[key].trim()}</td>
+                    </tr>
+                )
+            })
+        }
         return rows
     }
 
@@ -49,7 +51,7 @@ class ProductSpecifics extends Component {
                             <div className="col-sm">
                                 <Table striped bordered hover>
                                     <tbody>
-                                    {this.addProductDetails()}
+                                        {this.addProductDetails()}
                                     </tbody>
                                 </Table>
                             </div>

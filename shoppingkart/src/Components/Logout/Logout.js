@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import Auth from '../Login/Auth';
 import setAuthToken from '../Login/setAuthToken';
-
+import Axios from "axios";
 
 
 class Logout extends Component {
@@ -19,6 +19,7 @@ class Logout extends Component {
                 loggedinstatus: "User has logged out"
 
             });
+            this.saveUserOrder();
             localStorage.removeItem("token");
             localStorage.removeItem("username");
             localStorage.removeItem("userid");
@@ -39,6 +40,31 @@ class Logout extends Component {
 
         }
     }
+
+    /**
+     
+    @function author    Pallavi Desai => B00837405
+
+    **/
+
+    // save the cart items as unconfirmed order to dB after logout
+    async saveUserOrder(){
+        if(localStorage.getItem('tempCart') && JSON.parse(localStorage.getItem('tempCart')).length>0){
+            let res = "";
+            const url = "http://localhost:5000/orders/addToCart/";
+            await Axios.post(url, {
+                username: localStorage.getItem("username"),
+                orderItems: JSON.parse(localStorage.getItem('tempCart')),
+                grandTotal: 0,
+                orderStatus: "unconfirmed"
+            }).then(function (response) {
+                res = response;
+            });
+            localStorage.removeItem('tempCart');
+            localStorage.removeItem('id');
+        }
+    }
+
     render() {
         return (
             <div className="wrapper">

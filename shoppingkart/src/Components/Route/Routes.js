@@ -12,8 +12,20 @@ import OrderHistory from "../Orders/Orders";
 import Cart from "../CartManagement/Mycart";
 import OrderConfirmation from "../CartManagement/Checkout/Checkout";
 import Help from "../Help/Help";
+import AddReview from "../ProductReviews/AddReview";
+import Logout from "../Logout/Logout";
+import Auth from "../Login/Auth";
 import DeleteProduct from "../Admin/DeleteProduct";
 import UpdateProduct from "../Admin/UpdateProduct";
+
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render = {(props) => (
+        Auth.getAuth() 
+        ? (<Component {...props} />) 
+        : (<Redirect to={{pathname: "/login"}}/>)
+        )} />
+    )
 
 class Routes extends Component {
     render() {
