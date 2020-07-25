@@ -11,8 +11,6 @@ class ProductRating extends Component {
         super(props);
         this.state = {
         };
-        // this.props = this.props.parentProps;
-        debugger;
         console.log(props)
     }
     render() {
