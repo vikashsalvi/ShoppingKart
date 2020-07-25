@@ -39,7 +39,7 @@ class Routes extends Component {
                 <Route exact path='/product' component={ProductDetails} />
                 <Route exact path='/order-history' component={OrderHistory} />
                 <Route exact path="/mycart" component={Cart}/>
-                <Route exact path='/AddReview' component={AddReview}/>
+                <PrivateRoute exact path='/AddReview' component={AddReview}/>
                 <Route exact path="/logout" component={Logout}/>
                 <PrivateRoute exact path='/orderConfirmation' component={OrderConfirmation}/>
                 <Route exact path='/help' component={Help}/>                
