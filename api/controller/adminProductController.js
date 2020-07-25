@@ -9,6 +9,9 @@ const express = require('express')
 const product = require("../model/productModel");
 
 
+// This is the API to save a new product to the database. It will check if the new productID already
+// exists in the database or not. If the ID already exists, then it will send error response
+// else it will save the product to the database and send the success response.
 const saveProduct = async (req, res)=>{
     const newProduct = new product({
         productID: req.body.product_id,
@@ -34,6 +37,9 @@ const saveProduct = async (req, res)=>{
     }
 }
 
+// This is the API to delete a product from the database. It will check if the productID exists in the database
+// If the productID is valid then it will remove the corresponding product
+// Else it will send an error response
 const deleteProduct = async (req, res)=>{
     try{
     const removedItem =  await product.deleteOne({productID:req.body.product_id})
@@ -52,6 +58,10 @@ const deleteProduct = async (req, res)=>{
     }
 }
 
+// This is the API to update an existing product from the database. 
+// It will check if the productID exists in the database and
+// If the productID is valid then it will update the corresponding product
+// Else it will send an error response
 const updateProduct = async (req, res) => {
     try{
         console.log(req.body)

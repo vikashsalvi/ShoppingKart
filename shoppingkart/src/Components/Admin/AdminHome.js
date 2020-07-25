@@ -1,3 +1,10 @@
+/**
+
+ @author    Hardik Dudhrejia => B00835071
+
+ **/
+
+
 import React from 'react'
 import {Link} from 'react-router-dom'
 import './home.css'
@@ -17,8 +24,7 @@ class AdminHome extends React.Component{
                     <div className="col-sm-3">
                     <Link to="removeProduct"> <button className="btn btn-primary">Delete Product</button></Link>
                     </div>
-                </div>
-                
+                </div>    
             </div>
         )
     }

@@ -1,3 +1,10 @@
+/**
+
+ @author    Hardik Dudhrejia => B00835071
+
+ **/
+
+
 import React, { useState } from 'react';
 import { Form, Toast, Col } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
