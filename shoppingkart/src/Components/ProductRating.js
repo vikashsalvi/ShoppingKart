@@ -37,7 +37,6 @@ class ProductRating extends Component {
     totalRating(data) {
         let rate = 0;
         count = 0;
-        debugger;
         for (let i = 0; i < data.length; i++) {
             rate = rate + data[i].productRating;
             count = count + 1;
