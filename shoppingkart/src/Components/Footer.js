@@ -25,7 +25,7 @@ class Footer extends Component {
                         </p>
                         </div>
                         <div className="col-sm ml-2" style={{ "marginTop": "20px" }}>
-                            <p><FontAwesomeIcon icon={faMapMarker} /> &nbsp; Lorem ipsum dolor sit amet</p>
+                            <p><FontAwesomeIcon icon={faMapMarker} /> &nbsp;Canada </p>
                             <p>
                             <FontAwesomeIcon icon={faPhone} /> &nbsp; <a style={{"color":"#ffffff"}} href="tel:+1-999-999-9999">(999)-999-9999</a>
                             </p>
