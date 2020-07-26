@@ -4,7 +4,7 @@ import Product from '../Products/Product';
 import ProductRating from '../ProductRating/ProductRating';
 import ProductSpecifics from '../ProductSpecifics/ProductSpecifics';
 import ProductReviews from '../ProductReviews/ProductReviews';
-import AddReview from '../ProductReviews/AddReview';
+
 import Axios from "axios";
 
 /**
@@ -13,10 +13,13 @@ import Axios from "axios";
 
 let myStorage = window.localStorage;
 let productArray;
-let productID;
+
 
 class ProductDetails extends Component {
-    constructor(props){
+
+    productID = this.props.location.state.query;
+
+    constructor(props) {
         super(props);
         this.state = {
             productName: "",
@@ -30,11 +33,11 @@ class ProductDetails extends Component {
 
     async componentDidMount() {
         console.log("Id " + this.props.location.state.query);
-        const productData  = await Axios.get("http://localhost:5000/product/getProductDetails/" + this.props.location.state.query);
-        this.setState( {
+        const productData = await Axios.get("http://localhost:5000/product/getProductDetails/" + this.props.location.state.query);
+        this.setState({
             productName: productData.data.data[0].productName,
             productDescription: productData.data.data[0].productDescription,
-            productUrl: productData.data.data[0].imageUrl,
+            productUrl: productData.data.data[0].imageURL,
             productQuantity: productData.data.data[0].productQuantity,
             productPrice: productData.data.data[0].productPrice
         })
@@ -48,70 +51,94 @@ class ProductDetails extends Component {
         let items = [];
         let counter = 5;
         let start = 1;
-        if(this.state.productQuantity < 5 ){
+        if (this.state.productQuantity < 5) {
             counter = this.state.productQuantity
         }
-        if(this.state.productQuantity === 0){
+        if (this.state.productQuantity === 0) {
             start = 0
         }
         for (let i = start; i <= counter; i++) {
-             items.push(<option key={i} value={i}>{i}</option>);
+            items.push(<option key={i} value={i}>{i}</option>);
         }
         return items;
     }
 
-    getStockText(){
-        if(this.state.productQuantity === 0 ){
+    getStockText() {
+        if (this.state.productQuantity === 0) {
             return <h6 className="text-danger">No stock left</h6>
-        }else{
-        return <h6 className="text-success">In sotck, Quantity left: {this.state.productQuantity}</h6>
+        } else {
+            return <h6 className="text-success">In stock, Quantity left: {this.state.productQuantity}</h6>
         }
     }
 
-    getPurchaseButtons(){
+    getPurchaseButtons() {
         let list = []
-        if(this.state.productQuantity === 0 ){
+        if (this.state.productQuantity === 0) {
             list.push(<button type="button" className="btn btn-outline-primary w-100" disabled>Buy now</button>);
             list.push(<button type="button" class="btn btn-outline-primary w-100 mt-4" disabled>Add to cart</button>);
-        }else{
-            list.push(<button type="button" className="btn btn-outline-primary w-100"   onClick={() => this.addItemAndRedirectToCart()}>Buy now</button>);          
-            list.push(<button type="button" class="btn btn-outline-primary w-100 mt-4" onClick ={() => this.addItemsToCart()}>Add to cart</button>);
+        } else {
+            list.push(<button type="button" className="btn btn-outline-primary w-100" onClick={() => this.addItemAndRedirectToCart()}>Buy now</button>);
+            list.push(<button type="button" class="btn btn-outline-primary w-100 mt-4" onClick={() => this.addItemsToCart()}>Add to cart</button>);
         }
         return list;
     }
-    addItemAndRedirectToCart(){
-        productArray = myStorage.getItem('tempCart')? JSON.parse(myStorage.getItem('tempCart')) : []; 
-        productID = myStorage.getItem('id') ? JSON.parse(myStorage.getItem('id'))+1 : 0;
-        productArray.push({
-            id: productID,
-            name: this.state.productName,
-            img:this.state.productUrl,
-            quantity: parseInt(document.getElementById("quantitySelectBox").value),
-            price: parseInt(this.state.productPrice),
-            totalPrice: 0
-        });
-        productArray[productArray.length - 1].totalPrice = productArray[productArray.length - 1].price * productArray[productArray.length - 1].quantity;
-        myStorage.setItem('tempCart', JSON.stringify(productArray));
-        myStorage.setItem('id', productID);
+    addItemAndRedirectToCart() {
+        let productArray = window.localStorage.getItem('tempCart') ? JSON.parse(window.localStorage.getItem('tempCart')) : [];
 
-        this.props.history.push('/mycart', {'query': this.props.id})
-    }
-    // adding the product to localStorage 
-    addItemsToCart(){
-        productArray = myStorage.getItem('tempCart')? JSON.parse(myStorage.getItem('tempCart')) : []; 
-        productID = myStorage.getItem('id') ? JSON.parse(myStorage.getItem('id'))+1 : 0;
-        productArray.push({
-            id: productID,
-            name: this.state.productName,
-            img:this.state.productUrl,
-            quantity: parseInt(document.getElementById("quantitySelectBox").value),
-            price: parseInt(this.state.productPrice),
-            totalPrice: 0
+        let count = -1;
+
+        let found = productArray.some(product => {
+            count += 1;
+            return product.id === this.productID;
         });
-        productArray[productArray.length - 1].totalPrice = productArray[productArray.length - 1].price * productArray[productArray.length - 1].quantity;
-        myStorage.setItem('tempCart', JSON.stringify(productArray));
-        myStorage.setItem('id', productID);
-        alert("Added product to cart")
+
+        if (found) {
+            productArray[count].quantity += 1;
+            productArray[count].totalPrice = parseInt(productArray[count].totalPrice) + parseInt(this.state.productPrice);
+        } else {
+            productArray.push({
+                id: this.productID,
+                name: this.state.productName,
+                img: this.state.productUrl,
+                quantity: 1,
+                price: parseInt(this.state.productPrice),
+                totalPrice: parseInt(this.state.productPrice)
+            });
+        }
+        window.localStorage.setItem('tempCart', JSON.stringify(productArray));
+
+        alert("Item is added to Cart");
+
+        this.props.history.push('/mycart', { 'query': this.props.id })
+    }
+    // adding the product to localStorage
+    addItemsToCart() {
+
+        let productArray = window.localStorage.getItem('tempCart') ? JSON.parse(window.localStorage.getItem('tempCart')) : [];
+        let count = -1;
+
+        let found = productArray.some(product => {
+            count += 1;
+            return product.id === this.productID;
+        });
+
+        if (found) {
+            productArray[count].quantity += parseInt(document.getElementById("quantitySelectBox").value);
+            productArray[count].totalPrice = parseInt(productArray[count].totalPrice) + (parseInt(this.state.productPrice) * parseInt(document.getElementById("quantitySelectBox").value));
+        } else {
+            productArray.push({
+                id: this.productID,
+                name: this.state.productName,
+                img: this.state.productUrl,
+                quantity: parseInt(document.getElementById("quantitySelectBox").value),
+                price: parseInt(this.state.productPrice),
+                totalPrice: (parseInt(document.getElementById("quantitySelectBox").value) * parseInt(this.state.productPrice))
+            });
+        }
+        window.localStorage.setItem('tempCart', JSON.stringify(productArray));
+
+        alert("Item is added to Cart");
+
     }
 
     render() {
@@ -123,7 +150,7 @@ class ProductDetails extends Component {
                         <div className="col-lg-4 col-xs-5 mt-5">
                             <div className="row h-100">
                                 <div className="col">
-                                    <Product img={this.state.productUrl}/>
+                                    <Product img={this.state.productUrl} />
                                 </div>
                             </div>
                         </div>
@@ -146,8 +173,8 @@ class ProductDetails extends Component {
                                             <div className="col-md-4">
                                                 Quantity
                                                 <select className="form-control"
-                                                onChange={this.onDropdownSelected}
-                                                id="quantitySelectBox">
+                                                    onChange={this.onDropdownSelected}
+                                                    id="quantitySelectBox">
                                                     {this.createSelectuantity()}
                                                 </select>
                                             </div>
@@ -174,9 +201,9 @@ class ProductDetails extends Component {
                             </div>
                         </div>
                     </div>
-                    <ProductSpecifics productId={this.props.location.state.query}/>
-                    <ProductRating parentProps={this.props} productId={this.props.location.state.query}/>
-                    <ProductReviews  productId={this.props.location.state.query}/>
+                    <ProductSpecifics productId={this.props.location.state.query} />
+                    <ProductRating parentProps={this.props} productId={this.props.location.state.query} />
+                    <ProductReviews productId={this.props.location.state.query} />
                 </Container>
                 <br />
                 <br />

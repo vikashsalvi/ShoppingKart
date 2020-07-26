@@ -1,6 +1,11 @@
+/**
+ @author    Bharat Bhargava => B00838511
+ **/
+
 import React,{Component} from 'react';
 import userImage from './static/img/user.png'
 import { Container, Table, Card,Col,Image } from 'react-bootstrap';
+import Axios from "axios";
 
 class ProductReviews extends Component {
 
@@ -14,24 +19,30 @@ class ProductReviews extends Component {
 
     async componentDidMount() {
         let id = this.props.productId + ""
-        const productData = await Axios.get("http://localhost:5000/review/getProductReview/" + id);
-        this.setState({
-            productReviews: productData.data.data[0].productDetails
-        })
+        // To get reviews data from all users
+        const productData = await Axios.get("http://localhost:5000/review/getProductReview/" + id).then(
+            res => {
+                debugger;
+                this.setState({
+                    productReviews: res.data.data
+                })
+            }
+        );
+       
     }
 
+    // To show reviews provided by users with their usernames
     addReviews() {
         let rows = [];
         let reviews = this.state.productReviews;
-        for (let i = 0; i < reviews.length; i++) {
+        for (let i = 0; i < this.state.productReviews.length; i++) {
             rows.push(
                     <tr>
                         <Col className="text-center mt-1">
                             <Image style={{"width":"40px","height":"40px"}} 
                             src={userImage} roundedCircle 
                             fluid/>
-                            /**Fetch user and display user name based on user id i.e. reviews[i].userId */
-                            <p>User A</p>
+                            <p>{reviews[i].userName}</p>
                         </Col>
                         <td>{reviews[i].productDescription}</td>
                     </tr>  
@@ -39,6 +50,7 @@ class ProductReviews extends Component {
         }
         
         return rows
+        
     }
 
     render() {

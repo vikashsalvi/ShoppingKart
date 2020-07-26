@@ -15,20 +15,23 @@ let myStorage = window.localStorage;
 class Mycart extends Component {
   constructor(){
     super();
-    this.state = { 
+    this.state = {
       items: JSON.parse(myStorage.getItem('tempCart')) || []
     };
   }
-  
+
   // fetch the saved unconfirmed order and add into cart
   async componentDidMount(){
+
+    console.log(window.localStorage.getItem('tempCart'));
+
     if(myStorage.getItem('token')){
       let res = "";
       let items;
       const url = "http://localhost:5000/orders/getOrderDetails/"+myStorage.getItem("username")+"/unconfirmed";
       const response = await Axios.get(url);
         if(response.data.Status === "Success" && response.data.data.length>0 ){
-            items = myStorage.getItem('tempCart')? JSON.parse(myStorage.getItem('tempCart')) : []; 
+            items = myStorage.getItem('tempCart')? JSON.parse(myStorage.getItem('tempCart')) : [];
             let orderArray = response.data.data[0].orderItems;
             for(var i = 0; i < orderArray.length; i++){
               items.push(orderArray[i]);
@@ -38,9 +41,9 @@ class Mycart extends Component {
             });
             myStorage.setItem('tempCart', JSON.stringify(items));
             // deleting the unconfirmed order from dB since each user can have only one unconfirmed order
-            await Axios.delete("http://localhost:5000/orders/removeOrderData/"+myStorage.getItem("username")+"/unconfirmed"); 
+            await Axios.delete("http://localhost:5000/orders/removeOrderData/"+myStorage.getItem("username")+"/unconfirmed");
         }
-    }     
+    }
   }
 
   /* localStorage will have user's unconfirmed order throughout the session,
@@ -106,7 +109,7 @@ class Mycart extends Component {
     }
   }
 
-  async orderCheckout(){ 
+  async orderCheckout(){
     if(myStorage.getItem("token")){
       this.props.history.push({
         pathname: "/orderConfirmation",
@@ -118,7 +121,7 @@ class Mycart extends Component {
       })
     }
   }
-  
+
   render() {
     return (
       <div>

@@ -108,7 +108,7 @@ class Result extends Component {
                           name={item.productName}
                           price={item.productPrice}
                           category={item.category}
-                          image={item.imageUrl}
+                          image={item.imageURL}
                     />
                 )
             })
@@ -127,6 +127,7 @@ class Result extends Component {
                                 <option value={"default"}>-</option>
                                 <option value={"vegetable"}>Vegetables</option>
                                 <option value={"fruit"}>Fruits</option>
+                                <option value={"dairy"}>Dairy</option>
                             </select>
                         </div>
                         <div className="sort">
