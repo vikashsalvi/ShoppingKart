@@ -19,8 +19,9 @@ class Footer extends Component {
                         <div className="col-sm ml-2" style={{ "marginTop": "20px" }}>
                             About the company
                         <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                ShoppingKart is an electronic-commerce web application that facilitates transactions of services
+                                and goods online. The website will help users to buy products like groceries, daily essentials,
+                                and many commodities with the convenience of their house
                         </p>
                         </div>
                         <div className="col-sm ml-2" style={{ "marginTop": "20px" }}>
