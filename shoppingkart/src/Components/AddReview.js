@@ -60,6 +60,7 @@ class AddReview extends Component {
                 Axios.post("https://csci-5709-web-24.herokuapp.com/review/putReview", payload)
                     .then(res => {
                         alert("Review added");
+                        this.props.parentProps.history.push('/');
                     })
 
             }
