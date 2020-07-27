@@ -8,7 +8,7 @@ class Help extends Component {
         super(props);
 
         this.questions = [
-            {question: "Question 1", answer: "Answer 1"},
+            {question: "Question 1kjhkhkjhakjsdhakjdhaskjdhaskjdhakjdashkdhaskjdhakjsdhaksjdhakjhadkjhskd", answer: "Answer 1"},
             {question: "Question 2", answer: "Answer 2"},
             {question: "Question 3", answer: "Answer 3"},
             {question: "Question 4", answer: "Answer 4"},
@@ -26,9 +26,13 @@ class Help extends Component {
         this.itemClick = this.itemClick.bind(this);
     }
 
+    componentDidUpdate() {
+        this.scroll();
+    }
+
     chat(){
         return (
-            <div className="que-ans">
+            <div className="que-ans" id="que-ans">
                 <div className="ans">
                     <span>Welcome to Help Center !! Please ask your question</span>
                 </div>
@@ -50,6 +54,11 @@ class Help extends Component {
         );
     }
 
+    scroll(){
+        const que_ans = document.querySelector('#que-ans');
+        que_ans.scrollTop = que_ans.scrollHeight;
+    }
+
     fillSuggestion(e){
         const userInp = e.target.value;
         let suggestion = [];
@@ -65,7 +74,7 @@ class Help extends Component {
 
     questionList(){
         if(this.state.suggestion.length === 0){
-            return null;
+            return <div className="suggestion__error">No match found or question area blank</div>
         }
         return(
             <div className="queSuggestion">
@@ -87,6 +96,8 @@ class Help extends Component {
 
         this.selected.push(tup[0]);
 
+        document.getElementById("question").value = "";
+
         this.setState({
             suggestion : [],
             chat: this.selected
@@ -97,12 +108,15 @@ class Help extends Component {
         return (
             <div>
                 <div className="help-area">
+                    <div className="suggestion-box">
+                        <div className="suggestion__head">Suggestions</div>
+                        {this.questionList()}
+                    </div>
                     <div className="chat-box">
                         {this.chat()}
                         <div className="user-area">
                             <input type="text" id="question" className="question" placeholder="Enter your question"
                                    onChange={this.fillSuggestion}/>
-                            {this.questionList()}
                         </div>
                     </div>
                 </div>
