@@ -1,25 +1,22 @@
-import React, {Component} from "react";
+import React from 'react';
 import '../CSS/Brands.css';
 
-class Brand extends Component {
-    render() {
-        return (
-            <div className="brand-section">
-                <p className="heading">Brands Associated</p>
-                <div className="brand-area">
-                    <div className="brand">Brand Image</div>
-                    <div className="brand">Brand Image</div>
-                    <div className="brand">Brand Image</div>
-                    <div className="brand">Brand Image</div>
-                    <div className="brand">Brand Image</div>
-                    <div className="brand">Brand Image</div>
-                    <div className="brand">Brand Image</div>
-                    <div className="brand">Brand Image</div>
-                    <div className="brand">Brand Image</div>
-                </div>
+const Brand = () => {
+
+    const brand = ['Balaji', 'Haldiram', 'Chedda', 'Cadbury', 'Britannia', 'Pepsi', 'Garden', 'Bikaner'];
+
+    return (
+        <div className="brand-section">
+            <p className="heading">Brands Associated</p>
+            <div className="brand-area">
+                {
+                    brand.map(brand => {
+                        return <div className="brand">{brand}</div>
+                    })
+                }
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 export default Brand;
