@@ -1,19 +1,12 @@
 import React,{Component} from "react";
 import '../CSS/Help.css';
 import Question from "./Question";
+import Axios from "axios";
 
 class Help extends Component {
 
     constructor(props) {
         super(props);
-
-        this.questions = [
-            {question: "Question 1kjhkhkjhakjsdhakjdhaskjdhaskjdhakjdashkdhaskjdhakjsdhaksjdhakjhadkjhskd", answer: "Answer 1"},
-            {question: "Question 2", answer: "Answer 2"},
-            {question: "Question 3", answer: "Answer 3"},
-            {question: "Question 4", answer: "Answer 4"},
-            {question: "Question 5", answer: "Answer 5"}
-        ];
 
         this.selected = [];
 
@@ -59,13 +52,12 @@ class Help extends Component {
         que_ans.scrollTop = que_ans.scrollHeight;
     }
 
-    fillSuggestion(e){
+    async fillSuggestion(e){
         const userInp = e.target.value;
         let suggestion = [];
-        if(userInp.length > 0){
-            suggestion = this.questions.filter(item => {
-                return item.question.toLowerCase().includes(userInp.toLowerCase());
-            });
+        if (userInp.length > 0) {
+            const data = await Axios.get("https://csci-5709-web-24.herokuapp.com/help/getSuggestion/" + userInp);
+            suggestion = data.data.data;
         }
         this.setState({
             suggestion: suggestion
@@ -80,21 +72,22 @@ class Help extends Component {
             <div className="queSuggestion">
                 {
                     this.state.suggestion.map((item, index) => {
-                        return <Question key={index} question={item.question} onClick={this.itemClick}/>
+                        return <Question key={index} question={item.question} onClick={this.itemClick} id={item.id}/>
                     })
                 }
             </div>
         );
     }
 
-    itemClick(e) {
-        document.getElementById("question").value = e.target.innerText;
+    async itemClick(e) {
 
-        const tup = this.state.suggestion.filter((t) => {
-            return t.question === e.target.innerText;
-        });
+        const id = e.target.id;
+        const que = e.target.innerText;
 
-        this.selected.push(tup[0]);
+        const data = await Axios.get("https://csci-5709-web-24.herokuapp.com/help/getAnswer/" + id);
+        const ans = data.data.data;
+
+        this.selected.push({question: que, answer: ans});
 
         document.getElementById("question").value = "";
 
