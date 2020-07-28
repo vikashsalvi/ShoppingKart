@@ -14,7 +14,7 @@ const productModel = require("../model/productModel");
 const getAllProducts = (req, res) => {
     productModel.find().exec()
         .then(data => {
-            res.json({ Status :"Success", data : data});
+            res.json({ Status: "Success", data: data });
         })
         .catch(err => {
             console.log("Failure:" + err);
@@ -27,13 +27,13 @@ const getAllProducts = (req, res) => {
 
 // This controller will help to fetch the suggestion
 const getSuggestions = (req, res) => {
-    productModel.find({"productName" : {$regex : ".*"+ req.params.query +".*", $options: "i"}}).exec()
+    productModel.find({ "productName": { $regex: ".*" + req.params.query + ".*", $options: "i" } }).exec()
         .then(data => {
             let finalData = new Set();
             data.map(d => {
                 finalData.add(d.productName);
             });
-            res.json({ Status :"Success", data : Array.from(finalData)});
+            res.json({ Status: "Success", data: Array.from(finalData) });
         })
         .catch(err => {
             console.log("Failure:" + err);
@@ -46,9 +46,9 @@ const getSuggestions = (req, res) => {
 
 // This controller will help to fetch the result of search
 const getSearchedProducts = (req, res) => {
-    productModel.find({"productName" : {$regex : ".*"+ req.params.query +".*", $options: "i"}}).exec()
+    productModel.find({ "productName": { $regex: ".*" + req.params.query + ".*", $options: "i" } }).exec()
         .then(data => {
-            res.json({ Status :"Success", data : data});
+            res.json({ Status: "Success", data: data });
         })
         .catch(err => {
             console.log("Failure:" + err);
@@ -58,10 +58,10 @@ const getSearchedProducts = (req, res) => {
 /**
  @function author    Vikash Salvi => B00838074
  **/
-const getProductDetails = (req,res) => {
-    productModel.find({"productID" : req.params.query}).exec()
+const getProductDetails = (req, res) => {
+    productModel.find({ "productID": req.params.query }).exec()
         .then(data => {
-            res.json({ Status :"Success", data : data});
+            res.json({ Status: "Success", data: data });
         })
         .catch(err => {
             console.log("Failure:" + err);
@@ -71,14 +71,61 @@ const getProductDetails = (req,res) => {
  @function author    Vikash Salvi => B00838074
  **/
 
-const getTopProducts = (req,res) => {
+const getTopProducts = (req, res) => {
     productModel.find().limit(20).exec()
         .then(data => {
-            res.json({ Status :"Success", data : data});
+            res.json({ Status: "Success", data: data });
         })
         .catch(err => {
             console.log("Failure:" + err);
         })
+}
+
+const postProductDetails = (req, res) => {
+    let productIdList = req.body.productIds;
+    for (var i = 0; i < productIdList.length; i++) {
+        let product = productIdList[i];
+        productModel.findOne({ 'productID': product.id })
+            .then(data => {
+                let productInfo = data;
+                console.log(productInfo);
+                console.log(product.cartQuan);
+                productInfo.productQuantity = productInfo['productQuantity'] - parseInt(product.cartQuan);
+                productModel.updateOne(
+                    { 'productID': product.id },
+                    {
+                        $set: { 'productQuantity': productInfo.productQuantity }
+                    }
+                ).then(res => {
+                    console.log("updated: " + res);
+                })
+            })
+            .catch(err => {
+                console.log("Failure:" + err);
+            })
+    }
+    // var productID = req.body.productID;
+    // var productName = req.body.productName;
+    // var productPrice = req.body.productPrice;
+    // var productBrand = req.body.productBrand;
+    // var productQuantity = req.body.productQuantity;
+    // var productURL = req.body.imageURL;
+    // var productDescription = req.body.productDescription;
+
+    // productReviewModel.create({
+    //     productName: productName,
+    //     productPrice: productPrice,
+    //     productID: productID,
+    //     productBrand: productBrand,
+    //     productQuantity: productQuantity,
+    //     productURL: productURL,
+    //     productDescription: productDescription
+    // }).then(data => {
+    //     res.json({ Status: "Success", data: data });
+    // })
+    //     .catch(err => {
+    //         console.log("Failure:" + err);
+    //     });
 }
 
 // Exporting the controller
@@ -88,3 +135,4 @@ module.exports.getSuggestions = getSuggestions;
 module.exports.getSearchedProducts = getSearchedProducts;
 module.exports.getProductDetails = getProductDetails;
 module.exports.getTopProducts = getTopProducts;
+module.exports.postProductDetails = postProductDetails;
