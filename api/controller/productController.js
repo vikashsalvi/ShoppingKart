@@ -81,6 +81,9 @@ const getTopProducts = (req, res) => {
         })
 }
 
+/**
+ @function author    Bharat Bhargava => B00838511
+ **/
 const postProductDetails = (req, res) => {
     let productIdList = req.body.productIds;
     for (var i = 0; i < productIdList.length; i++) {
@@ -104,28 +107,6 @@ const postProductDetails = (req, res) => {
                 console.log("Failure:" + err);
             })
     }
-    // var productID = req.body.productID;
-    // var productName = req.body.productName;
-    // var productPrice = req.body.productPrice;
-    // var productBrand = req.body.productBrand;
-    // var productQuantity = req.body.productQuantity;
-    // var productURL = req.body.imageURL;
-    // var productDescription = req.body.productDescription;
-
-    // productReviewModel.create({
-    //     productName: productName,
-    //     productPrice: productPrice,
-    //     productID: productID,
-    //     productBrand: productBrand,
-    //     productQuantity: productQuantity,
-    //     productURL: productURL,
-    //     productDescription: productDescription
-    // }).then(data => {
-    //     res.json({ Status: "Success", data: data });
-    // })
-    //     .catch(err => {
-    //         console.log("Failure:" + err);
-    //     });
 }
 
 // Exporting the controller
