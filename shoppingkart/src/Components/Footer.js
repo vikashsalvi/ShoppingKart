@@ -17,11 +17,11 @@ class Footer extends Component {
                             </p>
                         </div>
                         <div className="col-sm ml-2" style={{ "marginTop": "20px" }}>
-                            About the company
+                        <p>About the company</p>
                         <p>
                                 ShoppingKart is an electronic-commerce web application that facilitates transactions of services
                                 and goods online. The website will help users to buy products like groceries, daily essentials,
-                                and many commodities with the convenience of their house
+                                and many commodities.
                         </p>
                         </div>
                         <div className="col-sm ml-2" style={{ "marginTop": "20px" }}>
@@ -29,7 +29,7 @@ class Footer extends Component {
                             <p>
                             <FontAwesomeIcon icon={faPhone} /> &nbsp; <a style={{"color":"#ffffff"}} href="tel:+1-999-999-9999">(999)-999-9999</a>
                             </p>
-                            <FontAwesomeIcon icon={faEnvelope} /> &nbsp; <a style={{"color":"#ffffff"}} href = "mailto: contatncshoppingkart@shoppingkar.com">contatnc@shoppingkar.com</a>
+                            <FontAwesomeIcon icon={faEnvelope} /> &nbsp; <a style={{"color":"#ffffff"}} href = "mailto: contact@shoppingkart.com">contact@shoppingkart.com</a>
                         </div>
 
                     </div>

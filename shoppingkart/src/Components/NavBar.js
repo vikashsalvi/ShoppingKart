@@ -22,13 +22,17 @@ class Navigation extends Component {
       showing: false,
       suggestion: [],
       selectedTup: [],
+      nav: [],
+      side: [],
       modalShow: false,
-      location:"",
-      message:""
+      location: "",
+      message: "",
     };
 
+    this.cities = ["halifax", "quebec", "toronto", "calgary", "victoria"];
     this.side_panel = [
       { name: "Home", url: "", cname: "item", linkClass: "link" },
+      { name: "Help", url: "help", cname: "item", linkClass: "link" },
       {
         name: "Cart",
         url: "mycart",
@@ -48,14 +52,19 @@ class Navigation extends Component {
         linkClass: "link",
       },
       { name: "Profile", url: "profile", cname: "item", linkClass: "link" },
-      { name: "Admin", url: "admin", cname: "item", linkClass: "link" },
       {
         name: "Orders",
         url: "order-history",
         cname: "item",
         linkClass: "link",
       },
-      { name: "Help", url: "help", cname: "item", linkClass: "link" },
+      { name: "Admin", url: "admin", cname: "item", linkClass: "link" },
+      {
+        name: "Logout",
+        url: "logout",
+        cname: "item hide-nav",
+        linkClass: "link",
+      },
     ];
 
     this.navigate = [
@@ -65,13 +74,50 @@ class Navigation extends Component {
       { name: "Logout", url: "logout", cname: "link" },
     ];
 
-    this.cities = ["halifax","quebec","toronto","calgary","victoria"];
-
     this.toggle = this.toggle.bind(this);
     this.validate = this.validate.bind(this);
     this.showList = this.showList.bind(this);
     this.itemClick = this.itemClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
+  }
+
+  componentDidMount() {
+    let nav = [],
+      side = [];
+    nav.push(this.navigate[0]);
+    side.push(this.side_panel[0]);
+    side.push(this.side_panel[1]);
+    side.push(this.side_panel[2]);
+
+    const user = window.localStorage.getItem("username");
+
+    if (user === null) {
+      nav.push(this.navigate[1]);
+      nav.push(this.navigate[2]);
+    } else if (user === "admin") {
+      nav.push(this.navigate[3]);
+    } else {
+      nav.push(this.navigate[3]);
+    }
+
+    if (user === null) {
+      side.push(this.side_panel[3]);
+      side.push(this.side_panel[4]);
+    } else if (user === "admin") {
+      side.push(this.side_panel[7]);
+    } else {
+      side.push(this.side_panel[5]);
+      side.push(this.side_panel[6]);
+    }
+
+    if (user !== null) {
+      side.push(this.side_panel[8]);
+    }
+
+    this.setState({
+      nav: nav,
+      side: side,
+    });
   }
 
   toggle() {
@@ -87,7 +133,13 @@ class Navigation extends Component {
       if (val === "") {
         alert("Please enter a search string");
       } else {
-          let url = storage.getItem("location")?"http://localhost:5000/location/getSearchedProductsByLocation/"+storage.getItem("location")+"/"+val: "https://csci-5709-web-24.herokuapp.com/product/getSearchedProduct/"+val;
+        let url = storage.getItem("location")
+          ? "http://localhost:5000/location/getSearchedProductsByLocation/" +
+            storage.getItem("location") +
+            "/" +
+            val
+          : "https://csci-5709-web-24.herokuapp.com/product/getSearchedProduct/" +
+            val;
         const data = await Axios.get(url);
         this.setState({
           suggestion: [],
@@ -109,7 +161,13 @@ class Navigation extends Component {
     let suggestion = [];
 
     if (userInp.length > 0) {
-      let url= storage.getItem("location")?"http://localhost:5000/location/getSuggestionsByLocation/"+storage.getItem("location")+"/"+userInp:  "https://csci-5709-web-24.herokuapp.com/product/getSuggestion/" +userInp;
+      let url = storage.getItem("location")
+        ? "http://localhost:5000/location/getSuggestionsByLocation/" +
+          storage.getItem("location") +
+          "/" +
+          userInp
+        : "https://csci-5709-web-24.herokuapp.com/product/getSuggestion/" +
+          userInp;
       const data = await Axios.get(url);
       suggestion = data.data.data;
     }
@@ -146,32 +204,31 @@ class Navigation extends Component {
     });
   }
 
-  handleClose(){
-      this.setState({
-          modalShow: false
-      })
+  handleClose() {
+    this.setState({
+      modalShow: false,
+    });
   }
 
-  handleLocationSubmission(){
-      let location = document.getElementById("location").value;
-      if(location == null || location == ""){
-            storage.removeItem("location");
-            this.handleClose();
-            window.location.reload(false);
+  handleLocationSubmission() {
+    let location = document.getElementById("location").value;
+    if (location == null || location == "") {
+      storage.removeItem("location");
+      this.handleClose();
+      window.location.reload(false);
+    } else {
+      let loc = location.toLocaleLowerCase();
+      if (this.cities.includes(loc)) {
+        storage.setItem("location", loc);
+        this.handleClose();
+        window.location.reload(false);
       } else {
-        let loc = location.toLocaleLowerCase();
-        if(this.cities.includes(loc)){
-            storage.setItem("location", loc);
-            this.handleClose();
-            window.location.reload(false);
-        } else {
-            this.setState({
-                location:"",
-                message: "Sorry! We do not deliver to this location"
-            });
-        }
+        this.setState({
+          location: "",
+          message: "Sorry! We do not deliver to this location",
+        });
+      }
     }
-
   }
 
   render() {
@@ -227,7 +284,7 @@ class Navigation extends Component {
               <div className="arrow" />
               <button
                 className="label location-button"
-                onClick={() =>  this.setState({ modalShow: true })}
+                onClick={() => this.setState({ modalShow: true })}
               >
                 Location
               </button>
@@ -247,8 +304,13 @@ class Navigation extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <input type="search" id="location" name="location" defaultValue={this.state.location}/>
-        <p>{this.state.message}</p>
+            <input
+              type="search"
+              id="location"
+              name="location"
+              defaultValue={this.state.location}
+            />
+            <p>{this.state.message}</p>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={() => this.handleLocationSubmission()}>

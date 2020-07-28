@@ -5,45 +5,28 @@
 **/
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
-import Auth from './Auth';
-import setAuthToken from './setAuthToken';
 import Axios from "axios";
 
-
 class Logout extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loggedinstatus: ""
-        }
-    };
 
     handleLogout() {
-        if (Auth.getAuth()) {
-            this.setState({
-                loggedinstatus: "User has logged out"
 
-            });
+        const user = window.localStorage.getItem("username");
+
+        if (user !== null) {
             this.saveUserOrder();
-            localStorage.removeItem("token");
-            localStorage.removeItem("username");
-            localStorage.removeItem("userid");
+            window.localStorage.removeItem("token");
+            window.localStorage.removeItem("username");
+            window.localStorage.removeItem("userid");
             localStorage.removeItem("location");
-            setAuthToken(false);
-            Auth.logout();
             alert("User has logged out");
             this.props.history.push("/")
-
+            window.location.reload();
         }
         else {
-            this.setState({
-                loggedinstatus: "User has not logged in yet"
-
-            });
-            console.log(this.state.loggedinstatus);
             alert("User did not login yet");
-            this.props.history.push("/")
-
+            this.props.history.push("/");
+            window.location.reload();
         }
     }
 
@@ -55,18 +38,18 @@ class Logout extends Component {
 
     // save the cart items as unconfirmed order to dB after logout
     async saveUserOrder(){
-        if(localStorage.getItem('tempCart') && JSON.parse(localStorage.getItem('tempCart')).length>0){
+        if(window.localStorage.getItem('tempCart') && JSON.parse(window.localStorage.getItem('tempCart')).length>0){
             const url = "https://csci-5709-web-24.herokuapp.com/orders/addToCart/";
             await Axios.post(url, {
-                username: localStorage.getItem("username"),
-                orderItems: JSON.parse(localStorage.getItem('tempCart')),
+                username: window.localStorage.getItem("username"),
+                orderItems: JSON.parse(window.localStorage.getItem('tempCart')),
                 grandTotal: 0,
                 orderStatus: "unconfirmed"
             }).then(function (response) {
 
             });
-            localStorage.removeItem('tempCart');
-            localStorage.removeItem('id');
+            window.localStorage.removeItem('tempCart');
+            window.localStorage.removeItem('id');
         }
     }
 
@@ -74,7 +57,6 @@ class Logout extends Component {
         return (
             <div className="wrapper">
                 <div className="form_area">
-
                     <h5> Are you sure you want to log out?</h5>
                     <button type="submit" className="submit" onClick={() => this.handleLogout()} >
                         <span>Logout</span>
