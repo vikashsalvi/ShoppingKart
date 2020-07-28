@@ -22,6 +22,9 @@ import Cards from 'react-credit-cards';
 let storage = window.localStorage;
 
 class Checkout extends Component {
+  constructor(props) {
+    super(props);
+  }
   state = {
     items: this.props.location.data,
     firstname: "",
@@ -91,12 +94,14 @@ class Checkout extends Component {
         for (i = 0; i < this.state.items.length; i++) {
           productIds[i] = { id: this.state.items[i].id, cartQuan: this.state.items[i].quantity };
         }
-        Axios.post("http://localhost:5000/product/setProductDetails/", {
+        Axios.post("https://csci-5709-web-24.herokuapp.com/product/setProductDetails/", {
           productIds: productIds
         }).then(res => {
         });
+        this.props.history.push({
+          pathname: '/'
+        });
         alert("Order Placed Successfully");
-        this.props.history.push('/orderConfirmation');
       });
     }
 
@@ -125,7 +130,6 @@ class Checkout extends Component {
 
   handleInputChange = (e) => {
     const { name, value } = e.target;
-
     this.setState({ [name]: value });
   }
 
@@ -137,17 +141,22 @@ class Checkout extends Component {
     this.setState({ showCredInfo: false })
   }
 
-  // To check if rating and description are filled by the user
+  // To check if required details are filled by the user
   checkEmpty() {
-    if (document.getElementById("cardpayment").checked) {
+    // check if address is filled by the user
+    if (document.getElementById("address").textContent === "No address found. Update your address") {
+      alert("Please enter address");
+      return false;
+    }
+    // check if card details are filled if method of payment is credit/debit card
+    else if (document.getElementById("cardpayment").checked) {
       if (this.state.showCredInfo === true) {
-        const name = document.getElementById('card_name');
-        const number = document.getElementById('card_number');
-        const expiry = document.getElementById('card_expiry');
-        const cvc = document.getElementById('card_cvc');
-        if (name === null || expiry === null || number === null || cvc === null) {
+        if (this.state.name === "" || this.state.expiry === "" || this.state.number === "" || this.state.cvc === "") {
           alert("Please fill all card details");
           return false;
+        }
+        else {
+          return true;
         }
       }
       else {
@@ -228,7 +237,7 @@ class Checkout extends Component {
                         <div className="form-group">
                           <input
                             type="tel"
-                            name="card_number"
+                            name="number"
                             className="card-ip"
                             placeholder="Card Number"
                             pattern="[\d| ]{16,22}"
@@ -240,7 +249,7 @@ class Checkout extends Component {
                         <div className="form-group">
                           <input
                             type="text"
-                            name="card_name"
+                            name="name"
                             className="card-ip"
                             placeholder="Name"
                             required
@@ -252,7 +261,7 @@ class Checkout extends Component {
                           <div className="col-4">
                             <input
                               type="tel"
-                              name="card_expiry"
+                              name="expiry"
                               className="form-control"
                               placeholder="Valid Thru"
                               pattern="\d\d/\d\d"
@@ -264,7 +273,7 @@ class Checkout extends Component {
                           <div className="col-4">
                             <input
                               type="tel"
-                              name="card_cvc"
+                              name="cvc"
                               className="form-control"
                               placeholder="CVC"
                               pattern="\d{3,4}"
