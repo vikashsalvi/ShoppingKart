@@ -1,13 +1,9 @@
-
 import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
 import '../CSS/Login.css';
 import { FaUser, FaLock, FaShoppingCart } from 'react-icons/fa';
 import { Link, withRouter } from 'react-router-dom'
 import axios from 'axios';
-import setAuthToken from './setAuthToken';
-import Auth from './Auth';
-const mystorage = window.localStorage;
 
 class Login extends Component {
 
@@ -17,14 +13,11 @@ class Login extends Component {
             uname: { status: false, text: '' },
             pass: { status: false, text: '' },
             main: { status: false, text: '' },
-
-
         }
 
         this.validate = this.validate.bind(this);
         this.login = this.login.bind(this);
         this.hasError = this.hasError.bind(this);
-
 
     };
 
@@ -81,6 +74,7 @@ class Login extends Component {
             field.value = "";
         }
     }
+
     login() {
         if (this.checkBlank()) {
             this.setState({
@@ -100,10 +94,7 @@ class Login extends Component {
                     main: { status: false, text: '' }
                 });
             }, 2500);
-        }
-        else {
-
-
+        } else {
             const loginUser = {
                 uname: this.state.uname.text.toLowerCase(),
                 pass: this.state.pass.text
@@ -111,44 +102,33 @@ class Login extends Component {
 
             axios.post("https://csci-5709-web-24.herokuapp.com/users/login", loginUser)
                 .then(res => {
-                    mystorage.setItem("username",this.state.uname.text)
                     const response = res.data;
                     if (response) {
-
                         if ((response.usernamenotfound) || (response.passwordincorrect)) {
                             alert("username or password is incorrect");
                             this.makeEmpty();
                             this.props.history.push('/login');
-                        }
-                        else if (this.state.uname.text.toLowerCase() === "admin") {
-                            mystorage.setItem("token", res.data.token)
-                            mystorage.setItem("userid", res.data.userid)
-                            Auth.authenticate();
-                            alert("admin can manage inventory")
+                        } else if (this.state.uname.text.toLowerCase() === "admin") {
+                            window.localStorage.setItem("username", this.state.uname.text);
+                            window.localStorage.setItem("token", res.data.token)
+                            window.localStorage.setItem("userid", res.data.userid)
+                            alert("Proceed to Admin Panel")
                             this.props.history.push('/admin');
-                        }
-                        else if (mystorage.getItem("username").toLowerCase() === loginUser.uname.toLowerCase()) {
-                            mystorage.setItem("token", res.data.token)
-                            mystorage.setItem("userid", res.data.userid)
-                            setAuthToken(res.data.token);
-                            Auth.authenticate();
+                        } else {
+                            window.localStorage.setItem("username", this.state.uname.text);
+                            window.localStorage.setItem("token", res.data.token)
+                            window.localStorage.setItem("userid", res.data.userid)
                             alert("User can continue shopping");
                             this.props.history.push('/');
+                            window.location.reload();
                         }
                     }
-
-
-
                 })
                 .catch(error => {
                     console.log(error);
                 })
-
-
         }
-
     }
-
 
     render() {
         return (
@@ -184,8 +164,6 @@ class Login extends Component {
 
                     <div className="redirect">
                         <Link to={'/register'} className="linkRegister">New User?Register</Link>
-                        {/*<br/><br/>*/}
-                        {/*<Link className="linkRegister">Forgot Password?</Link>*/}
                     </div>
                 </div>
                 <br />

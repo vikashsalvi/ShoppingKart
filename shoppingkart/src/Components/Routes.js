@@ -11,16 +11,22 @@ import Cart from "./Mycart";
 import OrderConfirmation from "./Checkout";
 import Help from "./Help";
 import Logout from "./Logout";
-import Auth from "./Auth";
 import AdminHome from "./AdminHome"
 import CreateProduct from "./InsertProduct"
 import DeleteProduct from "./DeleteProduct"
 import UpdateProduct from "./UpdateProduct"
 
+const user = window.localStorage.getItem("usename");
+let status = false;
+
+if(user !== null){
+    status = true;
+}
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
+
     <Route {...rest} render = {(props) => (
-        Auth.getAuth()
+        status
         ? (<Component {...props} />)
         : (<Redirect to={{pathname: "/login"}}/>)
         )} />
