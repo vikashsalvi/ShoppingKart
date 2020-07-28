@@ -14,12 +14,11 @@ const User = require("../model/userModel");
 
 //post request for register
 const register = (req, res) => {
-    User.findOne({ email: req.body.uname }).then(user => {
+    User.findOne({ username: req.body.uname }).then(user => {
         if (user) {
-            return res.json({ username: "Username already exists" });
+            return res.json({ status: false, message: "Username already exists"});
         }
         else {
-
             const addUser = new User({
                 firstname: req.body.fname,
                 lastname: req.body.lname,
@@ -33,7 +32,9 @@ const register = (req, res) => {
                     addUser.password = encrypt;
                     addUser
                         .save()
-                        .then(user => res.json(user))
+                        .then(user => {
+                            res.json({status: true, message: "Username registered"})
+                        })
                         .catch(error => console.log(error));
                 });
             });
@@ -45,7 +46,7 @@ const register = (req, res) => {
 const login = (req, res) => {
     const username = req.body.uname;
     const password = req.body.pass;
-    
+
     // Find user by username
     User.findOne({ username: req.body.uname }).exec()
         .then(user => {
@@ -66,7 +67,7 @@ const login = (req, res) => {
                             payload,
                             secretOrKey,
                             {
-                                expiresIn: 31556926 
+                                expiresIn: 31556926
                             },
                             (err, token) => {
                                 res.json({
@@ -82,8 +83,8 @@ const login = (req, res) => {
                     else{
                         return res.json({ passwordincorrect: "Password incorrect" });
                     }
-                   
-                })                
+
+                })
         })
     .catch (error => {
     return res.json({ usernamenotfound: "Username not found" });

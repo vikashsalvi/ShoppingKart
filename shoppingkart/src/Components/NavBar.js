@@ -18,18 +18,21 @@ class Navigation extends Component {
         this.state = {
             showing: false,
             suggestion: [],
-            selectedTup: []
+            selectedTup: [],
+            nav: [],
+            side:[]
         }
 
         this.side_panel = [
             {'name': 'Home', 'url': '', cname: 'item', linkClass: 'link'},
+            {'name': 'Help', 'url': 'help', cname: 'item', linkClass: 'link'},
             {'name': 'Cart', 'url': 'mycart', cname: 'item hide-nav', linkClass: 'link'},
             {'name': 'Login', 'url': 'login', cname: 'item hide-nav', linkClass: 'link'},
             {'name': 'Register', 'url': 'register', cname: 'item hide-nav', linkClass: 'link'},
             {'name': 'Profile', 'url': 'profile', cname: 'item', linkClass: 'link'},
-            {'name': 'Admin', 'url': 'admin', cname: 'item', linkClass: 'link'},
             {'name': 'Orders', 'url': 'order-history', cname: 'item', linkClass: 'link'},
-            {'name': 'Help', 'url': 'help', cname: 'item', linkClass: 'link'}
+            {'name': 'Admin', 'url': 'admin', cname: 'item', linkClass: 'link'},
+            {'name': 'Logout', 'url': 'logout', cname: 'item hide-nav', linkClass: 'link'},
         ];
 
         this.navigate = [
@@ -43,7 +46,44 @@ class Navigation extends Component {
         this.validate = this.validate.bind(this);
         this.showList = this.showList.bind(this);
         this.itemClick = this.itemClick.bind(this);
+    }
 
+    componentDidMount() {
+        let nav = [], side = [];
+        nav.push(this.navigate[0]);
+        side.push(this.side_panel[0]);
+        side.push(this.side_panel[1]);
+        side.push(this.side_panel[2]);
+
+        const user = window.localStorage.getItem("username");
+
+        if(user === null){
+            nav.push(this.navigate[1]);
+            nav.push(this.navigate[2]);
+        }else if(user === "admin"){
+            nav.push(this.navigate[3]);
+        }else{
+            nav.push(this.navigate[3]);
+        }
+
+        if(user === null){
+            side.push(this.side_panel[3]);
+            side.push(this.side_panel[4]);
+        }else if(user === "admin"){
+            side.push(this.side_panel[7]);
+        }else{
+            side.push(this.side_panel[5]);
+            side.push(this.side_panel[6]);
+        }
+
+        if(user !== null){
+            side.push(this.side_panel[8]);
+        }
+
+        this.setState({
+            nav: nav,
+            side: side
+        });
     }
 
     toggle() {
@@ -133,7 +173,7 @@ class Navigation extends Component {
                 </div>
                 <ul className="right">
                     {
-                        this.navigate.map((item, index) => {
+                        this.state.nav.map((item, index) => {
                             return (
                                 <li key={index}>
                                     <div className="label">{item.name}</div>
@@ -147,16 +187,12 @@ class Navigation extends Component {
                 <div className={this.state.showing ? "side-panel show-panel" : "side-panel"}>
                     <ul>
                         {
-                            this.side_panel.map((item, index) => {
+                            this.state.side.map((item, index) => {
                                 return (
-
                                     <li className={item.cname} key={index}>
-
-                                            <div className="label">{item.name}</div>
-                                            <div className="arrow" />
-                                            <Link to={item.url} className={item.linkClass} />
-
-
+                                        <div className="label">{item.name}</div>
+                                        <div className="arrow" />
+                                        <Link to={item.url} className={item.linkClass} />
                                     </li>
                                 );
                             })

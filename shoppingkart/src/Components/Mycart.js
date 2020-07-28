@@ -23,8 +23,6 @@ class Mycart extends Component {
   // fetch the saved unconfirmed order and add into cart
   async componentDidMount(){
 
-    console.log(window.localStorage.getItem('tempCart'));
-
     if(myStorage.getItem('token')){
       let items;
       const url = "https://csci-5709-web-24.herokuapp.com/orders/getOrderDetails/"+myStorage.getItem("username")+"/unconfirmed";
@@ -109,12 +107,22 @@ class Mycart extends Component {
   }
 
   async orderCheckout(){
-    if(myStorage.getItem("token")){
-      this.props.history.push({
-        pathname: "/orderConfirmation",
-        data: this.state.items,
-      })
-    } else {
+    const user = window.localStorage.getItem("username");
+    const cart = window.localStorage.getItem('tempCart');
+
+    if(user !== null){
+      if(cart === null || JSON.parse(cart).length === 0){
+        alert("Please add product to cart before checking out");
+        this.props.history.push({
+          pathname: "/"
+        })
+      }else{
+        this.props.history.push({
+          pathname: "/orderConfirmation",
+          data: this.state.items,
+        })
+      }
+    }else {
       this.props.history.push({
         pathname: "/login"
       })

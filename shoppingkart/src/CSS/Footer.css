@@ -7,4 +7,10 @@
   width: 100%;
   position: relative;
   background-color: #0073B1;
+  padding-bottom: 3rem;
+}
+
+.main-footer p, .main-footer h4, .main-footer a{
+  font-family: Arial, serif;
+  text-align: justify;
 }

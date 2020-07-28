@@ -64,11 +64,11 @@ class FeaturedProducts extends Component {
 
             <div className="row" >
                 {
-                    data.map((l) => (
-                        <div className="col-md-2 mt-4 ml-4">
+                    data.map((l, index) => (
+                        <div className="col-md-2 mt-4 ml-4" key={index}>
                             <Product text={l.productName}
                             img={l.imageURL}
-                            productID={l.productID} />
+                            productID={l.productID}/>
                         </div>
                     ))
                 }
