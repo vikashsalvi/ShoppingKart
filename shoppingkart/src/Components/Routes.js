@@ -16,7 +16,7 @@ import CreateProduct from "./InsertProduct"
 import DeleteProduct from "./DeleteProduct"
 import UpdateProduct from "./UpdateProduct"
 
-const user = window.localStorage.getItem("usename");
+const user = window.localStorage.getItem("username");
 let status = false;
 
 if(user !== null){
