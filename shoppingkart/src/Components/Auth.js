@@ -5,7 +5,7 @@
 **/
 //authentication status
 const Auth = {
-    isAuthenticated: false,
+    isAuthenticated: window.localStorage.getItem("token")? true : false,
     authenticate() {
         this.isAuthenticated = true;
     },

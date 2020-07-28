@@ -28,6 +28,7 @@ class Logout extends Component {
             localStorage.removeItem("token");
             localStorage.removeItem("username");
             localStorage.removeItem("userid");
+            localStorage.removeItem("location");
             setAuthToken(false);
             Auth.logout();
             alert("User has logged out");
