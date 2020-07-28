@@ -180,7 +180,7 @@ class Register extends Component {
                 cpass: this.state.cpass.text
             };
 
-            axios.post("http://localhost:5000/users/register", newUser)
+            axios.post("https://csci-5709-web-24.herokuapp.com/users/register", newUser)
                 .then(res => {
                     if (res.data.status) {
                         alert("User has been registered");
