@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios';
-import UserCard from './UserCard';
 
 class AdminUserHome extends React.Component{
     constructor(){
@@ -19,25 +18,24 @@ class AdminUserHome extends React.Component{
           })
         }
         
-        deleteUser(id,index){
-
-            console.log("User deleted with", id,"and with index",index)
-            this.state.users.splice(index,1)
-            this.setState({users:this.state.users})
-        //     axios.post("http://localhost:5000/admin/deleteUser",{
-        //         id:id
-        //     }).then(response => {
-        //     console.log(response)
-
-        //     //Axios call to get user
-        //     this.setState({users:response.data})
-        //   })
-        //   .catch(error => {
-        //     console.log(error)
-        //   })
-
-
-        }
+    deleteUser(id, index){
+        
+        axios.get("http://localhost:5000/admin/deleteUser",{
+            params:{user_id:id}})
+        .then(response => {
+            if(response.data.Success === false){
+                alert("There was some issue in deleting that user")
+            }
+            else{
+                this.state.users.splice(index,1)
+                this.setState({users:this.state.users})
+            }
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        
+    }
     
     render() {
         return (

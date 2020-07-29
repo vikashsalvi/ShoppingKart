@@ -7,7 +7,8 @@
 
 const express = require('express')
 const product = require("../model/productModel");
-const users = require("../model/userModel")
+const users = require("../model/userModel");
+const { response } = require('express');
 
 
 // This is the API to save a new product to the database. It will check if the new productID already
@@ -44,9 +45,6 @@ const saveProduct = async (req, res)=>{
 const deleteProduct = async (req, res)=>{
     try{
     const removedItem =  await product.deleteOne({productID:req.body.product_id})
-    console.log(req.body)
-    console.log("Item deleted")
-    console.log(removedItem.n)
     if(removedItem.n === 1)
     {
         res.json({"Success":true})
@@ -65,13 +63,9 @@ const deleteProduct = async (req, res)=>{
 // Else it will send an error response
 const updateProduct = async (req, res) => {
     try{
-        console.log(req.body)
         const updatedItem = await product.updateOne({productID:req.body.product_id},
             {$set:{productPrice:req.body.product_price,productQuantity:req.body.product_qty,
             productDescription:req.body.product_description,productURL:req.body.product_img}})
-        
-        console.log(req.body)
-        console.log(updatedItem)
 
         if(updatedItem.n === 1)
         {
@@ -97,8 +91,24 @@ const getAllUsers = async (req, res) => {
 
 }
 
+const deleteUser = async (req, res) => {
+    try{
+        const deletedUser = await users.deleteOne({_id:req.query.user_id})
+        if(deletedUser.n === 1){
+            res.json({"Success":true})
+        }
+        else{
+            res.json({"Success":false})
+        }
+        
+    }catch(err){
+        console.log(err)
+    }
+}
+
 
 module.exports.saveProduct = saveProduct
 module.exports.deleteProduct = deleteProduct
 module.exports.updateProduct = updateProduct
 module.exports.getAllUsers = getAllUsers
+module.exports.deleteUser = deleteUser 
