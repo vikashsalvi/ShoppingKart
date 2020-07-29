@@ -1,7 +1,3 @@
-/**
- @author    Vikash Salvi => B00838074
- **/
-
 import React, { Component } from 'react';
 import { Container, Table } from 'react-bootstrap';
 import Axios from "axios";

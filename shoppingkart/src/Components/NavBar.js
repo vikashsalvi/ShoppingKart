@@ -1,9 +1,3 @@
-/**
-
- @author    Deep Muni => B00828375
-
- **/
-
 import React, { Component } from "react";
 import "../CSS/NavBar.css";
 import { Link, withRouter } from "react-router-dom";
@@ -133,13 +127,16 @@ class Navigation extends Component {
       if (val === "") {
         alert("Please enter a search string");
       } else {
-        let url = storage.getItem("location")
-          ? "http://localhost:5000/location/getSearchedProductsByLocation/" +
-            storage.getItem("location") +
-            "/" +
-            val
-          : "https://csci-5709-web-24.herokuapp.com/product/getSearchedProduct/" +
-            val;
+        // let url = storage.getItem("location")
+        //   ? "http://localhost:5000/location/getSearchedProductsByLocation/" +
+        //     storage.getItem("location") +
+        //     "/" +
+        //     val
+        //   : "https://csci-5709-web-24.herokuapp.com/product/getSearchedProduct/" +
+        //     val;
+
+        let url = "https://csci-5709-web-24.herokuapp.com/product/getSearchedProduct/" + val;
+
         const data = await Axios.get(url);
         this.setState({
           suggestion: [],
@@ -161,13 +158,16 @@ class Navigation extends Component {
     let suggestion = [];
 
     if (userInp.length > 0) {
-      let url = storage.getItem("location")
-        ? "http://localhost:5000/location/getSuggestionsByLocation/" +
-          storage.getItem("location") +
-          "/" +
-          userInp
-        : "https://csci-5709-web-24.herokuapp.com/product/getSuggestion/" +
-          userInp;
+      // let url = storage.getItem("location")
+      //   ? "http://localhost:5000/location/getSuggestionsByLocation/" +
+      //     storage.getItem("location") +
+      //     "/" +
+      //     userInp
+      //   : "https://csci-5709-web-24.herokuapp.com/product/getSuggestion/" +
+      //     userInp;
+
+      let url = "https://csci-5709-web-24.herokuapp.com/product/getSuggestion/" + userInp;
+
       const data = await Axios.get(url);
       suggestion = data.data.data;
     }
@@ -253,7 +253,7 @@ class Navigation extends Component {
           {this.suggestionList()}
         </div>
         <ul className="right">
-          {this.navigate.map((item, index) => {
+          {this.state.nav.map((item, index) => {
             return (
               <li key={index}>
                 <div className="label">{item.name}</div>
@@ -271,7 +271,7 @@ class Navigation extends Component {
           }
         >
           <ul>
-            {this.side_panel.map((item, index) => {
+            {this.state.side.map((item, index) => {
               return (
                 <li className={item.cname} key={index}>
                   <div className="label">{item.name}</div>

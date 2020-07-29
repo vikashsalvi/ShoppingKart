@@ -1,20 +1,3 @@
-/**
-
- @author    Pallavi Desai => B00837405
-
- **/
-
-/**
-
-@author    Bharat Bhargava => B00838511
-
-**/
-/**
-
-@author    Rashmika Ibrahimpatnam => B00832190
-
-**/
-
 import React, { Component } from "react";
 import { Card, CardDeck } from "react-bootstrap";
 import card from "../Images/card.png";
@@ -215,7 +198,7 @@ class Checkout extends Component {
     }
   }
 
-  render() {    
+  render() {
     return (
       <div>
         <div>

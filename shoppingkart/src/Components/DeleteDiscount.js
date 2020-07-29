@@ -1,8 +1,3 @@
-/**
-
- @author    Rashmika Ibrahimpatnam => B00832190
-
- **/
 import React, { useState } from 'react';
 import { Form, Toast } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -16,7 +11,7 @@ const INITIALIZE_DISCOUNT = {
 }
 function DeleteDiscount() {
 
- 
+
     const [discount, setDiscount] = useState(INITIALIZE_DISCOUNT);
 
     const [success, SetSuccess] = useState(false);
@@ -87,7 +82,7 @@ function DeleteDiscount() {
                     </div>
                     <div className="col-sm-4">
                         <Link to="/updateDiscount"><button className="btn btn-primary">Update Discount</button></Link>
-                    </div>                    
+                    </div>
                 </div>
             </div>
 

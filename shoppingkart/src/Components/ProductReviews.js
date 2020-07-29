@@ -1,7 +1,3 @@
-/**
- @author    Bharat Bhargava => B00838511
- **/
-
 import React, { Component } from 'react';
 import userImage from '../Images/user.png';
 import { Container, Table, Card, Col, Image } from 'react-bootstrap';

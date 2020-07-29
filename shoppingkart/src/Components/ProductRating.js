@@ -1,7 +1,3 @@
-/**
- @author    Bharat Bhargava => B00838511
- **/
-
 import React, { Component } from "react";
 import { Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

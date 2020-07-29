@@ -1,7 +1,3 @@
-/**
- @author    Bharat Bhargava => B00838511
- **/
-
 import React, { Component } from 'react';
 import { Form, Button, Col, } from 'react-bootstrap';
 import Axios from 'axios';

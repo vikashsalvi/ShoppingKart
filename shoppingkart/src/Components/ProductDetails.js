@@ -1,7 +1,3 @@
-/**
- @author    Vikash Salvi => B00838074
- **/
-
 import React, { Component } from "react";
 import { Container } from 'react-bootstrap';
 import Product from './ProductsSpec';
@@ -59,7 +55,7 @@ class ProductDetails extends Component {
         }
         return items;
     }
-    
+
     //Dynamically change stock label
     getStockText() {
         if (this.state.productQuantity === 0) {

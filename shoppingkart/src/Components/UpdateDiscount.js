@@ -1,8 +1,3 @@
-/**
-
- @author    Rashmika Ibrahimpatnam => B00832190
-
- **/
 import React, { useState } from 'react';
 import { Form, Toast } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -66,9 +61,9 @@ function UpdateDiscount() {
             })
             .then((response) => {
                 if (response.data.Status === "Success") {
-                    SetSuccess(true)                    
+                    SetSuccess(true)
                     makeEmpty()
-                    
+
                 }
                 else {
                     alert("A record with the promocode does not exist")

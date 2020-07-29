@@ -1,8 +1,3 @@
-/**
-
- @author    Rashmika Ibrahimpatnam => B00832190
-
- **/
 import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
 import '../CSS/Login.css';

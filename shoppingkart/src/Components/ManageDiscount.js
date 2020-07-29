@@ -1,8 +1,3 @@
-/**
-
- @author    Rashmika Ibrahimpatnam => B00832190
-
- **/
 import React, { useState } from 'react';
 import { Form, Toast } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
