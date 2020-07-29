@@ -40,10 +40,13 @@ class AdminUserHome extends React.Component{
     render() {
         return (
             <div className="container">
+                <br/>
+                <h3 align="center">Current users of Shopping Kart</h3>
+                <br/>
                 <table className="table">
                     <thead className="thead-dark">
                         <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">User ID</th>
                         <th scope="col">FirstName</th>
                         <th scope="col">LastName</th>
                         <th scope="col">Delete User?</th>
