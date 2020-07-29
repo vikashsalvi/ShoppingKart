@@ -92,7 +92,7 @@ class Checkout extends Component {
     await Axios.post(url, {
       username: storage.getItem("username"),
       orderItems: this.state.items,
-      grandTotal: this.findTotal(),
+      grandTotal: this.findTotal() - this.getDiscount()+ 5.66,
       orderStatus: "Confirmed"
     }).then(res => {
       var i;
