@@ -48,12 +48,12 @@ class Routes extends Component {
             <Switch>
                 <Route exact path='/' component={Home}/>
                 <AdminRoute exact path='/admin' component={AdminHome}/>
-                <PrivateRoute exact path='/createProduct' component={CreateProduct}/>
-                <PrivateRoute exact path='/removeProduct' component={DeleteProduct}/>
-                <PrivateRoute exact path='/updateProduct' component={UpdateProduct}/>
-                <PrivateRoute exact path='/manageDiscount' component={ManageDiscount}/>
-                <PrivateRoute exact path='/updateDiscount' component={UpdateDiscount}/>
-                <PrivateRoute exact path='/removeDiscount' component={DeleteDiscount}/>
+                <AdminRoute exact path='/createProduct' component={CreateProduct}/>
+                <AdminRoute exact path='/removeProduct' component={DeleteProduct}/>
+                <AdminRoute exact path='/updateProduct' component={UpdateProduct}/>
+                <AdminRoute exact path='/manageDiscount' component={ManageDiscount}/>
+                <AdminRoute exact path='/updateDiscount' component={UpdateDiscount}/>
+                <AdminRoute exact path='/removeDiscount' component={DeleteDiscount}/>
                 <Route exact path='/profile' component={Profile}/>
                 <Route exact path='/register' component={Register}/>
                 <Route exact path= '/login' component={Login}/>
