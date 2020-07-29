@@ -1,7 +1,3 @@
-/**
- @author    Bharat Bhargava => B00838511
- **/
-
 import React, { Component } from 'react';
 import { Form, Button, Col, } from 'react-bootstrap';
 import Axios from 'axios';
@@ -57,7 +53,7 @@ class AddReview extends Component {
                     user_name: myStorage.getItem("username"),
                     product_id: this.props.productId
                 };
-                Axios.post("https://csci-5709-web-24.herokuapp.com/review/putReview", payload)
+                Axios.post("http://localhost:5000/review/putReview", payload)
                     .then(res => {
                         alert("Review added");
                         this.props.parentProps.history.push('/');

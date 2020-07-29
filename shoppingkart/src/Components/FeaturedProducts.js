@@ -1,6 +1,3 @@
-/**
- @author    Vikash Salvi => B00838074
- **/
 import React, { Component } from "react";
 import Container from 'react-bootstrap/Container';
 import Product from "./ProductsSpec";
@@ -32,7 +29,8 @@ class FeaturedProducts extends Component {
     }
 
     async componentDidMount() {
-        const products  = await Axios.get("https://csci-5709-web-24.herokuapp.com/product/getTopProducts" );
+        let url = window.localStorage.getItem("location")?"http://localhost:5000/location/getTopProductsByLocation/"+window.localStorage.getItem("location") : "http://localhost:5000/product/getTopProducts";
+        const products  = await Axios.get(url);
         this.setState( {
             list: products.data.data
         })
@@ -64,11 +62,11 @@ class FeaturedProducts extends Component {
 
             <div className="row" >
                 {
-                    data.map((l) => (
-                        <div className="col-md-2 mt-4 ml-4">
+                    data.map((l, index) => (
+                        <div className="col-md-2 mt-4 ml-4" key={index}>
                             <Product text={l.productName}
                             img={l.imageURL}
-                            productID={l.productID} />
+                            productID={l.productID}/>
                         </div>
                     ))
                 }
@@ -78,7 +76,7 @@ class FeaturedProducts extends Component {
 
     render() {
         return (
-            <Container>
+            <Container id="featuredProducts">
             <div className="container-fluid">
 
                 {this.generateProductRow(this.state.list1)}

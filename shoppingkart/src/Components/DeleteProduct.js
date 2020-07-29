@@ -1,10 +1,3 @@
-/**
-
- @author    Hardik Dudhrejia => B00835071
-
- **/
-
-
 import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -21,10 +14,6 @@ function DeleteProduct() {
     const [product, setProduct] = useState(PRODUCT_INFO);
 
     const [success, SetSuccess] = useState(false);
-
-    const showtoast = () => SetSuccess(!success);
-
-
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -54,7 +43,7 @@ function DeleteProduct() {
 
             axios({
                 method: "POST",
-                url:"https://csci-5709-web-24.herokuapp.com/admin/deleteProduct",
+                url:"http://localhost:5000/admin/deleteProduct",
                 data:  PRODUCT_INFO
               }).then((response)=>{
                 if(response.data.Success){
@@ -64,7 +53,6 @@ function DeleteProduct() {
                     alert("The product ID does not exists")
                 }
               })
-            console.log(PRODUCT_INFO)
             SetSuccess(true)
         }
         else {

@@ -1,11 +1,3 @@
-/**
-
- @author    Hardik Dudhrejia => B00835071
-
- **/
-
-
-
 import React, { useState } from 'react';
 import { Form, Toast, Col } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -71,7 +63,7 @@ function UpdateProduct() {
 
             await axios({
                 method: "POST",
-                url:"https://csci-5709-web-24.herokuapp.com/admin/editProduct",
+                url:"http://localhost:5000/admin/editProduct",
                 data:  INITIALIZE_PRODUCTS
               }).then((response)=>{
                 if(response.data.Success===false)

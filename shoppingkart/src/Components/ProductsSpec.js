@@ -1,7 +1,3 @@
-/**
- @author    Vikash Salvi => B00838074
- **/
-
 import React from "react";
 import { Container, Card } from "react-bootstrap";
 import {withRouter} from "react-router-dom";

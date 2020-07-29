@@ -30,6 +30,13 @@ productRoute.get('/getProductDetails/:query', productController.getProductDetail
 //Route to get all products featured on main page
 productRoute.get('/getTopProducts', productController.getTopProducts);
 
+/**
+ @Route author Bharat Bhargava => B00838511
+ **/
+//Route to set product detail based on product id
+productRoute.post('/setProductDetails', productController.postProductDetails);
 
 // Exporting the routes
 module.exports = productRoute;
+
+

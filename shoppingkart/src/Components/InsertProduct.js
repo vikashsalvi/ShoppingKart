@@ -35,7 +35,6 @@ function CreateProduct() {
     }
 
     function checkEmpty() {
-        // const productid = document.getElementById('id');
         const prodname = document.getElementById('prodname');
         const price = document.getElementById('price');
         const desp = document.getElementById('desp');
@@ -69,7 +68,7 @@ function CreateProduct() {
 
             await axios({
                 method: "POST",
-                url:"https://csci-5709-web-24.herokuapp.com/admin/saveProduct",
+                url:"http://localhost:5000/admin/saveProduct",
                 data:  INITIALIZE_PRODUCTS
               }).then((response)=>{
                 if(response.data.Success===false)

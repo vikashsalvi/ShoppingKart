@@ -5,9 +5,12 @@ const app = express();
 const productRoute = require('./api/route/productRoute');
 const productReviewRoute = require('./api/route/productReviewRoute')
 const cartRoute = require('./api/route/cartRoute');
-const userRoute = require('./api/route/userRoute')
+const userRoute = require('./api/route/userRoute');
+const locationRoute = require('./api/route/locationRoute');
+const discountRoute = require('./api/route/discountRoute');
 const db = require('./api/db/connection');
 const adminProductRoute = require('./api/route/adminProductRoute')
+const helpRoute = require('./api/route/helpRoute')
 
 app.use(cors());
 
@@ -28,6 +31,9 @@ app.use('/product', productRoute);
 app.use('/review', productReviewRoute);
 app.use('/orders', cartRoute);
 app.use('/users', userRoute);
+app.use('/location', locationRoute);
+app.use('/help', helpRoute);
+app.use('/discounts',discountRoute);
 
 app.listen(process.env.PORT || 5000, function () {
     console.log('Express serve running on port 5000');

@@ -200,6 +200,15 @@
     display: block;
 }
 
+.location-button{
+    border: none;
+    outline: none !important;
+    background: none;
+    border-radius: 5px;
+    font-family: Arial, serif;
+    font-size: 20px;
+}
+
 @media only screen and (max-width: 1120px) {
 
     .search-bar{
