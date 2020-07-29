@@ -1,31 +1,30 @@
 {
   "files": {
-    "main.css": "/static/css/main.d4b029a8.chunk.css",
-    "main.js": "/static/js/main.0efb61bb.chunk.js",
-    "main.js.map": "/static/js/main.0efb61bb.chunk.js.map",
+    "main.css": "/static/css/main.6f7c028d.chunk.css",
+    "main.js": "/static/js/main.00ba4df3.chunk.js",
+    "main.js.map": "/static/js/main.00ba4df3.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.211326c3.js",
     "runtime-main.js.map": "/static/js/runtime-main.211326c3.js.map",
-    "static/css/2.af3c1da9.chunk.css": "/static/css/2.af3c1da9.chunk.css",
-    "static/js/2.15d8f038.chunk.js": "/static/js/2.15d8f038.chunk.js",
-    "static/js/2.15d8f038.chunk.js.map": "/static/js/2.15d8f038.chunk.js.map",
+    "static/css/2.5c0038b0.chunk.css": "/static/css/2.5c0038b0.chunk.css",
+    "static/js/2.b0f93d8d.chunk.js": "/static/js/2.b0f93d8d.chunk.js",
+    "static/js/2.b0f93d8d.chunk.js.map": "/static/js/2.b0f93d8d.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.51026251e97ac05bb6f8cdb920076d49.js": "/precache-manifest.51026251e97ac05bb6f8cdb920076d49.js",
+    "precache-manifest.d7f78a820f8b6bc08c44431872e65d3d.js": "/precache-manifest.d7f78a820f8b6bc08c44431872e65d3d.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.af3c1da9.chunk.css.map": "/static/css/2.af3c1da9.chunk.css.map",
-    "static/css/main.d4b029a8.chunk.css.map": "/static/css/main.d4b029a8.chunk.css.map",
-    "static/js/2.15d8f038.chunk.js.LICENSE.txt": "/static/js/2.15d8f038.chunk.js.LICENSE.txt",
+    "static/css/2.5c0038b0.chunk.css.map": "/static/css/2.5c0038b0.chunk.css.map",
+    "static/css/main.6f7c028d.chunk.css.map": "/static/css/main.6f7c028d.chunk.css.map",
+    "static/js/2.b0f93d8d.chunk.js.LICENSE.txt": "/static/js/2.b0f93d8d.chunk.js.LICENSE.txt",
     "static/media/AboutUs.css": "/static/media/customer.4ccaa1ea.png",
     "static/media/emptyCart.png": "/static/media/emptyCart.4e086c9a.png",
-    "static/media/paypal.png": "/static/media/paypal.83e34342.png",
     "static/media/slider1.jpg": "/static/media/slider1.b2d5f187.jpg",
     "static/media/slider2.jpg": "/static/media/slider2.d5c7bb0a.jpg",
     "static/media/slider3.jpg": "/static/media/slider3.3ffc9169.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.211326c3.js",
-    "static/css/2.af3c1da9.chunk.css",
-    "static/js/2.15d8f038.chunk.js",
-    "static/css/main.d4b029a8.chunk.css",
-    "static/js/main.0efb61bb.chunk.js"
+    "static/css/2.5c0038b0.chunk.css",
+    "static/js/2.b0f93d8d.chunk.js",
+    "static/css/main.6f7c028d.chunk.css",
+    "static/js/main.00ba4df3.chunk.js"
   ]
 }

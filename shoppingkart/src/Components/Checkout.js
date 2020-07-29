@@ -65,7 +65,7 @@ class Checkout extends Component {
 
   // get the user details for order confirmation
   async componentDidMount() {
-    const url = "https://csci-5709-web-24.herokuapp.com/orders/getUserDetails/" + storage.getItem('username');
+    const url = "http://localhost:5000/orders/getUserDetails/" + storage.getItem('username');
     const response = await Axios.get(url);
     if (response.data.Status === "Success") {
       this.setState({
@@ -79,7 +79,7 @@ class Checkout extends Component {
   async saveAddress() {
     document.getElementById("address").contentEditable = false;
 
-    const url = "https://csci-5709-web-24.herokuapp.com/orders/changeAddress/" + storage.getItem('username');
+    const url = "http://localhost:5000/orders/changeAddress/" + storage.getItem('username');
     await Axios.put(url, {
       username: storage.getItem('username'),
       address: document.getElementById("address").textContent,
@@ -162,7 +162,7 @@ class Checkout extends Component {
 
   // this function will remove unconfirmed order from dB once order is confirmed
   async removeOrder() {
-    const url = "https://csci-5709-web-24.herokuapp.com/orders/removeOrderData/" + storage.getItem("username") + "/unconfirmed";
+    const url = "http://localhost:5000/orders/removeOrderData/" + storage.getItem("username") + "/unconfirmed";
     await Axios.delete(url);
   }
 

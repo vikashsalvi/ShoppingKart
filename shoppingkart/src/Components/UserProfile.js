@@ -27,7 +27,7 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        axios.get("https://csci-5709-web-24.herokuapp.com/users/getuser/" + mystorage.getItem("username")).then((res) => {
+        axios.get("http://localhost:5000/users/getuser/" + mystorage.getItem("username")).then((res) => {
             console.log(res);
             if (res.data.Status === "Success") {
                 this.setState({
@@ -112,7 +112,7 @@ class Profile extends Component {
             this.setState({
                 isDisabled: true
             });
-            const url = "https://csci-5709-web-24.herokuapp.com/users/editprofile/" + document.getElementById("uname").value;
+            const url = "http://localhost:5000/users/editprofile/" + document.getElementById("uname").value;
             axios.put(url, {
                 firstname: document.getElementById("fname").value,
                 lastname: document.getElementById("lname").value,

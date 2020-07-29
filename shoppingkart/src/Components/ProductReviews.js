@@ -16,7 +16,7 @@ class ProductReviews extends Component {
     async componentDidMount() {
         let id = this.props.productId + ""
         // To get reviews data from all users
-        await Axios.get("https://csci-5709-web-24.herokuapp.com/review/getProductReview/" + id).then(
+        await Axios.get("http://localhost:5000/review/getProductReview/" + id).then(
             res => {
                 this.setState({
                     productReviews: res.data.data

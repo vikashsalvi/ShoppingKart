@@ -43,7 +43,7 @@ function DeleteProduct() {
 
             axios({
                 method: "POST",
-                url:"https://csci-5709-web-24.herokuapp.com/admin/deleteProduct",
+                url:"http://localhost:5000/admin/deleteProduct",
                 data:  PRODUCT_INFO
               }).then((response)=>{
                 if(response.data.Success){

@@ -132,10 +132,10 @@ class Navigation extends Component {
         //     storage.getItem("location") +
         //     "/" +
         //     val
-        //   : "https://csci-5709-web-24.herokuapp.com/product/getSearchedProduct/" +
+        //   : "http://localhost:5000/product/getSearchedProduct/" +
         //     val;
 
-        let url = "https://csci-5709-web-24.herokuapp.com/product/getSearchedProduct/" + val;
+        let url = "http://localhost:5000/product/getSearchedProduct/" + val;
 
         const data = await Axios.get(url);
         this.setState({
@@ -163,10 +163,10 @@ class Navigation extends Component {
       //     storage.getItem("location") +
       //     "/" +
       //     userInp
-      //   : "https://csci-5709-web-24.herokuapp.com/product/getSuggestion/" +
+      //   : "http://localhost:5000/product/getSuggestion/" +
       //     userInp;
 
-      let url = "https://csci-5709-web-24.herokuapp.com/product/getSuggestion/" + userInp;
+      let url = "http://localhost:5000/product/getSuggestion/" + userInp;
 
       const data = await Axios.get(url);
       suggestion = data.data.data;

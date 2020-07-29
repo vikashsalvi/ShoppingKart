@@ -56,7 +56,7 @@ class Help extends Component {
         const userInp = e.target.value;
         let suggestion = [];
         if (userInp.length > 0) {
-            const data = await Axios.get("https://csci-5709-web-24.herokuapp.com/help/getSuggestion/" + userInp);
+            const data = await Axios.get("http://localhost:5000/help/getSuggestion/" + userInp);
             suggestion = data.data.data;
         }
         this.setState({
@@ -84,7 +84,7 @@ class Help extends Component {
         const id = e.target.id;
         const que = e.target.innerText;
 
-        const data = await Axios.get("https://csci-5709-web-24.herokuapp.com/help/getAnswer/" + id);
+        const data = await Axios.get("http://localhost:5000/help/getAnswer/" + id);
         const ans = data.data.data;
 
         this.selected.push({question: que, answer: ans});
