@@ -15,6 +15,8 @@ import AdminHome from "./AdminHome"
 import CreateProduct from "./InsertProduct"
 import DeleteProduct from "./DeleteProduct"
 import UpdateProduct from "./UpdateProduct"
+import AdminUserHome from "./AdminUserHome";
+import AdminInventoryHome from "./AdminInventoryHome"
 import ManageDiscount from "./ManageDiscount"
 import UpdateDiscount from "./UpdateDiscount"
 import DeleteDiscount from "./DeleteDiscount"
@@ -43,6 +45,8 @@ class Routes extends Component {
             <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route exact path='/admin' component={AdminHome}/>
+                <Route exact path='/adminUserManagement' component={AdminUserHome}/>
+                <Route exact path='/adminInventoryManagement' component={AdminInventoryHome}/>      
                 <Route exact path='/createProduct' component={CreateProduct}/>
                 <Route exact path='/removeProduct' component={DeleteProduct}/>
                 <Route exact path='/updateProduct' component={UpdateProduct}/>
