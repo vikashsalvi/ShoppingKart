@@ -87,29 +87,49 @@ class Checkout extends Component {
     });
   }
 
+  async proceedWithOrder() {
+    const url = "https://csci-5709-web-24.herokuapp.com/orders/addToCart/";
+    await Axios.post(url, {
+      username: storage.getItem("username"),
+      orderItems: this.state.items,
+      grandTotal: this.findTotal(),
+      orderStatus: "Confirmed"
+    }).then(res => {
+      var i;
+      var productIds = [];
+      for (i = 0; i < this.state.items.length; i++) {
+        productIds[i] = { id: this.state.items[i].id, cartQuan: this.state.items[i].quantity };
+      }
+      Axios.post("https://csci-5709-web-24.herokuapp.com/product/setProductDetails/", {
+        productIds: productIds
+      }).then(res => {
+      });
+      this.props.history.push({
+        pathname: '/'
+      });
+      alert("Order Placed Successfully");
+    });
+  }
   async placeOrder() {
     if (this.checkEmpty()) {
-      const url = "http://localhost:5000/orders/addToCart/";
-      await Axios.post(url, {
-        username: storage.getItem("username"),
-        orderItems: this.state.items,
-        grandTotal: this.findTotal(),
-        orderStatus: "Confirmed"
-      }).then(res => {
-        var i;
-        var productIds = [];
-        for (i = 0; i < this.state.items.length; i++) {
-          productIds[i] = { id: this.state.items[i].id, cartQuan: this.state.items[i].quantity };
-        }
-        Axios.post("http://localhost:5000/product/setProductDetails/", {
-          productIds: productIds
-        }).then(res => {
-        });
-        this.props.history.push({
-          pathname: '/'
-        });
-        alert("Order Placed Successfully");
-      });
+      for (var i=0; i<this.state.items.length;i++){
+        await Axios.get("https://csci-5709-web-24.herokuapp.com/product/getProductDetails/" + this.state.items[i].id).then(
+            res => {
+              if(res.data != null) {
+                if(this.state.items[i].quantity > res.data.data[0].productQuantity){
+                  alert(this.state.items[i].name + " currently unavailable");
+                  i = this.state.items.length;                  
+                } else {
+                  if( i === (this.state.items.length -1)){
+                    this.proceedWithOrder();
+                  }                   
+                }
+              }
+              
+            }
+        );
+      }
+      
     }
 
 
