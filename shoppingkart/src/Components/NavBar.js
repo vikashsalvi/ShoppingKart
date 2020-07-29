@@ -22,7 +22,6 @@ class Navigation extends Component {
       location: "",
       message: "",
     };
-
     this.cities = ["halifax", "quebec", "toronto", "calgary", "victoria"];
     this.side_panel = [
       { name: "Home", url: "", cname: "item", linkClass: "link" },

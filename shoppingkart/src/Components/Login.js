@@ -114,6 +114,7 @@ class Login extends Component {
                             window.localStorage.setItem("userid", res.data.userid)
                             alert("Proceed to Admin Panel")
                             this.props.history.push('/admin');
+                            window.location.reload();
                         } else {
                             window.localStorage.setItem("username", this.state.uname.text);
                             window.localStorage.setItem("token", res.data.token)
