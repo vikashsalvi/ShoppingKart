@@ -48,7 +48,6 @@ const getQuestionSuggestion = (req, res) => {
 const getAnswer = (req, res) => {
     helpModel.find({"id" : req.params.query}).exec()
         .then(data => {
-            console.log(data);
             res.json({ Status :"Success", data : data[0].answer});
         })
         .catch(err => {

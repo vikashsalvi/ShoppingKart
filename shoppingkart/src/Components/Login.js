@@ -100,7 +100,7 @@ class Login extends Component {
                 pass: this.state.pass.text
             };
 
-            axios.post("https://csci-5709-web-24.herokuapp.com/users/login", loginUser)
+            axios.post("http://localhost:5000/users/login", loginUser)
                 .then(res => {
                     const response = res.data;
                     if (response) {

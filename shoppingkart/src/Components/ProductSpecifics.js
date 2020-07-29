@@ -13,7 +13,7 @@ class ProductSpecifics extends Component {
 
     async componentDidMount() {
         let id = this.props.productId + ""
-        let url= window.localStorage.getItem('location')?"http://localhost:5000/location/getProductDetailsByLocation/"+window.localStorage.getItem('location')+"/"+id:"https://csci-5709-web-24.herokuapp.com/product/getProductDetails/" + id;
+        let url= window.localStorage.getItem('location')?"http://localhost:5000/location/getProductDetailsByLocation/"+window.localStorage.getItem('location')+"/"+id:"http://localhost:5000/product/getProductDetails/" + id;
         const productData = await Axios.get(url);
         this.setState({
             productDetails: productData.data.data[0].productDetails
