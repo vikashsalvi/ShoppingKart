@@ -11,7 +11,7 @@ const discountRoute = require('./api/route/discountRoute');
 const db = require('./api/db/connection');
 const adminProductRoute = require('./api/route/adminProductRoute')
 const helpRoute = require('./api/route/helpRoute')
-
+const ordersRoute = require('./api/route/ordersRoute')
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -34,6 +34,7 @@ app.use('/users', userRoute);
 app.use('/location', locationRoute);
 app.use('/help', helpRoute);
 app.use('/discounts',discountRoute);
+app.use('/orders',ordersRoute);
 
 app.listen(process.env.PORT || 5000, function () {
     console.log('Express serve running on port 5000');
