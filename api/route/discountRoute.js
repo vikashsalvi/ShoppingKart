@@ -13,5 +13,7 @@ discountRoute.get('/getdiscount/:promocode',discountController.getdiscount);
 discountRoute.post('/managediscounts',discountController.postdiscount);
 discountRoute.put('/updatediscount/:promocode',discountController.updatediscount);
 discountRoute.post('/deletediscount',discountController.deletediscount);
+discountRoute.get('/',discountController.getalldiscount);
+
 
 module.exports = discountRoute;
