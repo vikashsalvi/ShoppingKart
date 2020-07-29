@@ -10,5 +10,5 @@ const adminProductController = require('../controller/adminProductController')
 adminRoute.post("/saveProduct",adminProductController.saveProduct)
 adminRoute.post("/deleteProduct",adminProductController.deleteProduct)
 adminRoute.post("/editProduct",adminProductController.updateProduct)
-
+adminRoute.get("/getAllUsers",adminProductController.getAllUsers)
 module.exports = adminRoute;

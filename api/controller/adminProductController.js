@@ -7,6 +7,7 @@
 
 const express = require('express')
 const product = require("../model/productModel");
+const users = require("../model/userModel")
 
 
 // This is the API to save a new product to the database. It will check if the new productID already
@@ -85,7 +86,19 @@ const updateProduct = async (req, res) => {
     }
 }
 
+const getAllUsers = async (req, res) => {
+    try{
+
+    const allUsers = await users.find()
+    res.json(allUsers)
+    }catch(err){
+        console.log(err)
+    }
+
+}
+
 
 module.exports.saveProduct = saveProduct
 module.exports.deleteProduct = deleteProduct
 module.exports.updateProduct = updateProduct
+module.exports.getAllUsers = getAllUsers
