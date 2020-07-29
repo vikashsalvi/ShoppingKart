@@ -12,17 +12,14 @@ import '../CSS/home.css'
 class AdminHome extends React.Component{
     render(){
         return(
-            <div align="right" className="container" id="main-tag">
+            <div align="center" className="container" id="main-tag">
             <br/>
                 <div className="row">
-                    <div className="col-sm-3">
-                        <Link to="/createProduct"><button className="btn btn-primary">Insert Product</button></Link>
+                    <div className="col-sm-5">
+                        <Link to="/adminUserManagement"><button className="btn btn-primary">User Management</button></Link>
                     </div>
-                    <div className="col-sm-3">
-                       <Link to="/updateProduct"><button className="btn btn-primary">Update Product</button></Link>
-                    </div>
-                    <div className="col-sm-3">
-                    <Link to="removeProduct"> <button className="btn btn-primary">Delete Product</button></Link>
+                    <div className="col-sm-5">
+                       <Link to="/adminInventoryManagement"><button className="btn btn-primary">Inventory Management</button></Link>
                     </div>
                 </div>
             </div>
