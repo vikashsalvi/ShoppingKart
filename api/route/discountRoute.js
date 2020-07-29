@@ -10,5 +10,8 @@ const discountController = require("../controller/discountController");
 
 
 discountRoute.get('/getdiscount/:promocode',discountController.getdiscount);
+discountRoute.post('/managediscounts',discountController.postdiscount);
+discountRoute.put('/updatediscount/:promocode',discountController.updatediscount);
+discountRoute.post('/deletediscount',discountController.deletediscount);
 
 module.exports = discountRoute;

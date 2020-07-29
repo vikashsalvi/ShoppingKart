@@ -77,7 +77,7 @@ class Checkout extends Component {
   }
 
   makeEmpty() {
-    const fields = document.getElementById("discountcode").value = ""
+    document.getElementById("discountcode").value = ""
 }
 
   // get the user details for order confirmation

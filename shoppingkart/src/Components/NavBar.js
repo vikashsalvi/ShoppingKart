@@ -212,7 +212,7 @@ class Navigation extends Component {
 
   handleLocationSubmission() {
     let location = document.getElementById("location").value;
-    if (location == null || location == "") {
+    if (location === null || location === "") {
       storage.removeItem("location");
       this.handleClose();
       window.location.reload(false);

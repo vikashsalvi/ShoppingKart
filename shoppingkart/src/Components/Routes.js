@@ -15,6 +15,9 @@ import AdminHome from "./AdminHome"
 import CreateProduct from "./InsertProduct"
 import DeleteProduct from "./DeleteProduct"
 import UpdateProduct from "./UpdateProduct"
+import ManageDiscount from "./ManageDiscount"
+import UpdateDiscount from "./UpdateDiscount"
+import DeleteDiscount from "./DeleteDiscount"
 
 const user = window.localStorage.getItem("username");
 let status = false;
@@ -38,10 +41,13 @@ class Routes extends Component {
         return (
             <Switch>
                 <Route exact path='/' component={Home}/>
-                <Route exact path='/admin' component={AdminHome}/>
-                <Route exact path='/createProduct' component={CreateProduct}/>
-                <Route exact path='/removeProduct' component={DeleteProduct}/>
-                <Route exact path='/updateProduct' component={UpdateProduct}/>
+                <PrivateRoute exact path='/admin' component={AdminHome}/>
+                <PrivateRoute exact path='/createProduct' component={CreateProduct}/>
+                <PrivateRoute exact path='/removeProduct' component={DeleteProduct}/>
+                <PrivateRoute exact path='/updateProduct' component={UpdateProduct}/>
+                <PrivateRoute exact path='/manageDiscount' component={ManageDiscount}/>
+                <PrivateRoute exact path='/updateDiscount' component={UpdateDiscount}/>
+                <PrivateRoute exact path='/removeDiscount' component={DeleteDiscount}/>
                 <Route exact path='/profile' component={Profile}/>
                 <Route exact path='/register' component={Register}/>
                 <Route exact path= '/login' component={Login}/>
