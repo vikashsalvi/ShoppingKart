@@ -1,3 +1,8 @@
+/**
+
+ @author    Rashmika Ibrahimpatnam => B00832190
+
+ **/
 import React, { useState } from 'react';
 import { Form, Toast, Col } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -35,7 +40,6 @@ function CreateProduct() {
     }
 
     function checkEmpty() {
-        // const productid = document.getElementById('id');
         const prodname = document.getElementById('prodname');
         const price = document.getElementById('price');
         const desp = document.getElementById('desp');

@@ -15,6 +15,9 @@ import AdminHome from "./AdminHome"
 import CreateProduct from "./InsertProduct"
 import DeleteProduct from "./DeleteProduct"
 import UpdateProduct from "./UpdateProduct"
+import ManageDiscount from "./ManageDiscount"
+import UpdateDiscount from "./UpdateDiscount"
+import DeleteDiscount from "./DeleteDiscount"
 
 const user = window.localStorage.getItem("username");
 let status = false;
@@ -31,17 +34,26 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
         : (<Redirect to={{pathname: "/login"}}/>)
         )} />
     )
-
+const AdminRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render = {(props) => (
+        user.toLowerCase() === "admin"
+        ? (<Component {...props} />)
+        : (<Redirect to={{pathname: "/login"}}/>)
+        )} />
+)
 class Routes extends Component {
 
     render() {
         return (
             <Switch>
                 <Route exact path='/' component={Home}/>
-                <Route exact path='/admin' component={AdminHome}/>
-                <Route exact path='/createProduct' component={CreateProduct}/>
-                <Route exact path='/removeProduct' component={DeleteProduct}/>
-                <Route exact path='/updateProduct' component={UpdateProduct}/>
+                <AdminRoute exact path='/admin' component={AdminHome}/>
+                <AdminRoute exact path='/createProduct' component={CreateProduct}/>
+                <AdminRoute exact path='/removeProduct' component={DeleteProduct}/>
+                <AdminRoute exact path='/updateProduct' component={UpdateProduct}/>
+                <AdminRoute exact path='/manageDiscount' component={ManageDiscount}/>
+                <AdminRoute exact path='/updateDiscount' component={UpdateDiscount}/>
+                <AdminRoute exact path='/removeDiscount' component={DeleteDiscount}/>
                 <Route exact path='/profile' component={Profile}/>
                 <Route exact path='/register' component={Register}/>
                 <Route exact path= '/login' component={Login}/>

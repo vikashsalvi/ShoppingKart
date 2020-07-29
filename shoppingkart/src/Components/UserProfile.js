@@ -1,3 +1,8 @@
+/**
+
+ @author    Rashmika Ibrahimpatnam => B00832190
+
+ **/
 import React, { Component } from "react";
 import '../CSS/UserProfile.css';
 import axios from 'axios';

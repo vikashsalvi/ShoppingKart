@@ -22,10 +22,6 @@ function DeleteProduct() {
 
     const [success, SetSuccess] = useState(false);
 
-    const showtoast = () => SetSuccess(!success);
-
-
-
     function handleChange(event) {
         const { name, value } = event.target;
 
@@ -64,7 +60,6 @@ function DeleteProduct() {
                     alert("The product ID does not exists")
                 }
               })
-            console.log(PRODUCT_INFO)
             SetSuccess(true)
         }
         else {
