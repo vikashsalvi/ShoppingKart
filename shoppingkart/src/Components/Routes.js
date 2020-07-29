@@ -34,14 +34,20 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
         : (<Redirect to={{pathname: "/login"}}/>)
         )} />
     )
-
+const AdminRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render = {(props) => (
+        user.toLowerCase() === "admin"
+        ? (<Component {...props} />)
+        : (<Redirect to={{pathname: "/login"}}/>)
+        )} />
+)
 class Routes extends Component {
 
     render() {
         return (
             <Switch>
                 <Route exact path='/' component={Home}/>
-                <PrivateRoute exact path='/admin' component={AdminHome}/>
+                <AdminRoute exact path='/admin' component={AdminHome}/>
                 <PrivateRoute exact path='/createProduct' component={CreateProduct}/>
                 <PrivateRoute exact path='/removeProduct' component={DeleteProduct}/>
                 <PrivateRoute exact path='/updateProduct' component={UpdateProduct}/>
