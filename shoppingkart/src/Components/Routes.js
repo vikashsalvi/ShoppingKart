@@ -15,15 +15,12 @@ import AdminHome from "./AdminHome"
 import CreateProduct from "./InsertProduct"
 import DeleteProduct from "./DeleteProduct"
 import UpdateProduct from "./UpdateProduct"
-<<<<<<< HEAD
 import AdminUserHome from "./AdminUserHome";
 import AdminInventoryHome from "./AdminInventoryHome"
-=======
 import ManageDiscount from "./ManageDiscount"
 import UpdateDiscount from "./UpdateDiscount"
 import DeleteDiscount from "./DeleteDiscount"
 import DiscountData from "./DiscountData"
->>>>>>> f7d9d3bb405779c2e327b29f88aba682afbfc3a5
 
 const user = window.localStorage.getItem("username");
 let status = false;
