@@ -9,6 +9,11 @@
 @author    Bharat Bhargava => B00838511
 
 **/
+/**
+
+@author    Rashmika Ibrahimpatnam => B00832190
+
+**/
 
 import React, { Component } from "react";
 import { Card, CardDeck } from "react-bootstrap";
@@ -35,7 +40,9 @@ class Checkout extends Component {
     focus: '',
     name: '',
     number: '',
-    showCredInfo: false
+    showCredInfo: false,
+    discount: "",
+    showdiscount: false
   };
 
 
@@ -55,6 +62,23 @@ class Checkout extends Component {
       );
     }
   }
+
+  getDiscount() {
+
+    let discount;
+    if (this.state.discount === "") {
+      discount = 0
+    }
+    else {
+      discount = (parseFloat(this.state.discount) / 100) * this.findTotal()
+    }
+    return discount;
+
+  }
+
+  makeEmpty() {
+    const fields = document.getElementById("discountcode").value = ""
+}
 
   // get the user details for order confirmation
   async componentDidMount() {
@@ -112,6 +136,25 @@ class Checkout extends Component {
     storage.removeItem('tempCart');
     storage.removeItem('id');
 
+  }
+
+  //this function will apply discount for the order based on the promocode
+  async applyDiscount() {
+    let current = this;
+    const url = "http://localhost:5000/discounts/getdiscount/" + document.getElementById("discountcode").value;
+    await Axios.get(url).then(function (response) {
+      if (response.data.Status === "Success" && response.data.data.length > 0) {
+        current.setState({
+          discount: response.data.data[0].discount,
+          showdiscount: true
+        });
+        alert("applied "+ current.state.discount + "% discount")
+      }
+      else{
+        alert("No discount tagged to the promocode")
+        current.makeEmpty()
+      }
+    }).catch(err => { console.log(err) });
   }
 
   // this function will remove unconfirmed order from dB once order is confirmed
@@ -172,7 +215,7 @@ class Checkout extends Component {
     }
   }
 
-  render() {
+  render() {    
     return (
       <div>
         <div>
@@ -326,6 +369,16 @@ class Checkout extends Component {
                 <p className="right-div-mainTitle"> Order summary</p>
               </div>
               <div>{this.getSubTotal()}</div>
+              <div>
+              {
+                    this.state.showdiscount && (
+                      <div className="totalDivOrder">
+                        <span className="totalDivspan"> Discount: </span>
+                        <span className="totalDivValue"> ${this.getDiscount()}  </span>
+                      </div>
+                    )
+              }
+              </div>
               <div className="totalDivOrder">
                 <span className="totalDivspan">Delivery Charges:</span>
                 <span className="totalDivValue"> $5.66</span>
@@ -333,7 +386,7 @@ class Checkout extends Component {
               <div className="totalDivOrder">
                 <span className="totalDivspan grandTotal"> Grand Total:</span>
                 <span className="totalDivValue grandTotal">
-                  ${this.findTotal() + 5.66}
+                  ${this.findTotal() - this.getDiscount() + 5.66 }
                 </span>
               </div>
               <div className="discountDiv">
@@ -344,9 +397,13 @@ class Checkout extends Component {
                   <input
                     type="text"
                     name="discount"
+                    id="discountcode"
                     className="discountInput"
+
                   />
-                  <button className="discountButton">Apply</button>
+                  <br />
+                  <br />
+                  <button className="discountButton" onClick={() => this.applyDiscount()}>Apply</button>
                 </div>
               </div>
               <div className="checkout-div">
