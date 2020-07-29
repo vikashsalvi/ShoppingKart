@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Toast } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
 import '../CSS/deleteprod.css';
 import axios from 'axios';
@@ -14,6 +14,10 @@ function DeleteProduct() {
     const [product, setProduct] = useState(PRODUCT_INFO);
 
     const [success, SetSuccess] = useState(false);
+
+    const showtoast = () => {
+        SetSuccess(!success)
+    };
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -47,13 +51,13 @@ function DeleteProduct() {
                 data:  PRODUCT_INFO
               }).then((response)=>{
                 if(response.data.Success){
-                    alert("ProductsSpec deleted successfully")
+                    console.log("ProductsSpec deleted successfully")
+                    SetSuccess(true)
                 }
                 else{
                     alert("The product ID does not exists")
                 }
               })
-            SetSuccess(true)
         }
         else {
             SetSuccess(false);
@@ -81,10 +85,16 @@ function DeleteProduct() {
             <div className="form_area">
                 <h1>Delete an existing product</h1>
                 <Form method="post">
+                    <Toast show={success} onClose={showtoast} className="toast-box">
+                        <Toast.Header>
+                            <strong className="mr-auto">Success!!!</strong>
+                        </Toast.Header>
+                        <Toast.Body>Product has been deleted</Toast.Body>
+                    </Toast>
                     <Form.Group>
                         <input
                             name="id"
-                            label="id"
+                            label={product}
                             placeholder="ProductsSpec ID"
                             type="number"
                             id="id"
