@@ -88,16 +88,16 @@ class ProductDetails extends Component {
         });
 
         if (found) {
-            productArray[count].quantity += 1;
-            productArray[count].totalPrice = parseInt(productArray[count].totalPrice) + parseInt(this.state.productPrice);
+            productArray[count].quantity += parseInt(document.getElementById("quantitySelectBox").value);
+            productArray[count].totalPrice = parseInt(productArray[count].totalPrice) + (parseInt(this.state.productPrice) * parseInt(document.getElementById("quantitySelectBox").value));
         } else {
             productArray.push({
                 id: this.productID,
                 name: this.state.productName,
                 img: this.state.productUrl,
-                quantity: 1,
+                quantity: parseInt(document.getElementById("quantitySelectBox").value),
                 price: parseInt(this.state.productPrice),
-                totalPrice: parseInt(this.state.productPrice)
+                totalPrice: (parseInt(document.getElementById("quantitySelectBox").value) * parseInt(this.state.productPrice))
             });
         }
         window.localStorage.setItem('tempCart', JSON.stringify(productArray));

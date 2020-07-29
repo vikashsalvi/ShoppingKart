@@ -88,7 +88,7 @@ class Checkout extends Component {
   }
 
   async proceedWithOrder() {
-    const url = "https://csci-5709-web-24.herokuapp.com/orders/addToCart/";
+    const url = "http://localhost:5000/orders/addToCart/";
     await Axios.post(url, {
       username: storage.getItem("username"),
       orderItems: this.state.items,
@@ -100,7 +100,7 @@ class Checkout extends Component {
       for (i = 0; i < this.state.items.length; i++) {
         productIds[i] = { id: this.state.items[i].id, cartQuan: this.state.items[i].quantity };
       }
-      Axios.post("https://csci-5709-web-24.herokuapp.com/product/setProductDetails/", {
+      Axios.post("http://localhost:5000/product/setProductDetails/", {
         productIds: productIds
       }).then(res => {
       });
@@ -113,7 +113,7 @@ class Checkout extends Component {
   async placeOrder() {
     if (this.checkEmpty()) {
       for (var i=0; i<this.state.items.length;i++){
-        await Axios.get("https://csci-5709-web-24.herokuapp.com/product/getProductDetails/" + this.state.items[i].id).then(
+        await Axios.get("http://localhost:5000/product/getProductDetails/" + this.state.items[i].id).then(
             res => {
               if(res.data != null) {
                 if(this.state.items[i].quantity > res.data.data[0].productQuantity){
