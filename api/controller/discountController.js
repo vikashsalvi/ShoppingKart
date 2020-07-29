@@ -7,6 +7,19 @@
 //load the model
 const Discount = require("../model/discountModel");
 
+//get all discount data
+const getalldiscount = (req,res ) => {
+    console.log("in controller")
+    Discount.find().exec()
+    .then(data => {
+        console.log(data)
+        res.json({ Status :"Success", data : data});
+    })
+    .catch(err => {
+        console.log("Failure:" + err);
+    })
+}
+
 //get request for specific promo code
 const getdiscount = (req, res) => {
     Discount.find({ promocode: req.params.promocode }).exec()
@@ -79,3 +92,4 @@ module.exports.getdiscount = getdiscount;
 module.exports.postdiscount = postdiscount;
 module.exports.updatediscount = updatediscount;
 module.exports.deletediscount = deletediscount;
+module.exports.getalldiscount = getalldiscount;

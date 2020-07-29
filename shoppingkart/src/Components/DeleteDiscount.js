@@ -77,12 +77,15 @@ function DeleteDiscount() {
             <div align="right" className="container">
             <br/>
                 <div className="row">
-                    <div className="col-sm-4">
+                    <div className="col-sm-3">
                         <Link to="/manageDiscount"><button className="btn btn-primary">Create Discount</button></Link>
                     </div>
-                    <div className="col-sm-4">
+                    <div className="col-sm-3">
                         <Link to="/updateDiscount"><button className="btn btn-primary">Update Discount</button></Link>
-                    </div>
+                    </div>  
+                    <div className="col-sm-3">
+                        <Link to="/alldiscounts"> <button className="btn btn-primary">Discount Data</button></Link>
+                    </div>                  
                 </div>
             </div>
 

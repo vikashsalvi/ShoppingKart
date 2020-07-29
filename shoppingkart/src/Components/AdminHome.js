@@ -3,6 +3,15 @@ import {Link} from 'react-router-dom'
 import '../CSS/home.css'
 
 class AdminHome extends React.Component{
+
+    componentDidMount(){
+        if((localStorage.getItem("username") !== null) && (localStorage.getItem("username").toLowerCase() === "admin")){
+            this.props.history.push('/admin')
+        }
+        else{
+            this.props.history.push('/login')
+        }
+    }
     render(){
         return(
             <div align="right" className="container" id="main-tag">

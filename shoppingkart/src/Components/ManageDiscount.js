@@ -22,8 +22,6 @@ function CreateDiscount() {
         SetSuccess(!success)
     };
 
-
-
     function handleChange(event) {
         const { name, value } = event.target;
 
@@ -85,11 +83,14 @@ function CreateDiscount() {
                 <br />
                 <div className="row">
 
-                    <div className="col-sm-4">
+                    <div className="col-sm-3">
                         <Link to="/updateDiscount"><button className="btn btn-primary">Update Discount</button></Link>
                     </div>
-                    <div className="col-sm-4">
+                    <div className="col-sm-3">
                         <Link to="removeDiscount"> <button className="btn btn-primary">Delete Discount</button></Link>
+                    </div>
+                    <div className="col-sm-3">
+                        <Link to="/alldiscounts"> <button className="btn btn-primary">Discount Data</button></Link>
                     </div>
                 </div>
             </div>
