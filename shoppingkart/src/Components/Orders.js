@@ -77,6 +77,16 @@ class Orders extends Component {
                 </tbody>
             </Table>)
         }
+
+        if(tab.length == 0){
+            tab.push(
+                <div >
+                    <br />
+                    <p>You dont have orders yet</p>
+                    <br />
+                </div>
+            )
+        }
         
         return tab;
     }
