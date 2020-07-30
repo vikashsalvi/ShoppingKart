@@ -86,13 +86,11 @@ const getTopProducts = (req, res) => {
  **/
 const postProductDetails = (req, res) => {
     let productIdList = req.body.productIds;
-    for (var i = 0; i < productIdList.length; i++) {
+    for (let i = 0; i < productIdList.length; i++) {
         let product = productIdList[i];
         productModel.findOne({ 'productID': product.id })
             .then(data => {
                 let productInfo = data;
-                console.log(productInfo);
-                console.log(product.cartQuan);
                 productInfo.productQuantity = productInfo['productQuantity'] - parseInt(product.cartQuan);
                 productModel.updateOne(
                     { 'productID': product.id },
