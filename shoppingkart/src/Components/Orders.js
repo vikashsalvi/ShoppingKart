@@ -1,7 +1,6 @@
 import React,{Component} from 'react'
 import Container from 'react-bootstrap/Container';
-import productImage from '../Images/ProductPlaceHolder.jpg'
-import { Table, Card, Col, Image, Button, Tab } from 'react-bootstrap';
+import { Table, Card, Col, Image, Button} from 'react-bootstrap';
 import '../CSS/order.css'
 import {withRouter} from "react-router-dom";
 import Axios from "axios";
@@ -22,27 +21,26 @@ class Orders extends Component {
         if(user === "" || user === undefined){
             this.props.history.push('/')
         }else{
-            let tab = [];
             let url = "http://localhost:5000/orders/getOrders"
-            const productData =Axios.post(url,{
+            Axios.post(url,{
                 username: storage.getItem("username")
             }).then(data => {
                 this.setState({
                     orders : data.data.data
                 })
             });
-            
-            
+
+
         }
-        
+
     }
-    
+
 
     setOrderTable() {
         let tab = []
         for(let order in this.state.orders){
             tab.push(
-            <Table bordered> 
+            <Table bordered>
                 <tbody>
                 <tr>
                     <th style={{"background":"darkcyan"}}>Order Status <p> {this.state.orders[order].orderStatus}</p></th>
@@ -63,7 +61,7 @@ class Orders extends Component {
                     </Col>
                     <td style={{"background":"white"}}>
                         <p>{or.name}</p>
-                        
+
                     </td>
                     <td style={{"background":"white"}}>
                         <Button onClick={buyNow}
@@ -75,12 +73,12 @@ class Orders extends Component {
                 </tr>
                     )
                 })}
-                
+
                 </tbody>
             </Table>)
         }
 
-        if(tab.length == 0){
+        if(tab.length === 0){
             tab.push(
                 <div >
                     <br />
@@ -89,14 +87,14 @@ class Orders extends Component {
                 </div>
             )
         }
-        
+
         return tab;
     }
 
     componentDidUpdate(){
-        
+
     }
-    
+
     render() {
         return (
             <div className="wrapper">

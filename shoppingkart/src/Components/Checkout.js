@@ -10,9 +10,6 @@ import Cards from 'react-credit-cards';
 let storage = window.localStorage;
 
 class Checkout extends Component {
-  constructor(props) {
-    super(props);
-  }
   state = {
     items: this.props.location.data,
     firstname: "",
@@ -112,24 +109,24 @@ class Checkout extends Component {
   }
   async placeOrder() {
     if (this.checkEmpty()) {
-      for (var i=0; i<this.state.items.length;i++){
+      for (let i=0; i<this.state.items.length;i++){
         await Axios.get("http://localhost:5000/product/getProductDetails/" + this.state.items[i].id).then(
             res => {
               if(res.data != null) {
                 if(this.state.items[i].quantity > res.data.data[0].productQuantity){
                   alert(this.state.items[i].name + " currently unavailable");
-                  i = this.state.items.length;                  
+                  i = this.state.items.length;
                 } else {
                   if( i === (this.state.items.length -1)){
                     this.proceedWithOrder();
-                  }                   
+                  }
                 }
               }
-              
+
             }
         );
       }
-      
+
     }
 
 
@@ -334,7 +331,7 @@ class Checkout extends Component {
                   ) : null}
                   <div style={{ display: "flex", padding: "5px 5px 5px 5px" }}>
                     <input type="radio" value="COD" name="payment" id="codpayment" onClick={() => this.hideCard()} />
-                    <img src={COD} style={{ height: "100px", width: "100px" }} />
+                    <img src={COD} style={{ height: "100px", width: "100px" }} alt={"test"}/>
                     Cash On Delivery
                     <div className="radio-button-img" alt="test" />
                   </div>

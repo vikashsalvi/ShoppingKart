@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import '../CSS/ProductRating.css';
-import AddReview from './AddReview'
 import Axios from "axios";
 
 let count = 0;
