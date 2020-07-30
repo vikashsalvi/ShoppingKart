@@ -12,7 +12,8 @@ class AddReview extends Component {
             product_description: '',
         };
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this)
+        this.handleChange = this.handleChange.bind(this);
+        debugger;
     }
 
 
@@ -27,8 +28,8 @@ class AddReview extends Component {
 
     // To check if rating and description are filled by the user
     checkEmpty() {
-        const rating = document.getElementById('rating');
-        const desp = document.getElementById('desp');
+        const rating = document.getElementById('rating_'+this.props.orderId);
+        const desp = document.getElementById('desp_'+this.props.orderId);
 
         if (rating.value === "") {
             alert("Please fill rating");
@@ -76,12 +77,13 @@ class AddReview extends Component {
                         <Form.Group as={Col}>
                             <Form.Control
                                 name="rating"
-                                id="rating"
+                                id={"rating_"+this.props.orderId}
                                 placeholder="Rating"
                                 min="0"
                                 step="1"
                                 max="5"
                                 type="Number"
+                                required
                                 onBlur={this.handleChange}
 
                             />
@@ -91,8 +93,9 @@ class AddReview extends Component {
                         <Form.Group as={Col}>
                             <Form.Control
                                 name="description"
-                                id="desp"
+                                id={"desp_"+this.props.orderId}
                                 label="Description"
+                                required
                                 placeholder="Description"
                                 type="textarea"
                                 onBlur={this.handleChange}
