@@ -29,7 +29,7 @@ const userDataSchema = new Schema({
       },
     address: {
         type: String,
-        required: true
+        required: false
     }
 });
 module.exports = user_data = mongoose.model("users",userDataSchema)
