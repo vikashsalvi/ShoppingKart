@@ -72,7 +72,6 @@ function UpdateProduct() {
                 }
                 else{
                     SetSuccess(true)
-                    // alert("ProductsSpec added successfully")
                 }
               })
         }
@@ -113,7 +112,7 @@ function UpdateProduct() {
                     <Form.Group>
                         <input
                             name="id"
-                            label="id"
+                            label={product}
                             placeholder="ProductsSpec ID"
                             type="number"
                             id="id"

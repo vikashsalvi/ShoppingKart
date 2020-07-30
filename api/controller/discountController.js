@@ -9,10 +9,8 @@ const Discount = require("../model/discountModel");
 
 //get all discount data
 const getalldiscount = (req,res ) => {
-    console.log("in controller")
     Discount.find().exec()
     .then(data => {
-        console.log(data)
         res.json({ Status :"Success", data : data});
     })
     .catch(err => {

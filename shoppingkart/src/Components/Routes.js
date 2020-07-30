@@ -24,10 +24,24 @@ import DiscountData from "./DiscountData"
 
 const user = window.localStorage.getItem("username");
 let status = false;
+let check = false;
 
-if((user !== null)){
+if((user !== null) && (user.toLowerCase() !== "admin")){
     status = true;
 }
+else if((user !== null) && (user.toLowerCase() === "admin")){
+    check = true;
+}
+
+
+const AdminRoute = ({ component: Component, ...rest }) => (
+
+    <Route {...rest} render = {(props) => (
+        check
+        ? (<Component {...props} />)
+        : (<Redirect to={{pathname: "/login"}}/>)
+        )} />
+    )
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
 
@@ -45,15 +59,15 @@ class Routes extends Component {
             <Switch>
                 <Route exact path='/' component={Home}/>
                 <Route exact path='/admin' component={AdminHome}/>
-                <Route exact path='/adminUserManagement' component={AdminUserHome}/>
-                <Route exact path='/adminInventoryManagement' component={AdminInventoryHome}/>      
-                <Route exact path='/createProduct' component={CreateProduct}/>
-                <Route exact path='/removeProduct' component={DeleteProduct}/>
-                <Route exact path='/updateProduct' component={UpdateProduct}/>
-                <Route exact path='/manageDiscount' component={ManageDiscount}/>
-                <Route exact path='/updateDiscount' component={UpdateDiscount}/>
-                <Route exact path='/removeDiscount' component={DeleteDiscount}/>
-                <Route exact path='/alldiscounts' component={DiscountData}/>
+                <AdminRoute exact path='/adminUserManagement' component={AdminUserHome}/>
+                <AdminRoute exact path='/adminInventoryManagement' component={AdminInventoryHome}/>      
+                <AdminRoute exact path='/createProduct' component={CreateProduct}/>
+                <AdminRoute exact path='/removeProduct' component={DeleteProduct}/>
+                <AdminRoute exact path='/updateProduct' component={UpdateProduct}/>
+                <AdminRoute exact path='/manageDiscount' component={ManageDiscount}/>
+                <AdminRoute exact path='/updateDiscount' component={UpdateDiscount}/>
+                <AdminRoute exact path='/removeDiscount' component={DeleteDiscount}/>
+                <AdminRoute exact path='/alldiscounts' component={DiscountData}/>
                 <Route exact path='/profile' component={Profile}/>
                 <Route exact path='/register' component={Register}/>
                 <Route exact path= '/login' component={Login}/>

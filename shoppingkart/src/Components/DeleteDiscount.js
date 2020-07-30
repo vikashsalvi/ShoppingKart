@@ -58,13 +58,13 @@ function DeleteDiscount() {
                 if(response.data.Success){
                     console.log("Record deleted successfully")
                     makeEmpty()
+                    SetSuccess(true)
                 }
                 else{
-                    alert("The product ID does not exists")
+                    alert("The ppromocode does not exist")
                     makeEmpty()
                 }
               })
-            SetSuccess(true)
         }
         else {
             SetSuccess(false);
