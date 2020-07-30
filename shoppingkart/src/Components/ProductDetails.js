@@ -24,7 +24,7 @@ class ProductDetails extends Component {
 
     async componentDidMount() {
         console.log("Id " + this.props.location.state.query);
-        let url= window.localStorage.getItem('location')?"http://localhost:5000/location/getProductDetailsByLocation/"+window.localStorage.getItem('location')+"/"+this.props.location.state.query:"http://localhost:5000/product/getProductDetails/" + this.props.location.state.query;
+        let url= window.localStorage.getItem('location')?"https://csci-5709-shoppingkart-group24.herokuapp.com/location/getProductDetailsByLocation/"+window.localStorage.getItem('location')+"/"+this.props.location.state.query:"https://csci-5709-shoppingkart-group24.herokuapp.com/product/getProductDetails/" + this.props.location.state.query;
         const productData = await Axios.get(url);
         this.setState({
             productName: productData.data.data[0].productName,

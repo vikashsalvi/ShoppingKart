@@ -10,4 +10,4 @@ Node:
 1. node index.js or
 2. npm start
 
-URL for the app: http://localhost:5000/
+URL for the app: https://csci-5709-shoppingkart-group24.herokuapp.com/

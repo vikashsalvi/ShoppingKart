@@ -19,7 +19,7 @@ class Mycart extends Component {
 
     if(myStorage.getItem('token')){
       let items;
-      const url = "http://localhost:5000/orders/getOrderDetails/"+myStorage.getItem("username")+"/unconfirmed";
+      const url = "https://csci-5709-shoppingkart-group24.herokuapp.com/orders/getOrderDetails/"+myStorage.getItem("username")+"/unconfirmed";
       const response = await Axios.get(url);
         if(response.data.Status === "Success" && response.data.data.length>0 ){
             items = myStorage.getItem('tempCart')? JSON.parse(myStorage.getItem('tempCart')) : [];
@@ -32,7 +32,7 @@ class Mycart extends Component {
             });
             myStorage.setItem('tempCart', JSON.stringify(items));
             // deleting the unconfirmed order from dB since each user can have only one unconfirmed order
-            await Axios.delete("http://localhost:5000/orders/removeOrderData/"+myStorage.getItem("username")+"/unconfirmed");
+            await Axios.delete("https://csci-5709-shoppingkart-group24.herokuapp.com/orders/removeOrderData/"+myStorage.getItem("username")+"/unconfirmed");
         }
     }
   }

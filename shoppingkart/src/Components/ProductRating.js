@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Container } from 'react-bootstrap';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
 import '../CSS/ProductRating.css';
 import Axios from "axios";
 
@@ -20,7 +18,7 @@ class ProductRating extends Component {
     async componentDidMount() {
         let id = this.props.productId + ""
         // To get reviews data from all users
-        await Axios.get("http://localhost:5000/review/getProductReview/" + id).then(
+        await Axios.get("https://csci-5709-shoppingkart-group24.herokuapp.com/review/getProductReview/" + id).then(
             res => {
                 this.totalRating(res.data.data)
             }
@@ -53,7 +51,7 @@ class ProductRating extends Component {
                                 <div className="content text-center">
                                     <div className="ratings">
                                         <span className="product-rating">{this.state.rating}</span><span>/5</span>
-                                        
+
                                         <div className="rating-text">
                                             <span>{count} ratings & {count} reviews</span>
                                         </div>

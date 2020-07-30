@@ -52,7 +52,7 @@ function DeleteDiscount() {
             INITIALIZE_DISCOUNT.promocode = document.getElementById('promocode').value;
             axios({
                 method: "POST",
-                url:"http://localhost:5000/discounts/deletediscount",
+                url:"https://csci-5709-shoppingkart-group24.herokuapp.com/discounts/deletediscount",
                 data:  INITIALIZE_DISCOUNT
               }).then((response)=>{
                 if(response.data.Success){
@@ -82,10 +82,10 @@ function DeleteDiscount() {
                     </div>
                     <div className="col-sm-3">
                         <Link to="/updateDiscount"><button className="btn btn-primary">Update Discount</button></Link>
-                    </div>  
+                    </div>
                     <div className="col-sm-3">
                         <Link to="/alldiscounts"> <button className="btn btn-primary">Discount Data</button></Link>
-                    </div>                  
+                    </div>
                 </div>
             </div>
 

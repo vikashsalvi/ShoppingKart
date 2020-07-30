@@ -57,7 +57,7 @@ function CreateDiscount() {
 
             await axios({
                 method: "POST",
-                url: "http://localhost:5000/discounts/managediscounts",
+                url: "https://csci-5709-shoppingkart-group24.herokuapp.com/discounts/managediscounts",
                 data: INITIALIZE_DISCOUNT
             }).then((response) => {
                 if (response.data.Success === false) {

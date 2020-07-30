@@ -34,7 +34,7 @@ class Logout extends Component {
     // save the cart items as unconfirmed order to dB after logout
     async saveUserOrder(){
         if(window.localStorage.getItem('tempCart') && JSON.parse(window.localStorage.getItem('tempCart')).length>0){
-            const url = "http://localhost:5000/orders/addToCart/";
+            const url = "https://csci-5709-shoppingkart-group24.herokuapp.com/orders/addToCart/";
             await Axios.post(url, {
                 username: window.localStorage.getItem("username"),
                 orderItems: JSON.parse(window.localStorage.getItem('tempCart')),

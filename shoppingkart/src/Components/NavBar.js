@@ -127,11 +127,11 @@ class Navigation extends Component {
         alert("Please enter a search string");
       } else {
         let url = storage.getItem("location")
-          ? "http://localhost:5000/location/getSearchedProductsByLocation/" +
+          ? "https://csci-5709-shoppingkart-group24.herokuapp.com/location/getSearchedProductsByLocation/" +
             storage.getItem("location") +
             "/" +
             val
-          : "http://localhost:5000/product/getSearchedProduct/" +
+          : "https://csci-5709-shoppingkart-group24.herokuapp.com/product/getSearchedProduct/" +
             val;
 
         const data = await Axios.get(url);
@@ -156,11 +156,11 @@ class Navigation extends Component {
 
     if (userInp.length > 0) {
       let url = storage.getItem("location")
-        ? "http://localhost:5000/location/getSuggestionsByLocation/" +
+        ? "https://csci-5709-shoppingkart-group24.herokuapp.com/location/getSuggestionsByLocation/" +
           storage.getItem("location") +
           "/" +
           userInp
-        : "http://localhost:5000/product/getSuggestion/" +
+        : "https://csci-5709-shoppingkart-group24.herokuapp.com/product/getSuggestion/" +
           userInp;
 
       const data = await Axios.get(url);
@@ -211,7 +211,7 @@ class Navigation extends Component {
       storage.removeItem("location");
       this.setState({
         location
-      }); 
+      });
       this.handleClose();
       window.location.reload(false);
     } else {

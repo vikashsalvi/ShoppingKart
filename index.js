@@ -20,9 +20,8 @@ app.use(bodyParser.json());
 const path = require('path');
 app.use(express.static(__dirname + '/shoppingkart/build/'));
 
-app.get('/', function (req, res, next) {
-    res.sendFile(path.join(__dirname + '/shoppingkart/build/index.html'));
-    next();
+app.get('/', function (req, res) {
+    res.status(200).send("OK");
 });
 
 app.use("/admin",adminProductRoute)

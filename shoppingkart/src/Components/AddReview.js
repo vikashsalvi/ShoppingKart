@@ -44,27 +44,31 @@ class AddReview extends Component {
 
     // To set values in the database for reviews
     async handleSubmit(event) {
-        if (myStorage.getItem("token")) {
-            event.preventDefault()
-            if (this.checkEmpty()) {
-                let payload = {
-                    product_rating: this.state.product_rating,
-                    product_description: this.state.product_description,
-                    user_id: myStorage.getItem("userid"),
-                    user_name: myStorage.getItem("username"),
-                    product_id: this.props.productId
-                };
-                Axios.post("http://localhost:5000/review/putReview", payload)
-                    .then(res => {
-                        alert("Review added");
-                        this.props.parentProps.history.push('/');
-                    })
 
+        if(this.state.product_rating <= 0 || this.state.product_rating > 5){
+            alert("Rating should be be between 1 to 5");
+        }else{
+            if (myStorage.getItem("token")) {
+                event.preventDefault()
+                if (this.checkEmpty()) {
+                    let payload = {
+                        product_rating: this.state.product_rating,
+                        product_description: this.state.product_description,
+                        user_id: myStorage.getItem("userid"),
+                        user_name: myStorage.getItem("username"),
+                        product_id: this.props.productId
+                    };
+                    Axios.post("https://csci-5709-shoppingkart-group24.herokuapp.com/review/putReview", payload)
+                        .then(res => {
+                            alert("Review added");
+                            this.props.parentProps.history.push('/');
+                        })
+                }
+            } else {
+                this.props.parentProps.history.push({
+                    pathname: "/login"
+                });
             }
-        } else {
-            this.props.parentProps.history.push({
-                pathname: "/login"
-            });
         }
     }
 

@@ -29,7 +29,7 @@ class FeaturedProducts extends Component {
     }
 
     async componentDidMount() {
-        let url = window.localStorage.getItem("location")?"http://localhost:5000/location/getTopProductsByLocation/"+window.localStorage.getItem("location") : "http://localhost:5000/product/getTopProducts";
+        let url = window.localStorage.getItem("location")?"https://csci-5709-shoppingkart-group24.herokuapp.com/location/getTopProductsByLocation/"+window.localStorage.getItem("location") : "https://csci-5709-shoppingkart-group24.herokuapp.com/product/getTopProducts";
         const products  = await Axios.get(url);
         this.setState( {
             list: products.data.data

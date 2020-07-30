@@ -13,7 +13,7 @@ class ProductSpecifics extends Component {
 
     async componentDidMount() {
         let id = this.props.productId + ""
-        let url= window.localStorage.getItem('location')?"http://localhost:5000/location/getProductDetailsByLocation/"+window.localStorage.getItem('location')+"/"+id:"http://localhost:5000/product/getProductDetails/" + id;
+        let url= window.localStorage.getItem('location')?"https://csci-5709-shoppingkart-group24.herokuapp.com/location/getProductDetailsByLocation/"+window.localStorage.getItem('location')+"/"+id:"https://csci-5709-shoppingkart-group24.herokuapp.com/product/getProductDetails/" + id;
         const productData = await Axios.get(url);
         this.setState({
             productDetails: productData.data.data[0].productDetails
@@ -26,15 +26,15 @@ class ProductSpecifics extends Component {
 
 
         if (detail) {
-            Object.keys(detail).map(function (key, index) {
+            rows = Object.keys(detail).map(function (key, index) {
 
-                rows.push(
+                return (
                     <tr>
                         <td className="font-weight-bold">{key.trim().replace(/([A-Z])/g, ' $1').replace(/^./, function (word) { return word.toUpperCase(); })
                         }</td>
                         <td>{detail[key].trim()}</td>
                     </tr>
-                )
+                );
             })
         }
         return rows

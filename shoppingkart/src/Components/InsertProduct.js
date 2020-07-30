@@ -68,7 +68,7 @@ function CreateProduct() {
 
             await axios({
                 method: "POST",
-                url:"http://localhost:5000/admin/saveProduct",
+                url:"https://csci-5709-shoppingkart-group24.herokuapp.com/admin/saveProduct",
                 data:  INITIALIZE_PRODUCTS
               }).then((response)=>{
                 if(response.data.Success===false)

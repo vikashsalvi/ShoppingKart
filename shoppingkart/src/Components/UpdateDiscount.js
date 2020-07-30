@@ -56,7 +56,7 @@ function UpdateDiscount() {
             setDiscount(INITIALIZE_DISCOUNT)
             await axios({
                 method: "PUT",
-                url: "http://localhost:5000/discounts/updatediscount/" + document.getElementById('promocode').value,
+                url: "https://csci-5709-shoppingkart-group24.herokuapp.com/discounts/updatediscount/" + document.getElementById('promocode').value,
                 data: { discountpercent : document.getElementById('discountpercent').value }
             })
             .then((response) => {

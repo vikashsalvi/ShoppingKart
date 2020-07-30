@@ -8,19 +8,19 @@ class AdminUserHome extends React.Component{
             users: []
         }
     }
-    
+
     componentDidMount(){
-        axios.get("http://localhost:5000/admin/getAllUsers").then(response => {
+        axios.get("https://csci-5709-shoppingkart-group24.herokuapp.com/admin/getAllUsers").then(response => {
             this.setState({users:response.data})
           })
           .catch(error => {
             console.log(error)
           })
         }
-        
+
     deleteUser(id, index){
-        
-        axios.get("http://localhost:5000/admin/deleteUser",{
+
+        axios.get("https://csci-5709-shoppingkart-group24.herokuapp.com/admin/deleteUser",{
             params:{user_id:id}})
         .then(response => {
             if(response.data.Success === false){
@@ -34,9 +34,9 @@ class AdminUserHome extends React.Component{
           .catch(error => {
             console.log(error)
           })
-        
+
     }
-    
+
     render() {
         return (
             <div className="container">
@@ -55,9 +55,9 @@ class AdminUserHome extends React.Component{
                     <tbody>
                     {console.log(this.state.users)}
                     {this.state.users.length>0?
-                            this.state.users.map((person, index) => 
+                            this.state.users.map((person, index) =>
                             (
-                            <tr>    
+                            <tr>
                                 <th scope="row">{person._id}</th>
                                 <td>{person.firstname}</td>
                                 <td>{person.lastname}</td>
@@ -65,13 +65,13 @@ class AdminUserHome extends React.Component{
                                     onClick={this.deleteUser.bind(this,person._id,index)}>Delete User</button></td>
                             </tr>
                             ))
-                            :null}   
-                        
+                            :null}
+
                     </tbody>
                 </table>
             </div>
         )
-    
+
     }
 }
 export default AdminUserHome;

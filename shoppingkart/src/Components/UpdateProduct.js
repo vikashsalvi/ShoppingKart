@@ -63,7 +63,7 @@ function UpdateProduct() {
 
             await axios({
                 method: "POST",
-                url:"http://localhost:5000/admin/editProduct",
+                url:"https://csci-5709-shoppingkart-group24.herokuapp.com/admin/editProduct",
                 data:  INITIALIZE_PRODUCTS
               }).then((response)=>{
                 if(response.data.Success===false)

@@ -20,7 +20,7 @@ class DiscountData extends Component {
     }
 
     async componentDidMount() {
-        const url = "http://localhost:5000/discounts";
+        const url = "https://csci-5709-shoppingkart-group24.herokuapp.com/discounts";
         console.log("here at mount");
         const response = await Axios.get(url);
         if (response.data.Status === "Success") {
@@ -58,7 +58,7 @@ class DiscountData extends Component {
     render() {
         return (
             <div className="wrapper">
-                
+
             <div align="right" className="container">
                 <br />
                 <div className="row">

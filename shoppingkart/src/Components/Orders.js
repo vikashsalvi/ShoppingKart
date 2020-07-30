@@ -21,7 +21,7 @@ class Orders extends Component {
         if(user === "" || user === undefined){
             this.props.history.push('/')
         }else{
-            let url = "http://localhost:5000/orders/getOrders"
+            let url = "https://csci-5709-shoppingkart-group24.herokuapp.com/orders/getOrders"
             Axios.post(url,{
                 username: storage.getItem("username")
             }).then(data => {

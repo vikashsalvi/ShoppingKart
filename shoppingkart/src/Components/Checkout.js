@@ -62,7 +62,7 @@ class Checkout extends Component {
 
   // get the user details for order confirmation
   async componentDidMount() {
-    const url = "http://localhost:5000/orders/getUserDetails/" + storage.getItem('username');
+    const url = "https://csci-5709-shoppingkart-group24.herokuapp.com/orders/getUserDetails/" + storage.getItem('username');
     const response = await Axios.get(url);
     if (response.data.Status === "Success") {
       this.setState({
@@ -76,7 +76,7 @@ class Checkout extends Component {
   async saveAddress() {
     document.getElementById("address").contentEditable = false;
 
-    const url = "http://localhost:5000/orders/changeAddress/" + storage.getItem('username');
+    const url = "https://csci-5709-shoppingkart-group24.herokuapp.com/orders/changeAddress/" + storage.getItem('username');
     await Axios.put(url, {
       username: storage.getItem('username'),
       address: document.getElementById("address").textContent,
@@ -85,7 +85,7 @@ class Checkout extends Component {
   }
 
   async proceedWithOrder() {
-    const url = "http://localhost:5000/orders/addToCart/";
+    const url = "https://csci-5709-shoppingkart-group24.herokuapp.com/orders/addToCart/";
     await Axios.post(url, {
       username: storage.getItem("username"),
       orderItems: this.state.items,
@@ -97,7 +97,7 @@ class Checkout extends Component {
       for (i = 0; i < this.state.items.length; i++) {
         productIds[i] = { id: this.state.items[i].id, cartQuan: this.state.items[i].quantity };
       }
-      Axios.post("http://localhost:5000/product/setProductDetails/", {
+      Axios.post("https://csci-5709-shoppingkart-group24.herokuapp.com/product/setProductDetails/", {
         productIds: productIds
       }).then(res => {
       });
@@ -110,7 +110,7 @@ class Checkout extends Component {
   async placeOrder() {
     if (this.checkEmpty()) {
       for (let i=0; i<this.state.items.length;i++){
-        await Axios.get("http://localhost:5000/product/getProductDetails/" + this.state.items[i].id).then(
+        await Axios.get("https://csci-5709-shoppingkart-group24.herokuapp.com/product/getProductDetails/" + this.state.items[i].id).then(
             res => {
               if(res.data != null) {
                 if(this.state.items[i].quantity > res.data.data[0].productQuantity){
@@ -141,7 +141,7 @@ class Checkout extends Component {
   //this function will apply discount for the order based on the promocode
   async applyDiscount() {
     let current = this;
-    const url = "http://localhost:5000/discounts/getdiscount/" + document.getElementById("discountcode").value;
+    const url = "https://csci-5709-shoppingkart-group24.herokuapp.com/discounts/getdiscount/" + document.getElementById("discountcode").value;
     await Axios.get(url).then(function (response) {
       if (response.data.Status === "Success" && response.data.data.length > 0) {
         current.setState({
@@ -159,7 +159,7 @@ class Checkout extends Component {
 
   // this function will remove unconfirmed order from dB once order is confirmed
   async removeOrder() {
-    const url = "http://localhost:5000/orders/removeOrderData/" + storage.getItem("username") + "/unconfirmed";
+    const url = "https://csci-5709-shoppingkart-group24.herokuapp.com/orders/removeOrderData/" + storage.getItem("username") + "/unconfirmed";
     await Axios.delete(url);
   }
 
