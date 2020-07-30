@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const path = require('path');
-app.use(express.static(__dirname + '/shoppingkart/build/'));
+//app.use(express.static(__dirname + '/shoppingkart/build/'));
 
 app.get('/', function (req, res) {
     res.status(200).send("OK");
