@@ -19,7 +19,7 @@ class Navigation extends Component {
       nav: [],
       side: [],
       modalShow: false,
-      location: "",
+      location: storage.getItem("location")?storage.getItem("location"):"",
       message: "",
     };
     this.cities = ["halifax", "quebec", "toronto", "calgary", "victoria"];
@@ -126,15 +126,13 @@ class Navigation extends Component {
       if (val === "") {
         alert("Please enter a search string");
       } else {
-        // let url = storage.getItem("location")
-        //   ? "http://localhost:5000/location/getSearchedProductsByLocation/" +
-        //     storage.getItem("location") +
-        //     "/" +
-        //     val
-        //   : "http://localhost:5000/product/getSearchedProduct/" +
-        //     val;
-
-        let url = "http://localhost:5000/product/getSearchedProduct/" + val;
+        let url = storage.getItem("location")
+          ? "http://localhost:5000/location/getSearchedProductsByLocation/" +
+            storage.getItem("location") +
+            "/" +
+            val
+          : "http://localhost:5000/product/getSearchedProduct/" +
+            val;
 
         const data = await Axios.get(url);
         this.setState({
@@ -157,15 +155,13 @@ class Navigation extends Component {
     let suggestion = [];
 
     if (userInp.length > 0) {
-      // let url = storage.getItem("location")
-      //   ? "http://localhost:5000/location/getSuggestionsByLocation/" +
-      //     storage.getItem("location") +
-      //     "/" +
-      //     userInp
-      //   : "http://localhost:5000/product/getSuggestion/" +
-      //     userInp;
-
-      let url = "http://localhost:5000/product/getSuggestion/" + userInp;
+      let url = storage.getItem("location")
+        ? "http://localhost:5000/location/getSuggestionsByLocation/" +
+          storage.getItem("location") +
+          "/" +
+          userInp
+        : "http://localhost:5000/product/getSuggestion/" +
+          userInp;
 
       const data = await Axios.get(url);
       suggestion = data.data.data;
@@ -213,12 +209,18 @@ class Navigation extends Component {
     let location = document.getElementById("location").value;
     if (location === null || location === "") {
       storage.removeItem("location");
+      this.setState({
+        location
+      }); 
       this.handleClose();
       window.location.reload(false);
     } else {
       let loc = location.toLocaleLowerCase();
       if (this.cities.includes(loc)) {
         storage.setItem("location", loc);
+        this.setState({
+          location
+        });
         this.handleClose();
         window.location.reload(false);
       } else {
