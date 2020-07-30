@@ -11,4 +11,5 @@ Node:
 2. npm start
 
 URL for the back end: https://csci-5709-shoppingkart-group24.herokuapp.com/
+
 URL for the fron end: https://shoppingkart.d2m244ri2wzjre.amplifyapp.com/
