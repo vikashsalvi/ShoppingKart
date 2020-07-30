@@ -53,13 +53,7 @@ class ProductRating extends Component {
                                 <div className="content text-center">
                                     <div className="ratings">
                                         <span className="product-rating">{this.state.rating}</span><span>/5</span>
-                                        <div class="stars">
-                                            <FontAwesomeIcon icon={faStar} style={{ "color": "orange" }} />
-                                            <FontAwesomeIcon icon={faStar} style={{ "color": "orange" }} />
-                                            <FontAwesomeIcon icon={faStar} style={{ "color": "orange" }} />
-                                            <FontAwesomeIcon icon={faStar} style={{ "color": "orange" }} />
-                                            <FontAwesomeIcon icon={faStar} />
-                                        </div>
+                                        
                                         <div className="rating-text">
                                             <span>{count} ratings & {count} reviews</span>
                                         </div>
