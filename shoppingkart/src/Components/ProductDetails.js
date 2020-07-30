@@ -67,7 +67,7 @@ class ProductDetails extends Component {
     //Dynamically disable or enable buy now and add to cart button
     getPurchaseButtons() {
         let list = []
-        if (this.state.productQuantity === 0) {
+        if (this.state.productQuantity <=  0) {
             list.push(<button type="button" className="btn btn-outline-primary w-100" disabled>Buy now</button>);
             list.push(<button type="button" class="btn btn-outline-primary w-100 mt-4" disabled>Add to cart</button>);
         } else {
