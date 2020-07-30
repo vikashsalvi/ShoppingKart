@@ -5,6 +5,7 @@ import { Table, Card, Col, Image, Button, Tab } from 'react-bootstrap';
 import '../CSS/order.css'
 import {withRouter} from "react-router-dom";
 import Axios from "axios";
+import AddReview from './AddReview';
 
 let storage = window.localStorage;
 
@@ -65,10 +66,11 @@ class Orders extends Component {
                         
                     </td>
                     <td style={{"background":"white"}}>
-                        <Button variant="dark" className="buts mt-2">Provide review</Button>
-                        <br />
                         <Button onClick={buyNow}
                         variant="dark" className="buts mt-2">Buy again</Button>
+                       <div className="review-section">
+                       <AddReview parentProps={this.props} productId={or.id} orderId={this.state.orders[order]._id}/>
+                       </div>
                     </td>
                 </tr>
                     )

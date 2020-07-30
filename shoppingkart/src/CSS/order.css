@@ -5,3 +5,10 @@
 .OrderHeader{
     font-weight: 600;
 }
+
+.review-section {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

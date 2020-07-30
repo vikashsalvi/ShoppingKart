@@ -67,15 +67,6 @@ class ProductRating extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-sm">
-                                <div className="content text-center">
-                                    <div className="ratings">
-                                        <div className="text-center">
-                                            <AddReview parentProps={this.props.parentProps} productId={this.props.productId} />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </Container>
