@@ -14,7 +14,7 @@ const products = mongoose.Schema({
     productPrice: { type: Number, required: true },
     productBrand: {type: String, required: true},
     productQuantity: {type: Number, required: true},
-    productURL: {type: String, required: true},
+    imageURL: {type: String, required: true},
     productDescription: {type: String, required: true},
 });
 

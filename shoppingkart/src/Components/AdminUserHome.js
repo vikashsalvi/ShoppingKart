@@ -69,15 +69,6 @@ class AdminUserHome extends React.Component{
                         
                     </tbody>
                 </table>
-                                    {/* <br/><br/>
-                <div className="row">
-                    <div className="col-xs-2">
-                        {this.state.users.length>0?
-                        this.state.users.map((person, index) => 
-                        (<UserCard person={person} deleteUser={this.callBackdeleteUser}/>))
-                        :null} 
-                    </div>
-                </div> */}
             </div>
         )
     

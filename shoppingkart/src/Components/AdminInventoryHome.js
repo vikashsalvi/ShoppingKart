@@ -16,13 +16,13 @@ class AdminHome extends React.Component{
             <br/>
                 <div className="row">
                     <div className="col-sm-3">
-                        <Link to="/createProduct"><button className="btn btn-primary">Insert ProductSpec</button></Link>
+                        <Link to="/createProduct"><button id="button1" className="btn btn-primary">Insert ProductSpec</button></Link>
                     </div>
                     <div className="col-sm-3">
-                       <Link to="/updateProduct"><button className="btn btn-primary">Update ProductSpec</button></Link>
+                       <Link to="/updateProduct"><button id="button2" className="btn btn-primary">Update ProductSpec</button></Link>
                     </div>
                     <div className="col-sm-3">
-                    <Link to="removeProduct"> <button className="btn btn-primary">Delete ProductSpec</button></Link>
+                    <Link to="removeProduct"> <button id="button3" className="btn btn-primary">Delete ProductSpec</button></Link>
                     </div>
                 </div>
             </div>
