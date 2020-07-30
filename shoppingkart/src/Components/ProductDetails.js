@@ -58,7 +58,7 @@ class ProductDetails extends Component {
 
     //Dynamically change stock label
     getStockText() {
-        if (this.state.productQuantity === 0) {
+        if (this.state.productQuantity <= 0) {
             return <h6 className="text-danger">No stock left</h6>
         } else {
             return <h6 className="text-success">In stock, Quantity left: {this.state.productQuantity}</h6>
