@@ -21,7 +21,7 @@ const saveProduct = async (req, res)=>{
         productPrice : req.body.product_price,
         productBrand : req.body.product_brand,
         productQuantity : req.body.product_qty,
-        productURL : req.body.product_img,
+        imageURL : req.body.product_img,
         productDescription : req.body.product_description
     })
     try{

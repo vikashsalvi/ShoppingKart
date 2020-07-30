@@ -7,6 +7,10 @@
 
 }
 
+#button1,#button2,#button3{
+    background-color:   #0073B1;
+}
+
 .err-text {
     color : red;
 }
