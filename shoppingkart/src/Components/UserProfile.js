@@ -33,7 +33,7 @@ class Profile extends Component {
                 this.setState({
                     fn: res.data.data[0].firstname,
                     ln: res.data.data[0].lastname,
-                    addr: res.data.data[0].addr
+                    addr: res.data.data[0].address
                 })
             }
 
