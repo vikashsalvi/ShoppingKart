@@ -53,7 +53,6 @@ class AdminUserHome extends React.Component{
                         </tr>
                     </thead>
                     <tbody>
-                    {console.log(this.state.users)}
                     {this.state.users.length>0?
                             this.state.users.map((person, index) =>
                             (
