@@ -40,11 +40,11 @@ function CreateProduct() {
         const desp = document.getElementById('desp');
         const img = document.getElementById('img');
         const qty = document.getElementById('prodqty');
-        const category = document.getElementById('brand');
+        const category = document.getElementById('category');
 
 
         if ((prodname.value === "") || (price.value === "") || (desp.value === "") || (img.value === "")
-        || (qty.value === "") || (brand.value === "")) {
+        || (qty.value === "") || (category.value === "")) {
             alert("Please fill all the fields");
             return false;
         }
