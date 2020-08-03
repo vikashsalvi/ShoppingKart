@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import '../CSS/home.css'
 
 class AdminHome extends React.Component{
@@ -32,4 +32,4 @@ class AdminHome extends React.Component{
         )
     }
 }
-export default AdminHome;
+export default withRouter(AdminHome);
