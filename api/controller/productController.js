@@ -105,6 +105,7 @@ const postProductDetails = (req, res) => {
                 console.log("Failure:" + err);
             })
     }
+ res.json({ Status: "Success"});
 }
 
 // Exporting the controller
