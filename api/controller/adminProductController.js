@@ -65,7 +65,7 @@ const updateProduct = async (req, res) => {
     try{
         const updatedItem = await product.updateOne({productID:req.body.product_id},
             {$set:{productPrice:req.body.product_price,productQuantity:req.body.product_qty,
-            productDescription:req.body.product_description,productURL:req.body.product_img}})
+            productDescription:req.body.product_description,imageURL:req.body.product_img}})
 
         if(updatedItem.n === 1)
         {
