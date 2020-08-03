@@ -12,7 +12,7 @@ class ProductRating extends Component {
             rating: 0
         };
         this.totalRating = this.totalRating.bind(this)
-        console.log(props)
+        //console.log(props)
     }
 
     async componentDidMount() {
