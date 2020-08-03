@@ -19,11 +19,11 @@ class ProductDetails extends Component {
             productQuantity: 0,
             productPrice: 0
         };
-        console.log(props)
+        //console.log(props)
     }
 
     async componentDidMount() {
-        console.log("Id " + this.props.location.state.query);
+        //console.log("Id " + this.props.location.state.query);
         let url= window.localStorage.getItem('location')?"https://csci-5709-shoppingkart-group24.herokuapp.com/location/getProductDetailsByLocation/"+window.localStorage.getItem('location')+"/"+this.props.location.state.query:"https://csci-5709-shoppingkart-group24.herokuapp.com/product/getProductDetails/" + this.props.location.state.query;
         const productData = await Axios.get(url);
         this.setState({
@@ -36,7 +36,7 @@ class ProductDetails extends Component {
     }
     //Dropdown for quantity
     onDropdownSelected(e) {
-        console.log("Quantity ", e.target.value);
+        //console.log("Quantity ", e.target.value);
     }
 
     // Add dynamic quantity in dropdown
