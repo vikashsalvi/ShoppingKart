@@ -301,13 +301,14 @@ class Navigation extends Component {
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              Enter your location
+              Location
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <input
               type="search"
               className="inp" 
+              placeholder="Enter your location"
               id="location"
               name="location"
               defaultValue={this.state.location}
