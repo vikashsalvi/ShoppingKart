@@ -13,7 +13,7 @@ const INITIALIZE_PRODUCTS = {
     product_description: '',
     product_img: '',
     product_qty : '',
-    product_brand: ''
+    category: ''
 
 }
 
@@ -40,7 +40,7 @@ function CreateProduct() {
         const desp = document.getElementById('desp');
         const img = document.getElementById('img');
         const qty = document.getElementById('prodqty');
-        const brand = document.getElementById('brand');
+        const category = document.getElementById('brand');
 
 
         if ((prodname.value === "") || (price.value === "") || (desp.value === "") || (img.value === "")
@@ -63,7 +63,7 @@ function CreateProduct() {
             INITIALIZE_PRODUCTS.product_description = document.getElementById('desp').value;
             INITIALIZE_PRODUCTS.product_img = document.getElementById('img').value;
             INITIALIZE_PRODUCTS.product_qty = document.getElementById('prodqty').value;
-            INITIALIZE_PRODUCTS.product_brand = document.getElementById('brand').value;
+            INITIALIZE_PRODUCTS.category = document.getElementById('category').value;
 
 
             await axios({
@@ -169,11 +169,11 @@ function CreateProduct() {
                         </Form.Group>
                         <Form.Group as={Col}>
                             <input
-                                name="brand"
-                                label="Brand"
-                                placeholder="Brand"
+                                name="category"
+                                label="category"
+                                placeholder="Category"
                                 type="text"
-                                id="brand"
+                                id="category"
                                 className="inp"
                                 onChange={handleChange}
                             />
