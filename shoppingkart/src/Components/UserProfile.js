@@ -28,7 +28,7 @@ class Profile extends Component {
 
     componentDidMount() {
         axios.get("https://csci-5709-shoppingkart-group24.herokuapp.com/users/getuser/" + mystorage.getItem("username")).then((res) => {
-            console.log(res);
+            //console.log(res);
             if (res.data.Status === "Success") {
                 this.setState({
                     fn: res.data.data[0].firstname,
