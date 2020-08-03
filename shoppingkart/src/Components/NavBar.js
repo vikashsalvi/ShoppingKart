@@ -307,6 +307,7 @@ class Navigation extends Component {
           <Modal.Body>
             <input
               type="search"
+              className="inp" 
               id="location"
               name="location"
               defaultValue={this.state.location}
