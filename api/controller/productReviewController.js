@@ -7,11 +7,11 @@ const productReviewModel = require("../model/productReviewModel");
 
 // Post request for adding product review
 const postProductreview = (req, res) => {
-    var userid = req.body.user_id;
-    var productid = req.body.product_id;
-    var productrating = req.body.product_rating;
-    var productdesc = req.body.product_description;
-    var username = req.body.user_name
+    let userid = req.body.user_id;
+    let productid = req.body.product_id;
+    let productrating = req.body.product_rating;
+    let productdesc = req.body.product_description;
+    let username = req.body.user_name
     console.log(productrating);
 
     productReviewModel.create({

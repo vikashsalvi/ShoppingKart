@@ -1,11 +1,3 @@
-/**
-
- @author    Hardik Dudhrejia => B00835071
-
- **/
-
-
-
 import React, { useState } from 'react';
 import { Form, Toast, Col } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -71,7 +63,7 @@ function UpdateProduct() {
 
             await axios({
                 method: "POST",
-                url:"https://csci-5709-web-24.herokuapp.com/admin/editProduct",
+                url:"https://csci-5709-shoppingkart-group24.herokuapp.com/admin/editProduct",
                 data:  INITIALIZE_PRODUCTS
               }).then((response)=>{
                 if(response.data.Success===false)
@@ -80,7 +72,6 @@ function UpdateProduct() {
                 }
                 else{
                     SetSuccess(true)
-                    // alert("ProductsSpec added successfully")
                 }
               })
         }
@@ -97,13 +88,13 @@ function UpdateProduct() {
             <br/>
                 <div className="row">
                     <div className="col-sm-3">
-                        <Link to="/createProduct"><button className="btn btn-primary">Insert ProductsSpec</button></Link>
+                        <Link to="/createProduct"><button id="button1" className="btn btn-primary">Insert ProductsSpec</button></Link>
                     </div>
                     <div className="col-sm-3">
-                       <Link to="/updateProduct"><button className="btn btn-primary">Update ProductsSpec</button></Link>
+                       <Link to="/updateProduct"><button id="button2" className="btn btn-primary">Update ProductsSpec</button></Link>
                     </div>
                     <div className="col-sm-3">
-                    <Link to="removeProduct"> <button className="btn btn-primary">Delete ProductsSpec</button></Link>
+                    <Link to="removeProduct"> <button id="button3" className="btn btn-primary">Delete ProductsSpec</button></Link>
                     </div>
                 </div>
             </div>
@@ -121,7 +112,7 @@ function UpdateProduct() {
                     <Form.Group>
                         <input
                             name="id"
-                            label="id"
+                            label={product}
                             placeholder="ProductsSpec ID"
                             type="number"
                             id="id"

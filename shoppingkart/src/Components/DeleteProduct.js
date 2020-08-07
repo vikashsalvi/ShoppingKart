@@ -1,12 +1,5 @@
-/**
-
- @author    Hardik Dudhrejia => B00835071
-
- **/
-
-
 import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Toast } from 'react-bootstrap';
 import { FaShoppingCart } from 'react-icons/fa';
 import '../CSS/deleteprod.css';
 import axios from 'axios';
@@ -22,9 +15,9 @@ function DeleteProduct() {
 
     const [success, SetSuccess] = useState(false);
 
-    const showtoast = () => SetSuccess(!success);
-
-
+    const showtoast = () => {
+        SetSuccess(!success)
+    };
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -54,18 +47,17 @@ function DeleteProduct() {
 
             axios({
                 method: "POST",
-                url:"https://csci-5709-web-24.herokuapp.com/admin/deleteProduct",
+                url:"https://csci-5709-shoppingkart-group24.herokuapp.com/admin/deleteProduct",
                 data:  PRODUCT_INFO
               }).then((response)=>{
                 if(response.data.Success){
-                    alert("ProductsSpec deleted successfully")
+                    console.log("ProductsSpec deleted successfully")
+                    SetSuccess(true)
                 }
                 else{
                     alert("The product ID does not exists")
                 }
               })
-            console.log(PRODUCT_INFO)
-            SetSuccess(true)
         }
         else {
             SetSuccess(false);
@@ -79,13 +71,13 @@ function DeleteProduct() {
             <br/>
                 <div className="row">
                     <div className="col-sm-3">
-                        <Link to="/createProduct"><button className="btn btn-primary">Insert ProductsSpec</button></Link>
+                        <Link to="/createProduct"><button id="button1" className="btn btn-primary">Insert ProductsSpec</button></Link>
                     </div>
                     <div className="col-sm-3">
-                       <Link to="/updateProduct"><button className="btn btn-primary">Update ProductsSpec</button></Link>
+                       <Link to="/updateProduct"><button id="button2" className="btn btn-primary">Update ProductsSpec</button></Link>
                     </div>
                     <div className="col-sm-3">
-                    <Link to="removeProduct"> <button className="btn btn-primary">Delete ProductsSpec</button></Link>
+                    <Link to="removeProduct"> <button id="button3" className="btn btn-primary">Delete ProductsSpec</button></Link>
                     </div>
                 </div>
             </div>
@@ -93,10 +85,16 @@ function DeleteProduct() {
             <div className="form_area">
                 <h1>Delete an existing product</h1>
                 <Form method="post">
+                    <Toast show={success} onClose={showtoast} className="toast-box">
+                        <Toast.Header>
+                            <strong className="mr-auto">Success!!!</strong>
+                        </Toast.Header>
+                        <Toast.Body>Product has been deleted</Toast.Body>
+                    </Toast>
                     <Form.Group>
                         <input
                             name="id"
-                            label="id"
+                            label={product}
                             placeholder="ProductsSpec ID"
                             type="number"
                             id="id"

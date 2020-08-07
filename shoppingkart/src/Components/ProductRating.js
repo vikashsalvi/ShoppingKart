@@ -1,13 +1,6 @@
-/**
- @author    Bharat Bhargava => B00838511
- **/
-
 import React, { Component } from "react";
 import { Container } from 'react-bootstrap';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
 import '../CSS/ProductRating.css';
-import AddReview from './AddReview'
 import Axios from "axios";
 
 let count = 0;
@@ -19,13 +12,13 @@ class ProductRating extends Component {
             rating: 0
         };
         this.totalRating = this.totalRating.bind(this)
-        console.log(props)
+        //console.log(props)
     }
 
     async componentDidMount() {
         let id = this.props.productId + ""
         // To get reviews data from all users
-        await Axios.get("https://csci-5709-web-24.herokuapp.com/review/getProductReview/" + id).then(
+        await Axios.get("https://csci-5709-shoppingkart-group24.herokuapp.com/review/getProductReview/" + id).then(
             res => {
                 this.totalRating(res.data.data)
             }
@@ -58,24 +51,9 @@ class ProductRating extends Component {
                                 <div className="content text-center">
                                     <div className="ratings">
                                         <span className="product-rating">{this.state.rating}</span><span>/5</span>
-                                        <div class="stars">
-                                            <FontAwesomeIcon icon={faStar} style={{ "color": "orange" }} />
-                                            <FontAwesomeIcon icon={faStar} style={{ "color": "orange" }} />
-                                            <FontAwesomeIcon icon={faStar} style={{ "color": "orange" }} />
-                                            <FontAwesomeIcon icon={faStar} style={{ "color": "orange" }} />
-                                            <FontAwesomeIcon icon={faStar} />
-                                        </div>
+
                                         <div className="rating-text">
                                             <span>{count} ratings & {count} reviews</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-sm">
-                                <div className="content text-center">
-                                    <div className="ratings">
-                                        <div className="text-center">
-                                            <AddReview parentProps={this.props.parentProps} productId={this.props.productId} />
                                         </div>
                                     </div>
                                 </div>

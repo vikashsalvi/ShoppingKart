@@ -1,7 +1,3 @@
-/**
- @author    Vikash Salvi => B00838074
- **/
-
 import React, { Component } from "react";
 import { Container } from 'react-bootstrap';
 import Product from './ProductsSpec';
@@ -23,12 +19,13 @@ class ProductDetails extends Component {
             productQuantity: 0,
             productPrice: 0
         };
-        console.log(props)
+        //console.log(props)
     }
 
     async componentDidMount() {
-        console.log("Id " + this.props.location.state.query);
-        const productData = await Axios.get("https://csci-5709-web-24.herokuapp.com/product/getProductDetails/" + this.props.location.state.query);
+        //console.log("Id " + this.props.location.state.query);
+        let url= window.localStorage.getItem('location')?"https://csci-5709-shoppingkart-group24.herokuapp.com/location/getProductDetailsByLocation/"+window.localStorage.getItem('location')+"/"+this.props.location.state.query:"https://csci-5709-shoppingkart-group24.herokuapp.com/product/getProductDetails/" + this.props.location.state.query;
+        const productData = await Axios.get(url);
         this.setState({
             productName: productData.data.data[0].productName,
             productDescription: productData.data.data[0].productDescription,
@@ -39,7 +36,7 @@ class ProductDetails extends Component {
     }
     //Dropdown for quantity
     onDropdownSelected(e) {
-        console.log("Quantity ", e.target.value);
+        //console.log("Quantity ", e.target.value);
     }
 
     // Add dynamic quantity in dropdown
@@ -58,10 +55,10 @@ class ProductDetails extends Component {
         }
         return items;
     }
-    
+
     //Dynamically change stock label
     getStockText() {
-        if (this.state.productQuantity === 0) {
+        if (this.state.productQuantity <= 0) {
             return <h6 className="text-danger">No stock left</h6>
         } else {
             return <h6 className="text-success">In stock, Quantity left: {this.state.productQuantity}</h6>
@@ -70,7 +67,7 @@ class ProductDetails extends Component {
     //Dynamically disable or enable buy now and add to cart button
     getPurchaseButtons() {
         let list = []
-        if (this.state.productQuantity === 0) {
+        if (this.state.productQuantity <=  0) {
             list.push(<button type="button" className="btn btn-outline-primary w-100" disabled>Buy now</button>);
             list.push(<button type="button" class="btn btn-outline-primary w-100 mt-4" disabled>Add to cart</button>);
         } else {
@@ -91,16 +88,16 @@ class ProductDetails extends Component {
         });
 
         if (found) {
-            productArray[count].quantity += 1;
-            productArray[count].totalPrice = parseInt(productArray[count].totalPrice) + parseInt(this.state.productPrice);
+            productArray[count].quantity += parseInt(document.getElementById("quantitySelectBox").value);
+            productArray[count].totalPrice = parseInt(productArray[count].totalPrice) + (parseInt(this.state.productPrice) * parseInt(document.getElementById("quantitySelectBox").value));
         } else {
             productArray.push({
                 id: this.productID,
                 name: this.state.productName,
                 img: this.state.productUrl,
-                quantity: 1,
+                quantity: parseInt(document.getElementById("quantitySelectBox").value),
                 price: parseInt(this.state.productPrice),
-                totalPrice: parseInt(this.state.productPrice)
+                totalPrice: (parseInt(document.getElementById("quantitySelectBox").value) * parseInt(this.state.productPrice))
             });
         }
         window.localStorage.setItem('tempCart', JSON.stringify(productArray));

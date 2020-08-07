@@ -1,9 +1,3 @@
-/**
-
- @author    Deep Muni => B00828375
-
- **/
-
 import React, {Component} from "react";
 import '../CSS/SearchResults.css'
 import Card from "./Card";

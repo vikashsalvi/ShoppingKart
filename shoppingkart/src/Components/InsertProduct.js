@@ -13,7 +13,7 @@ const INITIALIZE_PRODUCTS = {
     product_description: '',
     product_img: '',
     product_qty : '',
-    product_brand: ''
+    category: ''
 
 }
 
@@ -35,17 +35,16 @@ function CreateProduct() {
     }
 
     function checkEmpty() {
-        // const productid = document.getElementById('id');
         const prodname = document.getElementById('prodname');
         const price = document.getElementById('price');
         const desp = document.getElementById('desp');
         const img = document.getElementById('img');
         const qty = document.getElementById('prodqty');
-        const brand = document.getElementById('brand');
+        const category = document.getElementById('category');
 
 
         if ((prodname.value === "") || (price.value === "") || (desp.value === "") || (img.value === "")
-        || (qty.value === "") || (brand.value === "")) {
+        || (qty.value === "") || (category.value === "")) {
             alert("Please fill all the fields");
             return false;
         }
@@ -64,12 +63,12 @@ function CreateProduct() {
             INITIALIZE_PRODUCTS.product_description = document.getElementById('desp').value;
             INITIALIZE_PRODUCTS.product_img = document.getElementById('img').value;
             INITIALIZE_PRODUCTS.product_qty = document.getElementById('prodqty').value;
-            INITIALIZE_PRODUCTS.product_brand = document.getElementById('brand').value;
+            INITIALIZE_PRODUCTS.category = document.getElementById('category').value;
 
 
             await axios({
                 method: "POST",
-                url:"https://csci-5709-web-24.herokuapp.com/admin/saveProduct",
+                url:"https://csci-5709-shoppingkart-group24.herokuapp.com/admin/saveProduct",
                 data:  INITIALIZE_PRODUCTS
               }).then((response)=>{
                 if(response.data.Success===false)
@@ -95,13 +94,13 @@ function CreateProduct() {
             <br/>
                 <div className="row">
                     <div className="col-sm-3">
-                        <Link to="/createProduct"><button className="btn btn-primary">Insert ProductsSpec</button></Link>
+                        <Link to="/createProduct"><button id="button1" className="btn btn-primary">Insert ProductsSpec</button></Link>
                     </div>
                     <div className="col-sm-3">
-                       <Link to="/updateProduct"><button className="btn btn-primary">Update ProductsSpec</button></Link>
+                       <Link to="/updateProduct"><button id="button2" className="btn btn-primary">Update ProductsSpec</button></Link>
                     </div>
                     <div className="col-sm-3">
-                    <Link to="removeProduct"> <button className="btn btn-primary">Delete ProductsSpec</button></Link>
+                    <Link to="removeProduct"> <button id="button3" className="btn btn-primary">Delete ProductsSpec</button></Link>
                     </div>
                 </div>
             </div>
@@ -170,11 +169,11 @@ function CreateProduct() {
                         </Form.Group>
                         <Form.Group as={Col}>
                             <input
-                                name="brand"
-                                label="Brand"
-                                placeholder="Brand"
+                                name="category"
+                                label="category"
+                                placeholder="Category"
                                 type="text"
-                                id="brand"
+                                id="category"
                                 className="inp"
                                 onChange={handleChange}
                             />

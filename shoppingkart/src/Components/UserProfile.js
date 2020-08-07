@@ -27,13 +27,13 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        axios.get("https://csci-5709-web-24.herokuapp.com/users/getuser/" + mystorage.getItem("username")).then((res) => {
-            console.log(res);
+        axios.get("https://csci-5709-shoppingkart-group24.herokuapp.com/users/getuser/" + mystorage.getItem("username")).then((res) => {
+            //console.log(res);
             if (res.data.Status === "Success") {
                 this.setState({
                     fn: res.data.data[0].firstname,
                     ln: res.data.data[0].lastname,
-                    addr: res.data.data[0].addr
+                    addr: res.data.data[0].address
                 })
             }
 
@@ -112,7 +112,7 @@ class Profile extends Component {
             this.setState({
                 isDisabled: true
             });
-            const url = "https://csci-5709-web-24.herokuapp.com/users/editprofile/" + document.getElementById("uname").value;
+            const url = "https://csci-5709-shoppingkart-group24.herokuapp.com/users/editprofile/" + document.getElementById("uname").value;
             axios.put(url, {
                 firstname: document.getElementById("fname").value,
                 lastname: document.getElementById("lname").value,

@@ -1,7 +1,3 @@
-/**
- @author    Bharat Bhargava => B00838511
- **/
-
 import React, { Component } from 'react';
 import { Form, Button, Col, } from 'react-bootstrap';
 import Axios from 'axios';
@@ -16,7 +12,8 @@ class AddReview extends Component {
             product_description: '',
         };
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this)
+        this.handleChange = this.handleChange.bind(this);
+        debugger;
     }
 
 
@@ -31,8 +28,8 @@ class AddReview extends Component {
 
     // To check if rating and description are filled by the user
     checkEmpty() {
-        const rating = document.getElementById('rating');
-        const desp = document.getElementById('desp');
+        const rating = document.getElementById('rating_'+this.props.orderId);
+        const desp = document.getElementById('desp_'+this.props.orderId);
 
         if (rating.value === "") {
             alert("Please fill rating");
@@ -47,27 +44,31 @@ class AddReview extends Component {
 
     // To set values in the database for reviews
     async handleSubmit(event) {
-        if (myStorage.getItem("token")) {
-            event.preventDefault()
-            if (this.checkEmpty()) {
-                let payload = {
-                    product_rating: this.state.product_rating,
-                    product_description: this.state.product_description,
-                    user_id: myStorage.getItem("userid"),
-                    user_name: myStorage.getItem("username"),
-                    product_id: this.props.productId
-                };
-                Axios.post("https://csci-5709-web-24.herokuapp.com/review/putReview", payload)
-                    .then(res => {
-                        alert("Review added");
-                        this.props.parentProps.history.push('/');
-                    })
 
+        if(this.state.product_rating <= 0 || this.state.product_rating > 5){
+            alert("Rating should be be between 1 to 5");
+        }else{
+            if (myStorage.getItem("token")) {
+                event.preventDefault()
+                if (this.checkEmpty()) {
+                    let payload = {
+                        product_rating: this.state.product_rating,
+                        product_description: this.state.product_description,
+                        user_id: myStorage.getItem("userid"),
+                        user_name: myStorage.getItem("username"),
+                        product_id: this.props.productId
+                    };
+                    Axios.post("https://csci-5709-shoppingkart-group24.herokuapp.com/review/putReview", payload)
+                        .then(res => {
+                            alert("Review added");
+                            this.props.parentProps.history.push('/');
+                        })
+                }
+            } else {
+                this.props.parentProps.history.push({
+                    pathname: "/login"
+                });
             }
-        } else {
-            this.props.parentProps.history.push({
-                pathname: "/login"
-            });
         }
     }
 
@@ -80,12 +81,13 @@ class AddReview extends Component {
                         <Form.Group as={Col}>
                             <Form.Control
                                 name="rating"
-                                id="rating"
+                                id={"rating_"+this.props.orderId}
                                 placeholder="Rating"
                                 min="0"
                                 step="1"
                                 max="5"
                                 type="Number"
+                                required
                                 onBlur={this.handleChange}
 
                             />
@@ -95,8 +97,9 @@ class AddReview extends Component {
                         <Form.Group as={Col}>
                             <Form.Control
                                 name="description"
-                                id="desp"
+                                id={"desp_"+this.props.orderId}
                                 label="Description"
+                                required
                                 placeholder="Description"
                                 type="textarea"
                                 onBlur={this.handleChange}
